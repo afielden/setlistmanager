@@ -47,8 +47,15 @@ public class CustomAdapter extends ArrayAdapter<Model> implements OnCheckedChang
 
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
+
 		View view = null;
-		if (convertView == null) {
+		boolean editMode = ui.isEditMode();
+
+		if (!editMode) {
+			return createReadOnlyView(position, convertView);
+		}
+
+		if (convertView == null || convertView.findViewById(R.id.setlist_row_handler) == null) {
 			LayoutInflater inflator = context.getLayoutInflater();
 			view = inflator.inflate(R.layout.list_item_handle_left, null);
 			
@@ -57,33 +64,72 @@ public class CustomAdapter extends ArrayAdapter<Model> implements OnCheckedChang
 			viewHolder.imageView = (ImageView)view.findViewById(R.id.setlist_row_handler);
 			viewHolder.text = (TextView) view.findViewById(R.id.setlist_row_name);
 			viewHolder.checkbox = (CheckBox) view.findViewById(R.id.checked_item_row_checkbox);
-//			viewHolder.checkbox.setOnCheckedChangeListener(this);
-//			viewHolder.checkbox.setOnClickListener(this);
-			
+			viewHolder.checkbox.setOnCheckedChangeListener(this);
+			viewHolder.checkbox.setOnClickListener(this);
+
 			view.setTag(viewHolder);
 			
-//			viewHolder.checkbox.setTag(getItem(position));
+			viewHolder.checkbox.setTag(getItem(position));
 		} 
 		
 		else {
 			view = convertView;
 			view.setBackgroundColor(Color.TRANSPARENT);
-//			((ViewHolder) view.getTag()).checkbox.setTag(getItem(position));
+			((ViewHolder) view.getTag()).checkbox.setTag(getItem(position));
 		}
 		
 		views.add(view);
 		ViewHolder holder = (ViewHolder) view.getTag();
-//		holder.itemNumber.setText(getItemNumber(position));
-//		holder.text.setText(getItem(position).getName());
+		holder.itemNumber.setText(getItemNumber(position));
+		holder.text.setText(getItem(position).getName());
 		String song = getItem(position).getName();
-//		holder.checkbox.setChecked(checked[position]);
-//		holder.imageView.setVisibility(ui.isEditMode()?View.VISIBLE:View.INVISIBLE);
-//		holder.checkbox.setVisibility(ui.isEditMode()?View.VISIBLE:View.INVISIBLE);
+		holder.checkbox.setChecked(checked[position]);
+		holder.imageView.setVisibility(ui.isEditMode() ? View.VISIBLE :View.INVISIBLE);
+		holder.checkbox.setVisibility(ui.isEditMode() ? View.VISIBLE :View.INVISIBLE);
 		
 		if (position == selectedPosition) {
 			view.setBackgroundColor(Color.GREEN);
 		}
 		
+		return view;
+	}
+
+
+	/**
+	 *
+	 * @return
+	 */
+	private View createReadOnlyView(final int position, View convertView) {
+
+		View view = null;
+
+		if (convertView == null || convertView.findViewById(R.id.setlist_row_handler) != null) {
+
+			LayoutInflater inflator = context.getLayoutInflater();
+			view = inflator.inflate(R.layout.list_item_not_editable, null);
+
+			final ViewHolder viewHolder = new ViewHolder();
+			viewHolder.itemNumber = (TextView)view.findViewById(R.id.itemNumber);
+			viewHolder.text = (TextView) view.findViewById(R.id.setlist_row_name);
+
+			view.setTag(viewHolder);
+
+			viewHolder.itemNumber.setTag(getItem(position));
+
+
+		}
+		else {
+			view = convertView;
+			view.setBackgroundColor(Color.TRANSPARENT);
+			((ViewHolder) view.getTag()).itemNumber.setTag(getItem(position));
+		}
+
+		views.add(view);
+		ViewHolder holder = (ViewHolder) view.getTag();
+		holder.itemNumber.setText(getItemNumber(position));
+		holder.text.setText(getItem(position).getName());
+		String song = getItem(position).getName();
+
 		return view;
 	}
 	
@@ -134,7 +180,7 @@ public class CustomAdapter extends ArrayAdapter<Model> implements OnCheckedChang
 		
 		Model element = (Model) buttonView.getTag();
 		element.setSelected(buttonView.isChecked());
-		
+
 		getItem(element.getPosition()).setSelected(isChecked);
 		checked[element.getPosition()] = isChecked;
 		

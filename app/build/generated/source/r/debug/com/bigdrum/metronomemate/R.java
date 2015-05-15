@@ -1515,11 +1515,11 @@ containing a value of this type.
         public static final int artistLabel=0x7f090057;
         public static final int artistName=0x7f090058;
         public static final int artist_label=0x7f09004c;
-        public static final int beat_play=0x7f090064;
-        public static final int beats_group_layout=0x7f090063;
+        public static final int beat_play=0x7f090068;
+        public static final int beats_group_layout=0x7f090067;
         public static final int beginning=0x7f09001a;
         public static final int checkbox=0x7f090030;
-        public static final int checked_item_row_checkbox=0x7f090069;
+        public static final int checked_item_row_checkbox=0x7f090064;
         public static final int clickRemove=0x7f090015;
         public static final int click_remove=0x7f090004;
         public static final int collapseActionView=0x7f09001e;
@@ -1544,8 +1544,8 @@ containing a value of this type.
         public static final int icon=0x7f09002d;
         public static final int ifRoom=0x7f09001f;
         public static final int image=0x7f09002a;
-        public static final int itemNumber=0x7f09006a;
-        public static final int items_textview_title=0x7f090066;
+        public static final int itemNumber=0x7f090065;
+        public static final int items_textview_title=0x7f09006a;
         public static final int listMode=0x7f09000b;
         public static final int list_item=0x7f09002c;
         public static final int middle=0x7f09001c;
@@ -1575,12 +1575,12 @@ containing a value of this type.
         public static final int search_voice_btn=0x7f090045;
         public static final int section_label=0x7f090061;
         public static final int select_setlist_listview=0x7f09005f;
-        public static final int select_setlist_name=0x7f090068;
-        public static final int set_list_layout=0x7f090065;
+        public static final int select_setlist_name=0x7f09006c;
+        public static final int set_list_layout=0x7f090069;
         public static final int set_list_name=0x7f090047;
-        public static final int setlist_row_handler=0x7f09006c;
-        public static final int setlist_row_name=0x7f09006b;
-        public static final int setlist_view=0x7f090067;
+        public static final int setlist_row_handler=0x7f090063;
+        public static final int setlist_row_name=0x7f090066;
+        public static final int setlist_view=0x7f09006b;
         public static final int shortcut=0x7f090031;
         public static final int showCustom=0x7f090011;
         public static final int showHome=0x7f090012;
@@ -1647,12 +1647,13 @@ containing a value of this type.
         public static final int fragment_song=0x7f030020;
         public static final int list_item_click_remove=0x7f030021;
         public static final int list_item_handle_left=0x7f030022;
-        public static final int metronome_frag=0x7f030023;
-        public static final int metronome_fragment_layout=0x7f030024;
-        public static final int select_setlist_row_layout=0x7f030025;
-        public static final int setlist_row_layout=0x7f030026;
-        public static final int song_row_layout=0x7f030027;
-        public static final int support_simple_spinner_dropdown_item=0x7f030028;
+        public static final int list_item_not_editable=0x7f030023;
+        public static final int metronome_frag=0x7f030024;
+        public static final int metronome_fragment_layout=0x7f030025;
+        public static final int select_setlist_row_layout=0x7f030026;
+        public static final int setlist_row_layout=0x7f030027;
+        public static final int song_row_layout=0x7f030028;
+        public static final int support_simple_spinner_dropdown_item=0x7f030029;
     }
     public static final class menu {
         public static final int add_gig=0x7f0d0000;
