@@ -1,0 +1,63 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!-- item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom"
+        android:title="@string/action_settings"/-->
+
+    <item android:id="@+id/action_setlists"
+        android:showAsAction="always"
+        android:icon="@android:drawable/ic_menu_revert"
+        android:title="@string/hello_world"/>
+    
+    <item android:id="@+id/action_copy"
+        android:showAsAction="always"
+        android:icon="@drawable/content_copy"
+        android:title="@string/hello_world"/>
+    
+    <item android:id="@+id/action_email"
+        android:showAsAction="always"
+        android:icon="@android:drawable/ic_menu_send"
+        android:title="@string/hello_world"/>
+    
+    <item android:id="@+id/action_search"
+        android:showAsAction="always"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="@string/search_button"/>
+    
+    <item android:id="@+id/action_play"
+        android:showAsAction="always"
+        android:icon="@android:drawable/ic_media_play"
+        android:title="@string/hello_world"/>
+    
+    <item android:id="@+id/action_add_section"
+        android:showAsAction="always"
+        android:icon="@android:drawable/ic_menu_more"
+        android:title="@string/hello_world"/>
+    
+    <item android:id="@+id/action_add"
+        android:showAsAction="always"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="@string/hello_world"/>
+    
+    <item android:id="@+id/action_edit"
+        android:showAsAction="always"
+        android:icon="@android:drawable/ic_menu_edit"
+        android:title="@string/action_edit"/>
+    
+    <item android:id="@+id/action_delete"
+        android:showAsAction="always"
+        android:icon="@android:drawable/ic_menu_delete"
+        android:title="@string/action_edit"/>
+    
+    <item android:id="@+id/action_help"
+        android:showAsAction="never"
+        android:icon="@android:drawable/ic_menu_help"
+        android:title="@string/action_help"/>
+    
+    <item android:id="@+id/action_editmode"
+        android:showAsAction="always"
+        android:title="@string/action_edit"/>
+
+</menu>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/test_bed"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" />
+<!-- We will add the DSLVFragment inside the FrameLayout in code -->
+<!-- From: file:/home/andrew/AndroidstudioProjects/MetronomeMate/dragSortListviewDemo/src/main/res/layout/test_bed_main.xml -->

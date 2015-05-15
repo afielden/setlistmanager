@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="80px"
+    android:gravity="center_vertical"
+    android:orientation="horizontal" xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <CheckBox
+        android:id="@+id/checked_item_row_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:focusable="false" />
+    
+    <TextView
+        android:id="@+id/itemNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="false"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:layout_toRightOf="@id/checked_item_row_checkbox"
+        android:text="1"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+    
+    <TextView
+        android:id="@+id/setlist_row_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_gravity="fill_horizontal"
+        android:layout_toRightOf="@id/itemNumber"
+        android:text="hello"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    
+
+    
+    
+    <ImageView
+        android:id="@+id/setlist_row_handler"
+        android:layout_width="24px"
+        android:layout_height="24px"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="8px"
+        android:layout_marginRight="30dp"
+        android:maxHeight="5dp"
+        android:maxWidth="5dp"
+        android:src="@drawable/draghandle" />
+
+    <!-- TextView
+        android:id="@+id/itemNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@id/setlist_row_name"
+        android:text="Small Text"
+        android:textAppearance="?android:attr/textAppearanceSmall" /-->
+
+</RelativeLayout>

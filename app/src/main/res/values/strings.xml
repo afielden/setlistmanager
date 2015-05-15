@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MetronomeMate</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_section1">Setlists</string>
+    <string name="title_section2">Gigs</string>
+    <string name="title_section3">Venues</string>
+    <string name="title_section4">About</string>
+    <string name="artist_label">Artist:</string>
+    <string name="song_label">Title:</string>
+    <string name="search_button">Search</string>
+    <string name="searching">Searching...</string>
+    <string name="add_label">Add</string>
+    <string name="title_activity_list">ListActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_song_list">SongListActivity</string>
+    <string name="nothing_found">No matching songs found</string>
+    <string name="add_song_button_label">New Song</string>
+    <string name="title_activity_search">Search for songs</string>
+    <string name="play_button_label">Play</string>
+    <string name="set_list_label">Set Lists</string>
+    <string name="no_song_selected_label">No song selected</string>
+    <string name="song_tempo_label">Tempo:</string>
+    <string name="title_activity_view_setlist">View setlist</string>
+    <string name="add_new_set_list">Add new set list</string>
+    <string name="title_activity_add_setlist">New Setlist</string>
+    <string name="set_list_name_label">Name</string>
+    <string name="setlist_label">Sets</string>
+    <string name="songs_label">Songs</string>
+    <string name="action_edit">Edit</string>
+    <string name="action_done">Done</string>
+    <string name="action_help">Help</string>
+    <string name="duplicate_set_list_name">Setlist name already exists</string>
+    <string name="setlist_non_existant">Setlist %s not found in database</string>
+    <string name="title_activity_enter_song_details">Enter song details</string>
+    <string name="song_timesig_label">Beats in a bar</string>
+    <string name="missing_song_name">A song title must be entered</string>
+    <string name="missing_tempo">Enter a value for the tempo</string>
+    <string name="missing_timesig">Enter the number of beats in a bar (max 12)</string>
+    <string name="invalid_timesig">Beast in a bar must be a number between 1 and 12</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="title_activity_select_setlist">SelectSetlist</string>
+    <string name="copy_to_setlist">Copied selected songs to setlist %s</string>
+    <string name="cancelled">Cancelled</string>
+    <string name="null_set_list">A setlist name must be entered</string>
+    <string name="title_activity_add_venue">AddVenue</string>
+    <string name="add_venue_address">Address</string>
+    <string name="add_venue_contact_name">Contact name</string>
+    <string name="add_venue_phone">Phone number</string>
+    <string name="add_venue_email">Email address</string>
+    <string name="add_venue_name">Name</string>
+    <string name="add_venue_street">Street</string>
+    <string name="add_venue_town">Town</string>
+    <string name="add_venue_postcode">Postcode</string>
+    <string name="add_venue_country">Country</string>
+    <string name="missing_venue_name">Enter a name</string>
+    <string name="venue_list">List of venues</string>
+    <string name="venue_details">Venue details</string>
+    <string name="gig_list">List of gigs</string>
+    <string name="gig_details">Gig details</string>
+    <string name="title_activity_add_gig">AddGig</string>
+    <string name="gig_venue">Venue</string>
+    <string name="gig_add_setlist_name">Setlist</string>
+    <string name="date_label">Date</string>
+    <string name="select_label">Select</string>
+    <string name="title_activity_select_venue">SelectVenue</string>
+    <string name="no_gig_name">A gig name must be entered</string>
+    <string name="no_set_list">A setlist must be selected</string>
+    <string name="no_venue">A venue must be selected</string>
+    <string name="gig_add_date">Date</string>
+    <string name="gig_add_time">Time</string>
+    <string name="no_date">A date must be entered</string>
+    <string name="no_time">A time must be entered</string>
+    <string name="title_activity_select_recipients">SelectRecipients</string>
+    <string name="email_success">Successfully emailed gig details</string>
+    <string name="email_failure">Problem emailing gig details</string>
+    <string name="title_activity_prefs">Preferences</string>
+    <string name="pref_email_user_title">Email user name</string>
+    <string name="pref_email_user_summary">User name for your email account</string>
+    <string name="pref_email_password_title">Email password</string>
+    <string name="pref_email_password_summary">Password for your email account</string>
+    <string name="pref_band_name">Band name</string>
+    <string name="pref_band_name_summary">The name of your band</string>
+    <string name="null_string">This should not be blank</string>
+    <string name="setlist">Setlist</string>
+    <string name="success">Success</string>
+    <string name="successfully_posted_post">Posted to Facebook</string>
+    <string name="facebook_error">Failed to post on Facebook</string>
+    <string name="facebook_permission_denied">Permission denied to post on Facebook</string>
+    <string name="email_user_not_set">Email user not set. Please go to the settings page and enter email account details</string>
+    <string name="app_id">138965024121</string>
+    <string name="song_key">Key</string>
+    <string name="subset_marker_text">Subset marker. Partition your set into sub-sections using these markers.</string>
+    <string name="db_delete_venue_fk_constraint">Unable to delete this Venue because it is used by the following Gigs:-</string>
+    <string name="db_delete_setlist_fk_constraint">Unable to delete selected Setlists because they are used by the following Gigs:-</string>
+    <string name="tooltip_add_setlist">Add a new setlist</string>
+    <string name="tooltip_edit_setlist">Edit selected setlist</string>
+    <string name="tooltip_delete_setlist">Delete selected setlist(s)</string>
+    <string name="tooltip_add_subsection">Add a subset marker</string>
+    <string name="tooltip_copy_songs">Copy selected song(s) to another setlist</string>
+    <string name="tooltip_add_song">Manually enter new song details</string>
+    <string name="tooltip_search_song">Search for a new song</string>
+    <string name="tooltip_edit_song">Edit selected song</string>
+    <string name="tooltip_delete_song">Delete selected song(s)</string>
+    <string name="tooltip_add_gig">Add a new gig</string>
+    <string name="tooltip_edit_gig">Edit selected gig</string>
+    <string name="tooltip_delete_gig">Delete selected gig</string>
+    <string name="tooltip_email_gig">Email gig details</string>
+    <string name="tooltip_add_venue">Add a new venue</string>
+    <string name="tooltip_edit_venue">Edit selected venue</string>
+    <string name="tooltip_delete_venue">Delete selected venue</string>
+    <string name="tooltip_back_to_setlists">Back to setlists</string>
+    <string name="tooltip_cancel">Cancel</string>
+    <string name="tooltip_select">Accept chosen item</string>
+    <string name="tooltip_ok">Save and finish</string>
+    <string name="crash_toast_text">Sorry, BeatBuddy crashed. Please allow diagnostic information to be sent to the developer</string>
+    <string name="crash_dialog_title">CrashTest has crashed</string>
+    <string name="crash_dialog_text">An unexpected error occurred forcing the
+    application to stop. Please help us fix this by sending us error data,
+    all you have to do is click OK.</string>
+    <string name="crash_dialog_comment_prompt">You might add your comments about the problem below:</string>
+    <string name="crash_dialog_ok_toast">Thank you !</string>
+    <string name="exception_error">BeatBuddy encountered an unexpected problem.
+	    Please contact technical support for further help. Contact details are on the \'About\' page</string>
+    <string name="help_welcome_title">Welcome to BeatBuddy</string>
+    <string name="help_welcome">
+<![CDATA[
+<html>
+MetronomeMate is a metronome app aimed at musicians in a band. It provides the following features:-
+<ul>
+<li><b>Song Search:</b> Search for songs by name or artist. MetronomeMate will find tempo, time signature and key details.</li>
+<li><b>Setlist Management:</b>Group your songs into setlists.</li>
+<li><b>Metronome:</b>Beat counters provide a visual guide to tempo when playing a song.</li>
+</ul>
+<center><h2>Getting Started</h2></center>
+Go to the Setlist tab and click the \'+\' action to create a new setlist. Populate it with all the songs you wish to perform at a gig.
+MetronomeMate can search for songs by title, and/or artist. Details associated with a song, such as tempo, time signature and key
+are automatically populated.
+<p>
+<center><h2>Setlists</h2></center>
+Setlists contain groups of songs. Tapping any setlist will show a list of all its songs. You can copy all the songs in a setlist to 
+another setlist.
+<center><h2>Songs</h2></center>
+Tap a song to display beat counters. Tap and hold on a song to display the details (tempo etc). You may add new songs by searching,
+or enter details manually. The order of songs in the list can be changed by selecting \'Edit\' mode.
+<p>
+You can also group the songs into \'subsets\' by adding subset markers into the list of songs.
+<center><h2>Contact</h2></center>
+For questions or problems with this app, please contact 
+<a href="mailto:bigdrumsoftware@gmail.com?Subject=BeatBuddy">Bigdrum Software</a>
+<center><h2>Credits</h2></center>
+Design, artwork and programming &copy; 2014 <b>Andrew Fielden</b>
+</body>
+</html>
+]]>
+    </string>
+    <string name="help_setlist_mgmt_title">Setlist Management</string>
+    <string name="help_setlist_mgmt">A setlist contains a group of songs. It can be divided into subsets by adding subset markers.
+Any setlist can be associated with a Gig. </string>
+    <string name="help_setlist_edit_title">Setlist Editing</string>
+    <string name="help_setlist_edit">Setlists can be re-ordered using the drag icon.
+Mark one or more setlists for deletion.
+Mark one setlist for editing.	    </string>
+    <string name="help_songlist_title">Songs</string>
+    <string name="help_songlist">Add songs to this setlist. You can click the magnifying glass icon to search for a song.
+This will automatically fill in the details like tempo, time signature and key.
+Click on the \'+\' icon to enter all the song details manually.
+Click and hold on a song to display the details.</string>
+    <string name="help_songlist_edit_title">Edit Songs</string>
+    <string name="help_songlist_edit">Songs can be re-ordered using the drag icon.
+Mark one or more songs for deletion, or copying to another setlist.
+Mark one song for editing.  </string>
+    <string name="help_gig_mgmt_title">Gig Management</string>
+    <string name="help_gig_mgmt">A gig has an associated venue, and optional setlist. Gig details can be emailed to 
+other people.   </string>
+    <string name="help_venue_mgmt_title">Venue Management</string>
+    <string name="help_venue_mgmt">Add details of all your gig venues, including address and contact name.</string>
+    <string name="help_no_setlists_title">No setlists</string>
+    <string name="help_no_setlists">There are no Setlists. To create a new setlist, click the \'+\' action item.</string>
+    <string name="help_no_songs_title">No songs in this setlist</string>
+    <string name="help_no_songs">This setlist contains no Songs. You can search for a song by click the magnifying glass icon,
+or enter song details manually by clicking the \'+\' icon. Subset markers can be added by clicking the \'v\' icon.</string>
+    <string name="help_no_gigs_title">No gigs</string>
+    <string name="help_no_gigs">There are no Gigs. First go to the Venue tab and create at least one Venue.
+Then create a new gig (at a selected Venue) on this tab by clicking the \'+\' icon.</string>
+    <string name="help_no_venues_title">No venues</string>
+    <string name="help_no_venues">There are no Venues. Add a new Venue by clicking the \'+\' icon.</string>
+    <string name="title_activity_about_fragment">About BeatBuddy</string>
+    <string name="gig_name_label">Name</string>
+
+</resources>
