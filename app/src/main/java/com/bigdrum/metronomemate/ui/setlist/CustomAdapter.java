@@ -130,6 +130,10 @@ public class CustomAdapter extends ArrayAdapter<Model> implements OnCheckedChang
 		holder.text.setText(getItem(position).getName());
 		String song = getItem(position).getName();
 
+		if (position == selectedPosition) {
+			view.setBackgroundColor(Color.GREEN);
+		}
+
 		return view;
 	}
 	
@@ -189,7 +193,7 @@ public class CustomAdapter extends ArrayAdapter<Model> implements OnCheckedChang
 	
 	 
 	/**
-	 * 
+	 *
 	 */
     public void notifyDataSetChangedAndReset() {
     	notifyDataSetChanged();
@@ -217,5 +221,26 @@ public class CustomAdapter extends ArrayAdapter<Model> implements OnCheckedChang
 		}
 	
 		ui.setEditItemActions(numberOfSelectedItems);
+	}
+
+
+	/**
+	 * Sets the checked status of a list item
+	 * @param position
+	 */
+	public void setItemCheckedAt(int position, boolean state) {
+
+		checked[position] = state;
+
+	}
+
+
+	/**
+	 *
+	 */
+	public void clearAllCheckedItems() {
+		for (int index=0; index < checked.length; index++) {
+			checked[index] = false;
+		}
 	}
 }

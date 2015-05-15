@@ -252,7 +252,8 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 		            Model item = listAdapter.getItem(from);
 		            listAdapter.remove(item);
 		            listAdapter.insert(item, to);
-		        
+
+					listAdapter.clearAllCheckedItems();
 			        
 			        listAdapter.notifyDataSetChanged();
 			        
@@ -386,7 +387,7 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 	
 	/**
 	 * 
-	 * @param state
+	 *
 	 */
 	private void setActionItemVisibility() {
 		if (!editMode) {
@@ -430,7 +431,7 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 	
 	/**
 	 * 
-	 * @param setId
+	 *
 	 */
 	private void displaySongsInSetlist() {
 		try {
