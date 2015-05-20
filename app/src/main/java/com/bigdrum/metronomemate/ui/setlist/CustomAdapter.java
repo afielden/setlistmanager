@@ -28,6 +28,7 @@ public class CustomAdapter extends ArrayAdapter<Model> implements OnCheckedChang
 	private int numberOfSelectedItems;
 	private int selectedPosition = -1;
     private View parentView;
+    private Model selectedItem;
 
 	public CustomAdapter(Activity context, int layoutResource, int textviewResource, List<Model> modelList, MetronomeFragment ui) {
 		super(context, layoutResource, textviewResource, modelList);
@@ -286,4 +287,16 @@ public class CustomAdapter extends ArrayAdapter<Model> implements OnCheckedChang
 			checked[index] = false;
 		}
 	}
+
+
+    public Model getSelectedItem() {
+
+        for (int index=0; index < checked.length; index++) {
+            if (checked[index] == true) {
+                return getItem(index);
+            }
+        }
+
+        return null;
+    }
 }

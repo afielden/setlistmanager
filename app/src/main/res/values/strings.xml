@@ -42,7 +42,7 @@
     <string name="ok">Ok</string>
     <string name="cancel">Cancel</string>
     <string name="title_activity_select_setlist">SelectSetlist</string>
-    <string name="copy_to_setlist">Copied selected songs to setlist %s</string>
+    <string name="copy_to_setlist">Copied selected songs to %s</string>
     <string name="cancelled">Cancelled</string>
     <string name="null_set_list">A setlist name must be entered</string>
     <string name="title_activity_add_venue">AddVenue</string>
@@ -191,5 +191,6 @@ Then create a new gig (at a selected Venue) on this tab by clicking the \'+\' ic
     <string name="help_no_venues">There are no Venues. Add a new Venue by clicking the \'+\' icon.</string>
     <string name="title_activity_about_fragment">About BeatBuddy</string>
     <string name="gig_name_label">Name</string>
+    <string name="select_target_setlist">Select the target setlist</string>
 
 </resources>

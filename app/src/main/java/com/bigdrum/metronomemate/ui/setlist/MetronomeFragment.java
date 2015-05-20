@@ -924,6 +924,14 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 		}
 		
 		Intent intent = new Intent(getActivity(), SelectSetlist.class);
+
+        if (setlistMode) {
+            intent.putExtra(Constants.SETLISTPRIMARYKEY, listAdapter.getSelectedItem().getId());
+        }
+        else {
+            intent.putExtra(Constants.SETLISTPRIMARYKEY, selectedSetlist.getId());
+        }
+
 		startActivityForResult(intent, Constants.SELECT_SETLIST);
 	}
 	

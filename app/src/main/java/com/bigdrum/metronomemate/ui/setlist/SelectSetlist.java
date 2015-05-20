@@ -1,5 +1,6 @@
 package com.bigdrum.metronomemate.ui.setlist;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -56,7 +57,7 @@ public class SelectSetlist extends Activity {
 	private void createSetlistView() {
 		DataService dbService = DataService.getDataService(this);
 		
-		setlists = dbService.getAllSetlists();
+		setlists = filterOutSourceSetlist(dbService.getAllSetlists());
 		ArrayAdapter<Model> arrayAdapter = new ArrayAdapter<Model>(this, R.layout.select_setlist_row_layout, R.id.select_setlist_name, setlists);
 		ListView listView = (ListView)findViewById(R.id.select_setlist_listview);
 		listView.setAdapter(arrayAdapter);
@@ -75,6 +76,25 @@ public class SelectSetlist extends Activity {
 				okAction.setVisible(true);
 			}
 		});
+	}
+
+
+	/**
+	 * Remove the source setlist from the list, if required
+	 * @return
+	 */
+	private List<Model> filterOutSourceSetlist(List<Model> setlists) {
+
+		List<Model> filteredSetlist = new ArrayList<Model>();
+		long setlistId = getIntent().getExtras().getLong(Constants.SETLISTPRIMARYKEY);
+
+		for (Model model : setlists) {
+			if (model.getId() != setlistId) {
+				filteredSetlist.add(model);
+			}
+		}
+
+		return filteredSetlist;
 	}
 	
 	
