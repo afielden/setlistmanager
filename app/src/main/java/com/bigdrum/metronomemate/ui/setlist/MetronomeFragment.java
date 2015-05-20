@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
-import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -90,9 +89,9 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 		playImage = (ImageView)rootView.findViewById(R.id.beat_play);
 		playImage.setVisibility(View.INVISIBLE);
 		playImage.setOnClickListener(this);
-		itemList = new ArrayList<Model>();
+		itemList = new ArrayList<>();
 		createUI();
-		beatViews = new ArrayList<ImageView>();
+		beatViews = new ArrayList<>();
 		currentBeat = 0;
 		handler = new Handler();
 
@@ -117,20 +116,20 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 		inflater.inflate(R.menu.main, menu);
 		this.actionMenu = menu;
 		
-		copyAction = (MenuItem)actionMenu.findItem(R.id.action_copy);
+		copyAction = actionMenu.findItem(R.id.action_copy);
 		copyAction.setTitle(R.string.tooltip_copy_songs);
-		addAction = (MenuItem)actionMenu.findItem(R.id.action_add);
-		addSectionAction = (MenuItem)actionMenu.findItem(R.id.action_add_section);
+		addAction = actionMenu.findItem(R.id.action_add);
+		addSectionAction = actionMenu.findItem(R.id.action_add_section);
 		addSectionAction.setTitle(R.string.tooltip_add_subsection);	
-		backToSetlistsAction = (MenuItem)actionMenu.findItem(R.id.action_setlists);
+		backToSetlistsAction = actionMenu.findItem(R.id.action_setlists);
 		backToSetlistsAction.setTitle(R.string.tooltip_back_to_setlists);
-		editModeAction = (MenuItem)actionMenu.findItem(R.id.action_editmode);
-		editAction = (MenuItem)actionMenu.findItem(R.id.action_edit);
-		deleteAction = (MenuItem)actionMenu.findItem(R.id.action_delete);
-		searchAction = (MenuItem)actionMenu.findItem(R.id.action_search);
+		editModeAction = actionMenu.findItem(R.id.action_editmode);
+		editAction = actionMenu.findItem(R.id.action_edit);
+		deleteAction = actionMenu.findItem(R.id.action_delete);
+		searchAction = actionMenu.findItem(R.id.action_search);
 		searchAction.setTitle(R.string.tooltip_search_song);
-		playAction = (MenuItem)actionMenu.findItem(R.id.action_play);
-		emailAction = (MenuItem)actionMenu.findItem(R.id.action_email);
+		playAction = actionMenu.findItem(R.id.action_play);
+		emailAction = actionMenu.findItem(R.id.action_email);
 		emailAction.setTitle(R.string.tooltip_email_gig);
 		
 		reset();
@@ -243,7 +242,7 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 	
 	/**
 	 * 
-	 * @return
+	 *
 	 */
 	private DropListener createDropListener() {
 		return new DragSortListView.DropListener()
@@ -296,8 +295,6 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 //		ListView listView = (ListView)rootView.findViewById(R.id.setlist_view);
 //		listView.setOnLongClickListener(this);
 		listView.setOnItemClickListener(new OnItemClickListener() {
-
-            private View selectedView;
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -357,7 +354,7 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 	
 	/**
 	 * 
-	 * @param visibility
+	 *
 	 */
 	private void setSongInformationVisibility(int visibility) {
 		if (beatsViewgroup != null) {
@@ -702,7 +699,8 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 	/**
 	 * 
 	 */
-	private void createBeatIcons(Model selectedSong) {
+	@SuppressWarnings("unused")
+    private void createBeatIcons(Model selectedSong) {
 		
 		currentBeat = 0;
 		beatsViewgroup = (ViewGroup)rootView.findViewById(R.id.beats_group_layout);
@@ -828,8 +826,7 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 
 	/**
 	 *
-	 * @param message
-	 * @return
+	 *
 	 */
 	private void showConfirmationDialog(String message) {
 
@@ -937,7 +934,7 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 	
 	
 	/**
-	 * @throws DataServiceException 
+	 *
 	 * 
 	 */
 	private void addSection() {
@@ -986,7 +983,7 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 	
 	/**
 	 * 
-	 * @return
+	 *
 	 */
 	private Model getSelectedSetlist() {
 		for (Model setlist : itemList) {
@@ -1038,7 +1035,8 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 	/**
 	 * 
 	 */
-	private void stopBeats() {
+	@SuppressWarnings("unused")
+    private void stopBeats() {
 		playImage.setImageResource(R.drawable.play_button);
 		Log.d("beatbuddy", "Pausing beats");
 		if (beatTask != null) {
@@ -1078,7 +1076,7 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 	
 	/**
 	 * 
-	 * @return
+	 *
 	 */
 	public boolean isEditMode() {
 		return editMode;
@@ -1087,7 +1085,7 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 
 	/**
 	 * 
-	 * @param numberOfSelectedItems
+	 *
 	 */
 	public void setEditItemActions(int numberOfSelectedItems) {
 		if (editMode) {
@@ -1114,9 +1112,9 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 	private class StartBeatsTask {
 		
 		private Thread metronome;
-		private Boolean stop = Boolean.valueOf(false);
+		private Boolean stop = false;
 		private int delay;
-		private Integer lock = Integer.valueOf(0);
+		private final Integer lock = 0;
 		
 		public StartBeatsTask() {
 			BigDecimal value = BigDecimal.valueOf((60/selectedSong.getTempo()) * 1000);
@@ -1124,7 +1122,8 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 			
 			metronome = new Thread(new Runnable() {
 
-				@Override
+				@SuppressWarnings("InfiniteLoopStatement")
+                @Override
 				public void run() {
 					while (true) {
 						try {
