@@ -35,12 +35,13 @@ import com.bigdrum.metronomemate.database.Constants;
 import com.bigdrum.metronomemate.database.DataService;
 import com.bigdrum.metronomemate.database.DataServiceException;
 import com.bigdrum.metronomemate.network.MySong;
+import com.bigdrum.metronomemate.ui.setlist.ConfirmationDialogFragment.ConfirmationDialogCallback;
 import com.mobeta.android.dslv.DragSortController;
 import com.mobeta.android.dslv.DragSortListView;
 import com.mobeta.android.dslv.DragSortListView.DropListener;
 
 public class MetronomeFragment extends Fragment implements OnClickListener, OnLongClickListener,
-        ConfirmationDialogFragment.NoticeDialogListener{
+        ConfirmationDialogCallback{
 
 	private View rootView;
 	private ViewGroup beatsViewgroup;
@@ -835,10 +836,42 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 		ConfirmationDialogFragment confirmDialog = new ConfirmationDialogFragment();
 
 		confirmDialog.setMessageAndTitle(message, "Confirm");
-        confirmDialog.setFragmentTag(getTag());
+        confirmDialog.setFragmentCallbackClass(this);
 
 		confirmDialog.show(getActivity().getFragmentManager(), "");
 	}
+
+
+    /**
+     * Called by the delete confirmation dialog (activity), which is on a separate thread, so
+     * we must use a handler to update the UI
+     */
+    public void positiveButtonClicked() {
+        handler.post(new Runnable() {
+
+            @Override
+            public void run() {
+                try {
+                    if (!setlistMode) {
+                        deleteSongs();
+                    } else {
+                        deleteSetlists();
+                    }
+                } catch (DataServiceException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        });
+    }
+
+
+    /**
+     *
+     */
+    public void negativeButtonClicked() {
+
+    }
 	
 	
 	/**
@@ -1062,34 +1095,7 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 	}
 
 
-    /**
-     *
-     * @param dialog
-     */
-    @Override
-    public void onDialogPositiveClick(DialogFragment dialog) {
 
-        try {
-            if (setlistMode) {
-                deleteSetlists();
-            } else {
-                deleteSongs();
-            }
-        }
-        catch (DataServiceException ex) {
-
-        }
-    }
-
-
-    /**
-     *
-     * @param dialog
-     */
-    @Override
-    public void onDialogNegativeClick(DialogFragment dialog) {
-
-    }
 
 
     /**
