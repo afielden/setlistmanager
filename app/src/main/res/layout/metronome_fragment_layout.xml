@@ -47,7 +47,8 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
                 android:text="@string/set_list_label"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textSize="@dimen/abc_text_size_large_material" />
 
             <com.mobeta.android.dslv.DragSortListView
                 android:id="@+id/setlist_view"

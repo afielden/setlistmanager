@@ -142,7 +142,7 @@ public class Model {
 	}
 
 	public boolean isSubsetItem() {
-		return artist.equals("<subset>");
+		return artist != null && artist.equals("<subset>");
 	}
 	
 	public boolean isSetlist() {

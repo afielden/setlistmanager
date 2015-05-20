@@ -27,6 +27,7 @@ public class CustomAdapter extends ArrayAdapter<Model> implements OnCheckedChang
 	private MetronomeFragment ui;
 	private int numberOfSelectedItems;
 	private int selectedPosition = -1;
+    private View parentView;
 
 	public CustomAdapter(Activity context, int layoutResource, int textviewResource, List<Model> modelList, MetronomeFragment ui) {
 		super(context, layoutResource, textviewResource, modelList);
@@ -35,7 +36,10 @@ public class CustomAdapter extends ArrayAdapter<Model> implements OnCheckedChang
 		this.numberOfSelectedItems = 0;
 		this.checked = new boolean[modelList.size()];
 		this.views = new HashSet<View>();
+//        this.parentView = ui.getView();
 	}
+
+    enum ViewType { SETLISTNAME, SONGNAME, SUBSETMARKER };
 
 	static class ViewHolder {
 		protected TextView itemNumber;
@@ -43,6 +47,8 @@ public class CustomAdapter extends ArrayAdapter<Model> implements OnCheckedChang
 		protected TextView text;
 		protected CheckBox checkbox;
 		protected boolean clicked;
+        protected ViewType viewType;
+        protected boolean isEditable;
 	}
 
 	@Override
@@ -102,22 +108,40 @@ public class CustomAdapter extends ArrayAdapter<Model> implements OnCheckedChang
 	private View createReadOnlyView(final int position, View convertView) {
 
 		View view = null;
+		Model listItem = getItem(position);
+        ViewHolder currentViewHolder = null;
+        LayoutInflater inflator = context.getLayoutInflater();
 
-		if (convertView == null || convertView.findViewById(R.id.setlist_row_handler) != null) {
+        if (convertView != null) {
+            currentViewHolder = (ViewHolder)convertView.getTag();
+        }
 
-			LayoutInflater inflator = context.getLayoutInflater();
+		if (convertView == null || currentViewHolder.isEditable) {
+
 			view = inflator.inflate(R.layout.list_item_not_editable, null);
 
 			final ViewHolder viewHolder = new ViewHolder();
-			viewHolder.itemNumber = (TextView)view.findViewById(R.id.itemNumber);
-			viewHolder.text = (TextView) view.findViewById(R.id.setlist_row_name);
 
-			view.setTag(viewHolder);
-
-			viewHolder.itemNumber.setTag(getItem(position));
-
-
+            initialiseViewHolder(viewHolder, ViewType.SONGNAME, view, position);
 		}
+
+        else if (convertView != null && listItem.isSubsetItem()) {
+
+            view = inflator.inflate(R.layout.list_item_subset_marker_readonly, null);
+
+            ViewHolder viewHolder = (ViewHolder)convertView.getTag();
+
+            initialiseViewHolder(viewHolder, ViewType.SUBSETMARKER, view, position);
+        }
+
+        else if (convertView != null && !listItem.isSubsetItem()) {
+            view = inflator.inflate(R.layout.list_item_not_editable, null);
+
+            ViewHolder viewHolder = (ViewHolder)convertView.getTag();
+
+            initialiseViewHolder(viewHolder, ViewType.SONGNAME, view, position);
+        }
+
 		else {
 			view = convertView;
 			view.setBackgroundColor(Color.TRANSPARENT);
@@ -125,10 +149,6 @@ public class CustomAdapter extends ArrayAdapter<Model> implements OnCheckedChang
 		}
 
 		views.add(view);
-		ViewHolder holder = (ViewHolder) view.getTag();
-		holder.itemNumber.setText(getItemNumber(position));
-		holder.text.setText(getItem(position).getName());
-		String song = getItem(position).getName();
 
 		if (position == selectedPosition) {
 			view.setBackgroundColor(Color.GREEN);
@@ -136,7 +156,30 @@ public class CustomAdapter extends ArrayAdapter<Model> implements OnCheckedChang
 
 		return view;
 	}
-	
+
+
+    /**
+     *
+     * @param viewHolder
+     * @param viewType
+     */
+    private void initialiseViewHolder(ViewHolder viewHolder, ViewType viewType,
+                                      View view, int position) {
+
+        viewHolder.itemNumber = (TextView)view.findViewById(R.id.itemNumber);
+        viewHolder.text = (TextView) view.findViewById(R.id.setlist_row_name);
+        viewHolder.text.setText(getItem(position).getName());
+        viewHolder.viewType = viewType;
+        viewHolder.isEditable = false;
+
+        if (viewHolder.itemNumber != null) {
+            viewHolder.itemNumber.setText(getItemNumber(position));
+            viewHolder.itemNumber.setTag(getItem(position));
+        }
+
+        view.setTag(viewHolder);
+    }
+
 	
 	/**
 	 * 

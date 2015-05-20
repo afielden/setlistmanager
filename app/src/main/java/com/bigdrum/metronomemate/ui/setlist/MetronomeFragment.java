@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -38,7 +39,8 @@ import com.mobeta.android.dslv.DragSortController;
 import com.mobeta.android.dslv.DragSortListView;
 import com.mobeta.android.dslv.DragSortListView.DropListener;
 
-public class MetronomeFragment extends Fragment implements OnClickListener, OnLongClickListener {
+public class MetronomeFragment extends Fragment implements OnClickListener, OnLongClickListener,
+        ConfirmationDialogFragment.NoticeDialogListener{
 
 	private View rootView;
 	private ViewGroup beatsViewgroup;
@@ -92,6 +94,7 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 		beatViews = new ArrayList<ImageView>();
 		currentBeat = 0;
 		handler = new Handler();
+
 //		rootView.setBackgroundColor(R.drawable.background);
 		return rootView;
 	}
@@ -176,8 +179,8 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 	 * 
 	 */
 	private void displayWelcomeMessage() {
-		help.setMessageAndTitleHtml(getString(R.string.help_welcome), 
-				getString(R.string.help_welcome_title), getActivity());
+		help.setMessageAndTitleHtml(getString(R.string.help_welcome),
+                getString(R.string.help_welcome_title), getActivity());
 		help.show(getActivity().getFragmentManager(), "");
 	}
 	
@@ -293,45 +296,44 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 //		listView.setOnLongClickListener(this);
 		listView.setOnItemClickListener(new OnItemClickListener() {
 
-			private View selectedView;
+            private View selectedView;
 
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				
-				listAdapter.setSelectedPosition(position);
-				
-				if (!setlistMode) {
-					selectedSong = itemList.get(position);
-					stopBeats();
-					createBeatIcons(selectedSong);
-					setSongInformationVisibility(View.VISIBLE);
-					setActionItemVisibility();
-					
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                listAdapter.setSelectedPosition(position);
+
+                if (!setlistMode) {
+                    selectedSong = itemList.get(position);
+//					stopBeats();
+//					createBeatIcons(selectedSong);
+//					setSongInformationVisibility(View.VISIBLE);
+                    setActionItemVisibility();
+
 //					if (selectedView != null) {
 //						selectedView.setBackgroundColor(Color.TRANSPARENT);
 //					}
 //					selectedView = view;
 //					view.setSelected(true);
-					listAdapter.notifyDataSetChanged();
+                    listAdapter.notifyDataSetChanged();
 //					view.setBackgroundColor(Color.RED);
-					
+
 //					SongDetailsFragment songDetails = new SongDetailsFragment();
 //					songDetails.setSong(selectedSong);
 //					songDetails.show(MetronomeFragment.this.getActivity().getFragmentManager(), "");
-				}
-				else {
-					editMode = false;
-					editModeAction.setTitle(R.string.action_edit);
-					selectedSetlist = itemList.get(position);
-					displaySongsInSetlist();
-					setlistMode(false);
-					listAdapter.setSelectedPosition(-1);
-					setActionItemVisibility();
-				}
-				
-				
-			}
-		});
+                } else {
+                    editMode = false;
+                    editModeAction.setTitle(R.string.action_edit);
+                    selectedSetlist = itemList.get(position);
+                    displaySongsInSetlist();
+                    setlistMode(false);
+                    listAdapter.setSelectedPosition(-1);
+                    setActionItemVisibility();
+                }
+
+
+            }
+        });
 	}
 	
 	
@@ -511,16 +513,14 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 	    	return true;
 	    	
 	    case R.id.action_delete:
-	    	try {
-				if (setlistMode) {
-					deleteSetlists();
-				}
-				else {
-					deleteSongs();
-				}
-			} catch (DataServiceException e) {
-				Toast.makeText(this.getActivity(), e.getReason(), Toast.LENGTH_SHORT).show();
-			}
+
+            if (setlistMode) {
+                showConfirmationDialog(getResources().getString(R.string.confirm_delete_setlists));
+            }
+            else {
+                showConfirmationDialog(getResources().getString(R.string.confirm_delete_songs));
+            }
+
 	    	return true;
 	    	
 	    case R.id.action_edit:
@@ -790,17 +790,17 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 	 * 
 	 */
 	private void deleteSetlists() throws DataServiceException {
-		
-		List<Model> remainingSetlists = dbService.deleteSetlists(itemList);
-		listAdapter.clear();
-		listAdapter.addAll(remainingSetlists);
-		listAdapter.notifyDataSetChanged();
-		
-		reorderUnselectedItems();
-		if (remainingSetlists.size() == 0) {
-			editMode = false;
-			setActionItemVisibility();
-		}
+
+        List<Model> remainingSetlists = dbService.deleteSetlists(itemList);
+        listAdapter.clear();
+        listAdapter.addAll(remainingSetlists);
+        listAdapter.notifyDataSetChanged();
+
+        reorderUnselectedItems();
+        if (remainingSetlists.size() == 0) {
+            editMode = false;
+            setActionItemVisibility();
+        }
 	}
 	
 	
@@ -809,19 +809,35 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 	 * 
 	 */
 	private void deleteSongs() throws DataServiceException {
-		
-		List<Model> remainingSongs = dbService.deleteSongs(itemList, selectedSetlist);
-		listAdapter.clear();
-		listAdapter.addAll(remainingSongs);
-		listAdapter.notifyDataSetChangedAndReset();
-		
-		reorderUnselectedItems();
-		if (remainingSongs.size() == 0) {
-			editMode = false;
-			setActionItemVisibility();
-		}
-		
-		setSongInformationVisibility(View.INVISIBLE);
+
+        List<Model> remainingSongs = dbService.deleteSongs(itemList, selectedSetlist);
+        listAdapter.clear();
+        listAdapter.addAll(remainingSongs);
+        listAdapter.notifyDataSetChangedAndReset();
+
+        reorderUnselectedItems();
+        if (remainingSongs.size() == 0) {
+            editMode = false;
+            setActionItemVisibility();
+        }
+
+        setSongInformationVisibility(View.INVISIBLE);
+	}
+
+
+	/**
+	 *
+	 * @param message
+	 * @return
+	 */
+	private void showConfirmationDialog(String message) {
+
+		ConfirmationDialogFragment confirmDialog = new ConfirmationDialogFragment();
+
+		confirmDialog.setMessageAndTitle(message, "Confirm");
+        confirmDialog.setFragmentTag(getTag());
+
+		confirmDialog.show(getActivity().getFragmentManager(), "");
 	}
 	
 	
@@ -998,23 +1014,23 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 		
 		handler.post(new Runnable() {
 
-			@Override
-			public void run() {
-				
-				int prevBeat = beatViews.size() - 1;
-				beatViews.get(currentBeat).setImageResource(R.drawable.beat_on);
-				
-				if (currentBeat > 0) {
-					prevBeat = currentBeat - 1;
-				}
-				beatViews.get(prevBeat).setImageResource(R.drawable.beat_off);
-				
-				if (++currentBeat >= beatViews.size()) {
-					currentBeat = 0;
-				}
-			}
-			
-		});
+            @Override
+            public void run() {
+
+                int prevBeat = beatViews.size() - 1;
+                beatViews.get(currentBeat).setImageResource(R.drawable.beat_on);
+
+                if (currentBeat > 0) {
+                    prevBeat = currentBeat - 1;
+                }
+                beatViews.get(prevBeat).setImageResource(R.drawable.beat_off);
+
+                if (++currentBeat >= beatViews.size()) {
+                    currentBeat = 0;
+                }
+            }
+
+        });
 	}
 	
 	
@@ -1046,7 +1062,37 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 	}
 
 
-	/**
+    /**
+     *
+     * @param dialog
+     */
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+
+        try {
+            if (setlistMode) {
+                deleteSetlists();
+            } else {
+                deleteSongs();
+            }
+        }
+        catch (DataServiceException ex) {
+
+        }
+    }
+
+
+    /**
+     *
+     * @param dialog
+     */
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+
+    }
+
+
+    /**
 	 * 
 	 * @author andrew
 	 *
@@ -1143,10 +1189,15 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 		
 		@Override
 		public void onLongPress(MotionEvent e) {
-			selectedSong = itemList.get(viewIdHitPosition(e, 0));
-			SongDetailsFragment songDetails = new SongDetailsFragment();
-			songDetails.setSong(selectedSong);
-			songDetails.show(MetronomeFragment.this.getActivity().getFragmentManager(), "");
+
+			int listItemPosition = viewIdHitPosition(e, 0);
+
+			if (listItemPosition > -1) {
+				selectedSong = itemList.get(listItemPosition);
+				SongDetailsFragment songDetails = new SongDetailsFragment();
+				songDetails.setSong(selectedSong);
+				songDetails.show(MetronomeFragment.this.getActivity().getFragmentManager(), "");
+			}
 		}
 
 	}

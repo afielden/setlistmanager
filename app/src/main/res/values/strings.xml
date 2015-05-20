@@ -115,6 +115,8 @@
     <string name="tooltip_cancel">Cancel</string>
     <string name="tooltip_select">Accept chosen item</string>
     <string name="tooltip_ok">Save and finish</string>
+    <string name="confirm_delete_setlists">"Delete the selected setlists?</string>
+    <string name="confirm_delete_songs">"Delete the selected songs?</string>
     <string name="crash_toast_text">Sorry, BeatBuddy crashed. Please allow diagnostic information to be sent to the developer</string>
     <string name="crash_dialog_title">CrashTest has crashed</string>
     <string name="crash_dialog_text">An unexpected error occurred forcing the
