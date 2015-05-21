@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +26,9 @@ public class EnterSongDetails extends Activity implements OnItemSelectedListener
 	private EditText artist;
 	private EditText tempo;
 	private EditText timeSig;
+	private EditText hoursEditText;
+	private EditText minsEditText;
+	private EditText secsEditText;
 	private int key;
 	private boolean subset;
 
@@ -52,6 +56,9 @@ public class EnterSongDetails extends Activity implements OnItemSelectedListener
 		tempo = (EditText)findViewById(R.id.enter_song_tempo);
 		timeSig = (EditText)findViewById(R.id.enter_song_timesig);
 		Spinner spinner = (Spinner) findViewById(R.id.enter_song_key);
+		hoursEditText = (EditText)findViewById(R.id.hours);
+		minsEditText = (EditText)findViewById(R.id.mins);
+		secsEditText = (EditText)findViewById(R.id.secs);
 		
 		originalSong = intent.getParcelableExtra(Constants.SONG_ENTERED);
 		if (originalSong != null) {
@@ -60,6 +67,7 @@ public class EnterSongDetails extends Activity implements OnItemSelectedListener
 			tempo.setText(String.valueOf(originalSong.getTempo()));
 			timeSig.setText(String.valueOf(originalSong.getTimeSignature()));
 			key = originalSong.getKey();
+            initialiseDuration(originalSong.getDuration());
 			
 			if (originalSong.getArtist().equals("<subset>")) {
 				subset = true;
@@ -69,7 +77,9 @@ public class EnterSongDetails extends Activity implements OnItemSelectedListener
 				((TextView)findViewById(R.id.artist_label)).setVisibility(View.INVISIBLE);
 				((TextView)findViewById(R.id.tempo_label)).setVisibility(View.INVISIBLE);
 				((TextView)findViewById(R.id.timesig_label)).setVisibility(View.INVISIBLE);
+                ((TextView)findViewById(R.id.song_key_label)).setVisibility(View.INVISIBLE);
 				((Spinner)findViewById(R.id.enter_song_key)).setVisibility(View.INVISIBLE);
+                ((LinearLayout)findViewById(R.id.song_duration_layout)).setVisibility(View.INVISIBLE);
 			}
 		}
 		
@@ -80,8 +90,22 @@ public class EnterSongDetails extends Activity implements OnItemSelectedListener
 		spinner.setSelection(key);
 		spinner.setOnItemSelectedListener(this);
 	}
-	
-	
+
+
+    /**
+     * Initialise the song duration text fields hh:mm:ss
+     * @param seconds : total song time in seconds
+     */
+    private void initialiseDuration(double seconds) {
+
+        String[] time = SongDetailsFragment.formatTime(seconds).split(":");
+
+        hoursEditText.setText(time[0]);
+        minsEditText.setText(time[1]);
+        secsEditText.setText(time[2]);
+    }
+
+
 	/**
 	 * 
 	 * @return
@@ -98,9 +122,27 @@ public class EnterSongDetails extends Activity implements OnItemSelectedListener
 		}
 		
 		MySong song = new MySong(id, songName.getText().toString(), artist.getText().toString(), 
-				Double.parseDouble(tempo.getText().toString()), Integer.parseInt(timeSig.getText().toString()), key, setlistCount, position);
+				Double.parseDouble(tempo.getText().toString()), Integer.parseInt(timeSig.getText().toString()), key, setlistCount,
+                position, convertTimeToSeconds());
 		return song;
 	}
+
+
+    /**
+     *
+     * @return seconds
+     */
+    private double convertTimeToSeconds() {
+
+        Integer hours = Integer.valueOf(hoursEditText.getText().toString());
+        Integer mins = Integer.valueOf(minsEditText.getText().toString());
+        Integer secs = Integer.valueOf(secsEditText.getText().toString());
+
+        Integer totalSeconds = (hours * 3600) + (mins * 60) + secs;
+
+        return totalSeconds.doubleValue();
+
+    }
 
 	
 	/**
@@ -111,6 +153,9 @@ public class EnterSongDetails extends Activity implements OnItemSelectedListener
 		String songNameStr = songName.getText().toString();
 		String tempoStr = tempo.getText().toString();
 		String timeSigStr = timeSig.getText().toString();
+		String hourStr = hoursEditText.getText().toString();
+		String minStr = minsEditText.getText().toString();
+		String secStr = secsEditText.getText().toString();
 		
 		if (songNameStr == null || songNameStr.equals("")) {
 			Toast.makeText(this, R.string.missing_song_name, Toast.LENGTH_SHORT).show();
@@ -126,6 +171,12 @@ public class EnterSongDetails extends Activity implements OnItemSelectedListener
 		}
 		else if (!subset && (Integer.valueOf(timeSigStr) < 1 || Integer.valueOf(timeSigStr) > 12)) {
 			Toast.makeText(this, R.string.invalid_timesig, Toast.LENGTH_SHORT).show();
+			return false;
+		}
+		else if (!subset && (hourStr == null || Integer.valueOf(hourStr) < 0 || Integer.valueOf(hourStr)> 24
+                || Integer.valueOf(minStr) < 0 || Integer.valueOf(minStr) > 60
+                || Integer.valueOf(secStr) < 0 || Integer.valueOf(secStr) > 60)) {
+			Toast.makeText(this, R.string.invalid_duration, Toast.LENGTH_SHORT).show();
 			return false;
 		}
 		

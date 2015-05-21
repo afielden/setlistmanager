@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bigdrum.metronomemate.R;
@@ -26,8 +27,11 @@ public class AddSetlistActivity extends Activity {
 		
 		Bundle extras = getIntent().getExtras();
 		EditText editText = (EditText)findViewById(R.id.set_list_name);
+		TextView textView = (TextView)findViewById(R.id.setlist_name_textview);
+
 		if (extras != null && (originalSetlistName = extras.getString(Constants.ORIGINAL_SETLIST_NAME)) != null) {
 			editText.setText(originalSetlistName);
+			textView.setText(R.string.edit_setlist_text);
 		}
 		
 		dbService = DataService.getDataService(this);

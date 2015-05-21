@@ -27,7 +27,7 @@ public class CustomAdapter extends ArrayAdapter<Model> implements OnCheckedChang
 	private MetronomeFragment ui;
 	private int numberOfSelectedItems;
 	private int selectedPosition = -1;
-    private View parentView;
+    private ViewGroup parentViewgroup;
     private Model selectedItem;
 
 	public CustomAdapter(Activity context, int layoutResource, int textviewResource, List<Model> modelList, MetronomeFragment ui) {
@@ -57,6 +57,7 @@ public class CustomAdapter extends ArrayAdapter<Model> implements OnCheckedChang
 
 		View view = null;
 		boolean editMode = ui.isEditMode();
+		parentViewgroup = parent;
 
 		if (!editMode) {
 			return createReadOnlyView(position, convertView);
@@ -64,7 +65,7 @@ public class CustomAdapter extends ArrayAdapter<Model> implements OnCheckedChang
 
 		if (convertView == null || convertView.findViewById(R.id.setlist_row_handler) == null) {
 			LayoutInflater inflator = context.getLayoutInflater();
-			view = inflator.inflate(R.layout.list_item_handle_left, null);
+			view = inflator.inflate(R.layout.list_item_handle_left, parentViewgroup, false);
 			
 			final ViewHolder viewHolder = new ViewHolder();
 			viewHolder.itemNumber = (TextView)view.findViewById(R.id.itemNumber);
@@ -119,7 +120,7 @@ public class CustomAdapter extends ArrayAdapter<Model> implements OnCheckedChang
 
 		if (convertView == null || currentViewHolder.isEditable) {
 
-			view = inflator.inflate(R.layout.list_item_not_editable, null);
+			view = inflator.inflate(R.layout.list_item_not_editable, parentViewgroup, false);
 
 			final ViewHolder viewHolder = new ViewHolder();
 
@@ -128,7 +129,7 @@ public class CustomAdapter extends ArrayAdapter<Model> implements OnCheckedChang
 
         else if (convertView != null && listItem.isSubsetItem()) {
 
-            view = inflator.inflate(R.layout.list_item_subset_marker_readonly, null);
+            view = inflator.inflate(R.layout.list_item_subset_marker_readonly,  parentViewgroup, false);
 
             ViewHolder viewHolder = (ViewHolder)convertView.getTag();
 
@@ -136,7 +137,7 @@ public class CustomAdapter extends ArrayAdapter<Model> implements OnCheckedChang
         }
 
         else if (convertView != null && !listItem.isSubsetItem()) {
-            view = inflator.inflate(R.layout.list_item_not_editable, null);
+            view = inflator.inflate(R.layout.list_item_not_editable, parentViewgroup, false);
 
             ViewHolder viewHolder = (ViewHolder)convertView.getTag();
 
@@ -289,14 +290,14 @@ public class CustomAdapter extends ArrayAdapter<Model> implements OnCheckedChang
 	}
 
 
-    public Model getSelectedItem() {
-
-        for (int index=0; index < checked.length; index++) {
-            if (checked[index] == true) {
-                return getItem(index);
-            }
-        }
-
-        return null;
-    }
+//    public Model getSelectedItem() {
+//
+//        for (int index=0; index < checked.length; index++) {
+//            if (checked[index] == true) {
+//                return getItem(index);
+//            }
+//        }
+//
+//        return null;
+//    }
 }

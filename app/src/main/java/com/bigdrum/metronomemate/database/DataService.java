@@ -6,6 +6,7 @@ import static com.bigdrum.metronomemate.database.Constants.SETLISTPRIMARYKEY;
 import static com.bigdrum.metronomemate.database.Constants.SETLIST_TABLE;
 import static com.bigdrum.metronomemate.database.Constants.SONGLIST_QUERY;
 import static com.bigdrum.metronomemate.database.Constants.SONG_ARTIST;
+import static com.bigdrum.metronomemate.database.Constants.SONG_DURATION;
 import static com.bigdrum.metronomemate.database.Constants.SONG_KEY;
 import static com.bigdrum.metronomemate.database.Constants.SONG_NAME;
 import static com.bigdrum.metronomemate.database.Constants.SONG_PRIMARYKEY;
@@ -46,7 +47,7 @@ public class DataService extends SQLiteOpenHelper {
 	
 	/**
 	 * 
-	 * @param context
+	 *
 	 */
 	private DataService(Context context) {
 		super(context, DBNAME, null, DBVERSION);
@@ -96,7 +97,8 @@ public class DataService extends SQLiteOpenHelper {
 				+ SONG_TEMPO + " REAL NOT NULL, "
 				+ SONG_TIMESIG + " INTEGER NOT NULL, "
 				+ SONG_KEY + " INTEGER, "
-				+ SONG_SETLIST_COUNT + " INTEGER NOT NULL);"
+				+ SONG_SETLIST_COUNT + " INTEGER NOT NULL, "
+				+ SONG_DURATION + " REAL NOT NULL);"
 				);
 		
 		db.execSQL("CREATE TABLE " + SONG_SET_TABLE_NAME + " ("
@@ -125,9 +127,7 @@ public class DataService extends SQLiteOpenHelper {
 
 	
 	/**
-	 * 
-	 * @param setlistName
-	 * @throws DataServiceException 
+	 *
 	 */
 	public void addSetlistName(String setlistName) {
 		
@@ -144,9 +144,7 @@ public class DataService extends SQLiteOpenHelper {
 	
 	
 	/**
-	 * 
-	 * @param newSetlistName
-	 * @param selectedSetlist
+	 *
 	 */
 	public void changeSetlistName(String newSetlistName, Model selectedSetlist) {
 		
@@ -154,7 +152,7 @@ public class DataService extends SQLiteOpenHelper {
 		String origSetlistName = selectedSetlist.getName().replaceAll("'","''");
 		newSetlistName=newSetlistName.replaceAll("'","''");
 		values.put(SETLISTNAME, newSetlistName);
-		db.update(SETLIST_TABLE, values, SETLISTNAME + "='" + origSetlistName + "' AND " 
+		db.update(SETLIST_TABLE, values, SETLISTNAME + "='" + origSetlistName + "' AND "
 				+ SETLISTPOS + "=" + selectedSetlist.getPosition(), null);
 	}
 	
@@ -196,8 +194,7 @@ public class DataService extends SQLiteOpenHelper {
 	
 	/**
 	 * 
-	 * @param setlistName
-	 * @return
+
 	 */
 	public List<Model> getSongsInSetlist(long setlistId) throws DataServiceException {
 		
@@ -211,7 +208,7 @@ public class DataService extends SQLiteOpenHelper {
 			cursor.moveToFirst();
 			while (!cursor.isAfterLast()) {
 				Model song = new Model(cursor.getLong(0), setlistId, cursor.getString(1), cursor.getString(2), cursor.getDouble(3), 
-						cursor.getInt(4), cursor.getInt(5), cursor.getInt(6), cursor.getInt(7));
+						cursor.getInt(4), cursor.getInt(5), cursor.getInt(6), cursor.getInt(8), cursor.getDouble(7));
 				songs.add(song);
 				cursor.moveToNext();
 		    }
@@ -223,9 +220,7 @@ public class DataService extends SQLiteOpenHelper {
 	
 	
 	/**
-	 * 
-	 * @param name
-	 * @return
+	 *
 	 */
 	public long getSetlistId(Model setlist) throws DataServiceException {
 		String[] cols = { SETLISTPRIMARYKEY };
@@ -247,9 +242,7 @@ public class DataService extends SQLiteOpenHelper {
 	
 	
 	/**
-	 * 
-	 * @param name
-	 * @return
+	 *
 	 */
 	public int getSetlistIdByName(String setlist) {
 		String[] cols = { SETLISTPRIMARYKEY };
@@ -268,15 +261,12 @@ public class DataService extends SQLiteOpenHelper {
 	
 	
 	/**
-	 * 
-	 * @param id
-	 * @return
-	 * @throws DataServiceException
+	 *
 	 */
 	public String getSetlistNameById(long id) {
 		String[] cols = { SETLISTNAME };
 		String name = null;
-		Cursor cursor = db.query(SETLIST_TABLE, cols, SETLISTPRIMARYKEY + "= " + id, 
+		Cursor cursor = db.query(SETLIST_TABLE, cols, SETLISTPRIMARYKEY + "= " + id,
 				null, null, null, null, null);
 		
 		if (cursor.moveToFirst()) {
@@ -292,9 +282,7 @@ public class DataService extends SQLiteOpenHelper {
 	
 	
 	/**
-	 * 
-	 * @param name
-	 * @return
+	 *
 	 * 
 	 */
 	public void addSetlistPosition(Model setlist) {
@@ -326,9 +314,7 @@ public class DataService extends SQLiteOpenHelper {
 	
 	
 	/**
-	 * 
-	 * @param song
-	 * @return
+	 *
 	 */
 	private Model getExistingSong(Model song) {
 		String cols[] = { SONG_PRIMARYKEY };
@@ -352,8 +338,7 @@ public class DataService extends SQLiteOpenHelper {
 	
 
 	/**
-	 * 
-	 * @param selectedSong
+	 *
 	 */
 	public void addSongToSetlist(Model song, long setlistId) throws DataServiceException {
 		/*if (setlist.getPosition() == -1) {
@@ -383,6 +368,7 @@ public class DataService extends SQLiteOpenHelper {
 			values.put(SONG_TIMESIG, song.getTimeSignature());
 			values.put(SONG_KEY, song.getKey());
 			values.put(SONG_SETLIST_COUNT, 1);
+			values.put(SONG_DURATION, song.getDuration());
 			long songId = db.insertOrThrow(SONG_TABLE, null, values);
 			song.setId(songId);
 		}
@@ -396,9 +382,7 @@ public class DataService extends SQLiteOpenHelper {
 	
 	
 	/**
-	 * 
-	 * @param song
-	 * @param setlist
+	 *
 	 */
 	private void createSongSetlistLinkRecord(Model song, long setlistId) {
 		ContentValues values = new ContentValues();
@@ -411,8 +395,7 @@ public class DataService extends SQLiteOpenHelper {
 	
 	
 	/**
-	 * 
-	 * @return
+	 *
 	 */
 	private int numberOfSubsets() {
 		String cols[] = { SONG_PRIMARYKEY };
@@ -427,13 +410,12 @@ public class DataService extends SQLiteOpenHelper {
 	
 	
 	/**
-	 * 
-	 * @param selectedSetlist
+	 *
 	 * @throws DataServiceException 
 	 */
 	public Model addSection(Model selectedSetlist) throws DataServiceException {
 		int nextSubset = numberOfSubsets() + 1;
-		Model newSection = new Model(-1, selectedSetlist.getSetlistId(), "Set" + nextSubset, "<subset>", 0, 0, 0, 1, -1);
+		Model newSection = new Model(-1, selectedSetlist.getSetlistId(), "Set" + nextSubset, "<subset>", 0, 0, 0, 1, -1, 0);
 		addSongToSetlist(newSection, selectedSetlist.getId());
 		
 		return newSection;
@@ -458,8 +440,7 @@ public class DataService extends SQLiteOpenHelper {
 	
 	
 	/**
-	 * 
-	 * @param modelMap
+	 *
 	 */
 	public void reorderSongs(List<Model> songs, Model setlist) {
 		ContentValues values = new ContentValues();
@@ -480,8 +461,7 @@ public class DataService extends SQLiteOpenHelper {
 
 
 	/**
-	 * 
-	 * @param setLists
+	 *
 	 * @throws DataServiceException
 	 */
 	public List<Model> deleteSetlists(List<Model> setLists) throws DataServiceException {
@@ -510,8 +490,7 @@ public class DataService extends SQLiteOpenHelper {
 	
 	
 	/**
-	 * 
-	 * @param Model
+	 *
 	 * @throws DataServiceException 
 	 */
 	public void deleteSongsInSetlist(Model setlist) throws DataServiceException {
@@ -527,10 +506,7 @@ public class DataService extends SQLiteOpenHelper {
 
 
 	/**
-	 * 
-	 * @param songs
-	 * @param setlist
-	 * @return
+	 *
 	 * @throws DataServiceException
 	 */
 	public List<Model> deleteSongs(List<Model> songs, Model setlist) throws DataServiceException {
@@ -561,8 +537,7 @@ public class DataService extends SQLiteOpenHelper {
 	
 	
 	/**
-	 * 
-	 * @param song
+	 *
 	 */
 	private void deleteSong(Model song) {
 		song.decrementSetlistCount();
@@ -576,8 +551,7 @@ public class DataService extends SQLiteOpenHelper {
 
 
 	/**
-	 * 
-	 * @param newSongModel
+	 *
 	 */
 	public void updateSong(Model song) {
 		ContentValues values = new ContentValues();
@@ -588,15 +562,14 @@ public class DataService extends SQLiteOpenHelper {
 		values.put(SONG_TIMESIG, song.getTimeSignature());
 		values.put(SONG_KEY, song.getKey());
 		values.put(SONG_SETLIST_COUNT, song.getSetlistCount());
+        values.put(SONG_DURATION, song.getDuration());
 		
 		db.update(SONG_TABLE, values, SONG_PRIMARYKEY + "=" + song.getId(), null);
 	}
 
 
 	/**
-	 * 
-	 * @param songs
-	 * @param setlist
+	 *
 	 * @throws DataServiceException
 	 */
 	public void copySongs(List<Model> songs, long toSetlistId) throws DataServiceException {
@@ -611,8 +584,7 @@ public class DataService extends SQLiteOpenHelper {
 	
 	/**
 	 * 
-	 * @param songs
-	 * @param setlist
+	 *
 	 */
 	public void copySetlist(List<Model> setlists, long toSetlistId) throws DataServiceException {
 		List<Model> songs;
@@ -628,5 +600,20 @@ public class DataService extends SQLiteOpenHelper {
 			}
 		}
 	}
-	
+
+
+	/**
+	 *
+	 * @param setlist: The setlist
+	 * @return int: Number of songs in this setlist
+	 */
+	public int findNumberOfSongsInSetlist(Model setlist) {
+
+		String[] cols = { SONG_SET_PRIMARY_KEY };
+		String name = null;
+		Cursor cursor = db.query(SONG_SET_TABLE_NAME, cols, SONG_SET_SETLIST_ID + "= " + setlist.getId(),
+				null, null, null, null, null);
+
+		return cursor.getCount();
+	}
 }

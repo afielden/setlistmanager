@@ -19,6 +19,7 @@ public class MySong implements Parcelable {
 	private int setlistCount;
 	private int position;
 	private TypedArray keyNames;
+	private double duration;
 
 	
 	public static final Parcelable.Creator<MySong> CREATOR = new Parcelable.Creator<MySong>() {
@@ -53,10 +54,11 @@ public class MySong implements Parcelable {
 		this.timeSignature = song.getTimeSignature();
 		this.key = song.getKey();
 		this.keyNames = keyNames;
+		this.duration = song.getDuration();
 	}
 	
 	
-	public MySong(long id, String songTitle, String artist, double tempo, int timeSignature, int key, int setlistCount, int position) {
+	public MySong(long id, String songTitle, String artist, double tempo, int timeSignature, int key, int setlistCount, int position, double duration) {
 		this.id = id;
 		this.songTitle = songTitle;
 		this.artist = artist;
@@ -65,6 +67,7 @@ public class MySong implements Parcelable {
 		this.key = key;
 		this.setlistCount = setlistCount;
 		this.position = position;
+        this.duration = duration;
 	}
 
 
@@ -136,6 +139,8 @@ public class MySong implements Parcelable {
 		return position;
 	}
 
+	public double getDuration() { return duration; }
+
 	/**
 	 * 
 	 */
@@ -152,6 +157,7 @@ public class MySong implements Parcelable {
 						+ Integer.valueOf(timeSignature))
 				.append("\n")
 				.append("Key: " + keyNames.getString(key))
+				.append("Duration: " + Double.valueOf(duration))
 				.append("\n\n");
 
 		return songInfo.toString();
@@ -181,6 +187,7 @@ public class MySong implements Parcelable {
 		key = parcel.readInt();
 		setlistCount = parcel.readInt();
 		position = parcel.readInt();
+		duration = parcel.readDouble();
 	}
 	
 	
@@ -197,6 +204,7 @@ public class MySong implements Parcelable {
 		dest.writeInt(key);
 		dest.writeInt(setlistCount);
 		dest.writeInt(position);
+		dest.writeDouble(duration);
 	}
 
 }

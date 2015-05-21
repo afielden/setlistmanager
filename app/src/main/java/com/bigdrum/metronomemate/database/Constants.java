@@ -20,6 +20,7 @@ public interface Constants extends BaseColumns {
 	public static final String SONG_TIMESIG = "timesig";
 	public static final String SONG_KEY = "key";
 	public static final String SONG_SETLIST_COUNT="setlistcount";
+	public static final String SONG_DURATION = "duration";
 	
 	// Song-Setlist link table
 	public static final String SONG_SET_PRIMARY_KEY = "_id";

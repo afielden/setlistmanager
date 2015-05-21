@@ -35,10 +35,12 @@
     <string name="setlist_non_existant">Setlist %s not found in database</string>
     <string name="title_activity_enter_song_details">Enter song details</string>
     <string name="song_timesig_label">Beats in a bar</string>
+    <string name="song_duration_label">Duration</string>
     <string name="missing_song_name">A song title must be entered</string>
     <string name="missing_tempo">Enter a value for the tempo</string>
     <string name="missing_timesig">Enter the number of beats in a bar (max 12)</string>
     <string name="invalid_timesig">Beast in a bar must be a number between 1 and 12</string>
+    <string name="invalid_duration">Enter a valid song duration (hh:mm:ss)</string>
     <string name="ok">Ok</string>
     <string name="cancel">Cancel</string>
     <string name="title_activity_select_setlist">SelectSetlist</string>
@@ -130,22 +132,21 @@
     <string name="help_welcome">
 <![CDATA[
 <html>
-MetronomeMate is a metronome app aimed at musicians in a band. It provides the following features:-
+SetlistManager is an app aimed at musicians in a band. It provides the following features:-
 <ul>
-<li><b>Song Search:</b> Search for songs by name or artist. MetronomeMate will find tempo, time signature and key details.</li>
+<li><b>Song Search:</b> Search for songs by name or artist. SetlistManager will find tempo, time signature and key details.</li>
 <li><b>Setlist Management:</b>Group your songs into setlists.</li>
-<li><b>Metronome:</b>Beat counters provide a visual guide to tempo when playing a song.</li>
 </ul>
 <center><h2>Getting Started</h2></center>
-Go to the Setlist tab and click the \'+\' action to create a new setlist. Populate it with all the songs you wish to perform at a gig.
-MetronomeMate can search for songs by title, and/or artist. Details associated with a song, such as tempo, time signature and key
+Go to the Setlist tab and click the \'+\' action to create a new setlist. Populate it with all the songs you wish to perform.
+SetlistManager can search for songs by title, and/or artist. Details associated with a song, such as tempo, time signature and key
 are automatically populated.
 <p>
 <center><h2>Setlists</h2></center>
-Setlists contain groups of songs. Tapping any setlist will show a list of all its songs. You can copy all the songs in a setlist to 
-another setlist.
+Setlists contain groups of songs. Tapping any setlist will show a summary of the number of songs it contains, and total play duration.
+Tap and hold to display a list of songs in the setlist. You can copy all the songs in a setlist to another setlist.
 <center><h2>Songs</h2></center>
-Tap a song to display beat counters. Tap and hold on a song to display the details (tempo etc). You may add new songs by searching,
+Tap a song to display a summary. Tap and hold on a song to edit the song details. You may add new songs by searching,
 or enter details manually. The order of songs in the list can be changed by selecting \'Edit\' mode.
 <p>
 You can also group the songs into \'subsets\' by adding subset markers into the list of songs.
@@ -153,14 +154,13 @@ You can also group the songs into \'subsets\' by adding subset markers into the 
 For questions or problems with this app, please contact 
 <a href="mailto:bigdrumsoftware@gmail.com?Subject=BeatBuddy">Bigdrum Software</a>
 <center><h2>Credits</h2></center>
-Design, artwork and programming &copy; 2014 <b>Andrew Fielden</b>
+Design and programming &copy; 2014 <b>Andrew Fielden</b>
 </body>
 </html>
 ]]>
     </string>
     <string name="help_setlist_mgmt_title">Setlist Management</string>
-    <string name="help_setlist_mgmt">A setlist contains a group of songs. It can be divided into subsets by adding subset markers.
-Any setlist can be associated with a Gig. </string>
+    <string name="help_setlist_mgmt">A setlist contains a group of songs. It can be divided into subsets by adding subset markers.</string>
     <string name="help_setlist_edit_title">Setlist Editing</string>
     <string name="help_setlist_edit">Setlists can be re-ordered using the drag icon.
 Mark one or more setlists for deletion.
@@ -192,5 +192,10 @@ Then create a new gig (at a selected Venue) on this tab by clicking the \'+\' ic
     <string name="title_activity_about_fragment">About BeatBuddy</string>
     <string name="gig_name_label">Name</string>
     <string name="select_target_setlist">Select the target setlist</string>
+    <string name="new_setlist_text">Enter the setlist name</string>
+    <string name="edit_setlist_text">Edit the setlist name</string>
+    <string name="long_click_tip">(Click and hold to edit)</string>
+    <string name="setlist_summary">Contains %s songs</string>
+    <string name="total_set_time">Total song time %s</string>
 
 </resources>
