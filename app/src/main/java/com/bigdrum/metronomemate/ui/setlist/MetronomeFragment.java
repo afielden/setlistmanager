@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.support.v7.internal.widget.AdapterViewCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -407,8 +406,8 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 //			songDetails.clear();
 			itemList.addAll(dbService.getSongsInSetlist(selectedSetlist.getId()));
 //			songDetails.addAll(songs);
-//			for (Model song : songs) {
-//				itemList.add(new Model(song.getSongTitle(), song.getPosition()));
+//			for (Model selectedSong : songs) {
+//				itemList.add(new Model(selectedSong.getSongTitle(), selectedSong.getPosition()));
 //			}
 			
 			listAdapter.notifyDataSetChangedAndReset();
@@ -534,11 +533,16 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 					} catch (DataServiceException e) {
 						Toast.makeText(getActivity(), e.getReason(), Toast.LENGTH_LONG).show();
 					}
-					
+
+					displaySetlists();
+
 					String message = getString(R.string.copy_to_setlist, targetSetlist);
 					Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
 				}
 				else if (resultCode == Activity.RESULT_CANCELED) {
+
+					displaySetlists();
+
 					Toast.makeText(getActivity(), R.string.cancelled, Toast.LENGTH_LONG).show();
 				}
 				break;
@@ -586,18 +590,26 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 			case (Constants.SEARCH_SONG): {
 				if (resultCode == Activity.RESULT_OK) {
 					MySong newSong = (MySong) data.getExtras().get(Constants.SONG_SELECTED);
-					Model newSongModel = new Model(-1, selectedSetlist.getId(), newSong.getSongTitle(), newSong.getArtist(), 
+
+					Model newSongModel = new Model(newSong.getId(), selectedSetlist.getId(), newSong.getSongTitle(), newSong.getArtist(),
 							newSong.getTempo(), newSong.getTimeSignature(), newSong.getKey(), 1, -1, newSong.getDuration());
 					
 					try {
-						dbService.addSongToSetlist(newSongModel, selectedSetlist.getId());
+						if (dbService.addSongToSetlist(newSongModel, selectedSetlist.getId())) {
+							itemList.add(newSongModel);
+							listAdapter.notifyDataSetChangedAndReset();
+                            Toast.makeText(getActivity(), R.string.song_added, Toast.LENGTH_LONG).show();
+						}
+                        else {
+                            Toast.makeText(getActivity(), R.string.song_already_added, Toast.LENGTH_LONG).show();
+                        }
+						editModeAction.setVisible(true);
+
 					} catch (DataServiceException e) {
+
 						e.printStackTrace();
 						Toast.makeText(getActivity(), e.getReason(), Toast.LENGTH_LONG).show();
 					}
-					itemList.add(newSongModel);
-					listAdapter.notifyDataSetChangedAndReset();
-					editModeAction.setVisible(true);
 				}
 				else if (resultCode == Activity.RESULT_CANCELED) {
 					Toast.makeText(getActivity(), R.string.cancelled, Toast.LENGTH_LONG).show();
@@ -1074,8 +1086,9 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 
         selectedSong = itemList.get(position);
         SongDetailsFragment songDetails = new SongDetailsFragment();
-        songDetails.setSong(selectedSong);
+        songDetails.setSelectedSong(selectedSong);
         songDetails.setDbService(dbService);
+        songDetails.setSelectedSetlist(selectedSetlist);
         songDetails.show(MetronomeFragment.this.getActivity().getFragmentManager(), "");
     }
 
@@ -1101,7 +1114,7 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 //					view.setBackgroundColor(Color.RED);
 
 //					SongDetailsFragment songDetails = new SongDetailsFragment();
-//					songDetails.setSong(selectedSong);
+//					songDetails.setSelectedSong(selectedSong);
 //					songDetails.show(MetronomeFragment.this.getActivity().getFragmentManager(), "");
 
             Intent intent = new Intent(getActivity(), EnterSongDetails.class);
@@ -1203,7 +1216,7 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 	public boolean onLongClick(View v) {
 		if (!setlistMode) {
 			SongDetailsFragment songDetails = new SongDetailsFragment();
-			songDetails.setSong(selectedSong);
+			songDetails.setSelectedSong(selectedSong);
 			songDetails.show(MetronomeFragment.this.getActivity().getFragmentManager(), "");
 		}
 		return true;
@@ -1230,7 +1243,7 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 //			if (listItemPosition > -1) {
 //				selectedSong = itemList.get(listItemPosition);
 //				SongDetailsFragment songDetails = new SongDetailsFragment();
-//				songDetails.setSong(selectedSong);
+//				songDetails.setSelectedSong(selectedSong);
 //				songDetails.show(MetronomeFragment.this.getActivity().getFragmentManager(), "");
 //			}
 		}

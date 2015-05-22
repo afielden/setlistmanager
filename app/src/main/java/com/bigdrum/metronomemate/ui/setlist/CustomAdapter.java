@@ -96,7 +96,7 @@ public class CustomAdapter extends ArrayAdapter<Model> implements OnCheckedChang
 		holder.checkbox.setVisibility(ui.isEditMode() ? View.VISIBLE :View.INVISIBLE);
 		
 		if (position == selectedPosition) {
-			view.setBackgroundColor(Color.GREEN);
+//			view.setBackgroundColor(Color.GREEN);
 		}
 		
 		return view;
@@ -120,7 +120,12 @@ public class CustomAdapter extends ArrayAdapter<Model> implements OnCheckedChang
 
 		if (convertView == null || currentViewHolder.isEditable) {
 
-			view = inflator.inflate(R.layout.list_item_not_editable, parentViewgroup, false);
+			if (listItem.isSubsetItem()) {
+				view = inflator.inflate(R.layout.list_item_subset_marker_readonly,  parentViewgroup, false);
+			}
+			else {
+				view = inflator.inflate(R.layout.list_item_not_editable, parentViewgroup, false);
+			}
 
 			final ViewHolder viewHolder = new ViewHolder();
 
@@ -153,7 +158,7 @@ public class CustomAdapter extends ArrayAdapter<Model> implements OnCheckedChang
 		views.add(view);
 
 		if (position == selectedPosition) {
-			view.setBackgroundColor(Color.GREEN);
+//			view.setBackgroundColor(Color.GREEN);
 		}
 
 		return view;

@@ -13,6 +13,6 @@
       android:text="Subset"
       android:gravity="center"
       android:paddingLeft="8dp"
-      android:background="@android:color/black"
-      android:textColor="@android:color/white" />
+      android:background="@drawable/gradient_vertical"
+      android:textColor="@android:color/black" />
 </LinearLayout>

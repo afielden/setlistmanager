@@ -4,6 +4,7 @@ import android.content.res.TypedArray;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.bigdrum.metronomemate.ui.setlist.SongDetailsFragment;
 import com.echonest.api.v4.EchoNestException;
 import com.echonest.api.v4.Song;
 
@@ -47,6 +48,7 @@ public class MySong implements Parcelable {
 	 * @throws EchoNestException
 	 */
 	public MySong(Song song, TypedArray keyNames) throws EchoNestException {
+		this.id = -1;
 		this.song = song;
 		this.artist = song.getArtistName();
 		this.songTitle = song.getTitle();
@@ -141,6 +143,8 @@ public class MySong implements Parcelable {
 
 	public double getDuration() { return duration; }
 
+	public void setKeyNames(TypedArray keyNames) { this.keyNames = keyNames; }
+
 	/**
 	 * 
 	 */
@@ -157,7 +161,8 @@ public class MySong implements Parcelable {
 						+ Integer.valueOf(timeSignature))
 				.append("\n")
 				.append("Key: " + keyNames.getString(key))
-				.append("Duration: " + Double.valueOf(duration))
+				.append("\n")
+				.append("Duration: " + SongDetailsFragment.formatTime(duration))
 				.append("\n\n");
 
 		return songInfo.toString();

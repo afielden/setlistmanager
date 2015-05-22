@@ -5,6 +5,9 @@ import static com.bigdrum.metronomemate.database.Constants.SETLISTPOS;
 import static com.bigdrum.metronomemate.database.Constants.SETLISTPRIMARYKEY;
 import static com.bigdrum.metronomemate.database.Constants.SETLIST_TABLE;
 import static com.bigdrum.metronomemate.database.Constants.SONGLIST_QUERY;
+import static com.bigdrum.metronomemate.database.Constants.SUBSET_QUERY;
+import static com.bigdrum.metronomemate.database.Constants.MATCHING_SONG_QUERY;
+import static com.bigdrum.metronomemate.database.Constants.SONG_QUERY;
 import static com.bigdrum.metronomemate.database.Constants.SONG_ARTIST;
 import static com.bigdrum.metronomemate.database.Constants.SONG_DURATION;
 import static com.bigdrum.metronomemate.database.Constants.SONG_KEY;
@@ -30,7 +33,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.bigdrum.metronomemate.R;
+import com.bigdrum.metronomemate.network.MySong;
 import com.bigdrum.metronomemate.ui.setlist.Model;
+import com.echonest.api.v4.SongParams;
 
 public class DataService extends SQLiteOpenHelper {
 
@@ -150,10 +155,10 @@ public class DataService extends SQLiteOpenHelper {
 		
 		ContentValues values = new ContentValues();
 		String origSetlistName = selectedSetlist.getName().replaceAll("'","''");
-		newSetlistName=newSetlistName.replaceAll("'","''");
-		values.put(SETLISTNAME, newSetlistName);
-		db.update(SETLIST_TABLE, values, SETLISTNAME + "='" + origSetlistName + "' AND "
-				+ SETLISTPOS + "=" + selectedSetlist.getPosition(), null);
+		newSetlistName=newSetlistName.replaceAll("'", "''");
+        values.put(SETLISTNAME, newSetlistName);
+        db.update(SETLIST_TABLE, values, SETLISTNAME + "='" + origSetlistName + "' AND "
+                + SETLISTPOS + "=" + selectedSetlist.getPosition(), null);
 	}
 	
 	
@@ -201,8 +206,8 @@ public class DataService extends SQLiteOpenHelper {
 		List<Model> songs = new ArrayList<Model>();
 //		String[] cols = { SONGNAME, ARTIST, TEMPO, TIMESIG, KEY, SONGPOS };
 //		Cursor cursor = db.query(SONG_TABLE, cols, SETLISTID + " = " + Integer.valueOf(setlistId).toString(), null, null, null, SONGPOS, null);
-		
-		Cursor cursor = db.rawQuery(SONGLIST_QUERY, new String[]{String.valueOf(setlistId)});
+
+        Cursor cursor = db.rawQuery(SONGLIST_QUERY, new String[]{String.valueOf(setlistId)});
 		
 		if (cursor.getCount() > 0) {
 			cursor.moveToFirst();
@@ -217,7 +222,34 @@ public class DataService extends SQLiteOpenHelper {
 		cursor.close();
 		return songs;
 	}
-	
+
+
+    /**
+     *
+     * @param setlistId : setlist id
+     * @return list of songs in the setlist (excluding subset items)
+     * @throws DataServiceException
+     */
+    public List<Model> getSongsInSetlistExcludingSubsets(long setlistId) throws DataServiceException {
+
+        List<Model> songs = new ArrayList<Model>();
+
+        Cursor cursor = db.rawQuery(SONG_QUERY, new String[]{String.valueOf(setlistId)});
+
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                Model song = new Model(cursor.getLong(0), setlistId, cursor.getString(1), cursor.getString(2), cursor.getDouble(3),
+                        cursor.getInt(4), cursor.getInt(5), cursor.getInt(6), cursor.getInt(8), cursor.getDouble(7));
+                songs.add(song);
+                cursor.moveToNext();
+            }
+        }
+
+        cursor.close();
+        return songs;
+    }
+
 	
 	/**
 	 *
@@ -300,16 +332,12 @@ public class DataService extends SQLiteOpenHelper {
 
 
 	
-	public boolean isSongInSetlist(long songId, long setlistId) {
-		String cols[] = { SONG_SET_PRIMARY_KEY };
-		
-		Cursor cursor = db.query(SONG_SET_TABLE_NAME, cols, SONG_SET_SETLIST_ID + "=" + setlistId 
-				+ " AND " + SONG_SET_SONG_ID + "=" + songId, 
-				null, null, null, null, null);
-		
-		boolean ok = (cursor.getCount() > 0);
-		cursor.close();
-		return ok;
+	public boolean isSongInSetlist(Model song, long setlistId) {
+
+        Cursor cursor = db.rawQuery(MATCHING_SONG_QUERY, new String[]{String.valueOf(setlistId),
+            song.getArtist(), song.getName()});
+
+        return (cursor.getCount() > 0);
 	}
 	
 	
@@ -340,14 +368,14 @@ public class DataService extends SQLiteOpenHelper {
 	/**
 	 *
 	 */
-	public void addSongToSetlist(Model song, long setlistId) throws DataServiceException {
+	public boolean addSongToSetlist(Model song, long setlistId) throws DataServiceException {
 		/*if (setlist.getPosition() == -1) {
 			addSetlistPosition(setlist);
 		}
 		setlistId = getSetlistId(setlist);*/
 		
-		if (isSongInSetlist(song.getId(), setlistId)) {
-			return;
+		if (isSongInSetlist(song, setlistId)) {
+			return false;
 		}
 		
 		Model existingSong = getExistingSong(song);
@@ -378,6 +406,8 @@ public class DataService extends SQLiteOpenHelper {
 		}
 		
 		createSongSetlistLinkRecord(song, setlistId);
+
+        return true;
 	}
 	
 	
@@ -397,15 +427,20 @@ public class DataService extends SQLiteOpenHelper {
 	/**
 	 *
 	 */
-	private int numberOfSubsets() {
-		String cols[] = { SONG_PRIMARYKEY };
-		
-		Cursor cursor = db.query(SONG_TABLE, cols, SONG_ARTIST + " = '<subset>'", 
-				null, null, null, null, null);
-		
-		int numOfSubsets = cursor.getCount();
-		cursor.close();
-		return numOfSubsets;
+	private int numberOfSubsets(long setlistId) {
+
+		Cursor cursor = db.rawQuery(SUBSET_QUERY, new String[]{String.valueOf(setlistId)});
+
+		return cursor.getCount();
+
+//		String cols[] = { SONG_PRIMARYKEY };
+//
+//		Cursor cursor = db.query(SONG_TABLE, cols, SONG_ARTIST + " = '<subset>'",
+//				null, null, null, null, null);
+//
+//		int numOfSubsets = cursor.getCount();
+//		cursor.close();
+//		return numOfSubsets;
 	}
 	
 	
@@ -414,7 +449,7 @@ public class DataService extends SQLiteOpenHelper {
 	 * @throws DataServiceException 
 	 */
 	public Model addSection(Model selectedSetlist) throws DataServiceException {
-		int nextSubset = numberOfSubsets() + 1;
+		int nextSubset = numberOfSubsets(selectedSetlist.getId()) + 1;
 		Model newSection = new Model(-1, selectedSetlist.getSetlistId(), "Set" + nextSubset, "<subset>", 0, 0, 0, 1, -1, 0);
 		addSongToSetlist(newSection, selectedSetlist.getId());
 		
@@ -615,5 +650,47 @@ public class DataService extends SQLiteOpenHelper {
 				null, null, null, null, null);
 
 		return cursor.getCount();
+	}
+
+
+	/**
+	 * Finds all songs matching the search criteria
+	 * @param params : The song search criteria
+	 */
+	public ArrayList<MySong> findMatchingSongs(SongParams params) {
+
+		ArrayList<MySong> matchingSongs = new ArrayList<MySong>();
+
+		String cols[] = { SONG_PRIMARYKEY, SONG_NAME, SONG_ARTIST, SONG_TEMPO, SONG_TIMESIG, SONG_KEY, SONG_SETLIST_COUNT, SONG_DURATION};
+        String searchCriteria = "";
+
+        if (params.getMap().get("title") != null) {
+            searchCriteria = SONG_NAME + " like '%" + ((String)params.getMap().get("title")).replaceAll("'","''") + "%'";
+        }
+        if (params.getMap().get("artist") != null) {
+            if (!searchCriteria.equals("")) {
+                searchCriteria += " AND ";
+            }
+            searchCriteria += SONG_ARTIST + " like '%" + ((String)params.getMap().get("artist")).replaceAll("'","''") + "%'";
+        }
+
+
+		Cursor cursor = db.query(SONG_TABLE, cols, searchCriteria, null, null, null, null, null);
+
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                MySong song = new MySong(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getDouble(3),
+                        cursor.getInt(4), cursor.getInt(5), cursor.getInt(6), -1, cursor.getDouble(7));
+
+                if (!song.getArtist().equals("<subset>")) {
+                    matchingSongs.add(song);
+                }
+                cursor.moveToNext();
+            }
+        }
+
+        cursor.close();
+        return matchingSongs;
 	}
 }

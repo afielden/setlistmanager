@@ -6,6 +6,7 @@ import java.util.List;
 import android.os.AsyncTask;
 
 import com.bigdrum.metronomemate.R;
+import com.bigdrum.metronomemate.database.DataService;
 import com.bigdrum.metronomemate.ui.setlist.SearchActivity;
 import com.echonest.api.v4.EchoNestAPI;
 import com.echonest.api.v4.EchoNestException;
@@ -16,10 +17,15 @@ public class FindSongTask extends AsyncTask<SongParams, Void, List<MySong>> {
 	
 	private EchoNestAPI en;
 	private SearchActivity searchSongUI;
+	private boolean localSearch;
+	private DataService dbService;
 	
-	public FindSongTask(SearchActivity searchSongUI) {
+	public FindSongTask(SearchActivity searchSongUI, boolean localSearch) {
 		
 		this.searchSongUI = searchSongUI;
+		this.localSearch = localSearch;
+
+		this.dbService = DataService.getDataService(searchSongUI);
 		
 		en = new EchoNestAPI("ZNEQOD6XK2TZP2IVK");
 		en.setTraceSends(false);
@@ -33,7 +39,12 @@ public class FindSongTask extends AsyncTask<SongParams, Void, List<MySong>> {
 	@Override
 	protected List<MySong> doInBackground(SongParams... searchParams) {
 		try {
-			return getTempo(searchParams[0]);
+            if (localSearch) {
+                return findSongsLocal(searchParams[0]);
+            }
+            else {
+                return findSongsRemote(searchParams[0]);
+            }
 		} catch (EchoNestException e) {
 			return null;
 		}
@@ -43,19 +54,19 @@ public class FindSongTask extends AsyncTask<SongParams, Void, List<MySong>> {
 	/**
 	 * 
 	 */
-	private void displayResults(ArrayList<MySong> songs) {
-		searchSongUI.showSearchResultsOnUiThread(songs);
+	private void displayResults(ArrayList<MySong> songs, boolean isLocal) {
+		searchSongUI.showSearchResultsOnUiThread(songs, isLocal);
 	}
 	
 	
 	
 	/**
 	 * 
-	 * @param p
-	 * @return
+	 * @param p : Song search parameters
+	 * @return List of matching songs in the remote DB
 	 * @throws EchoNestException
 	 */
-	public List<MySong> getTempo(SongParams p)
+	public List<MySong> findSongsRemote(SongParams p)
 			throws EchoNestException {
 		
 		List<Song> songs = en.searchSongs(p);
@@ -65,11 +76,35 @@ public class FindSongTask extends AsyncTask<SongParams, Void, List<MySong>> {
 			for (Song song : songs) {
 				mySongs.add(new MySong(song, searchSongUI.getResources().obtainTypedArray(R.array.keys_array)));
 			}
-			displayResults(mySongs);
+			displayResults(mySongs, false);
 			return mySongs;
 		} else {
-			displayResults(null);
+			displayResults(null, false);
 			return null;
 		}
+	}
+
+
+	/**
+	 *
+	 * @param searchParams : Song search parameters
+	 * @return List of matching songs in the local DB
+	 */
+	private List<MySong> findSongsLocal(SongParams searchParams) {
+
+		ArrayList<MySong> songs = dbService.findMatchingSongs(searchParams);
+
+        if (songs.size() > 0) {
+            for (MySong song : songs) {
+                song.setKeyNames(searchSongUI.getResources().obtainTypedArray(R.array.keys_array));
+            }
+            displayResults(songs, true);
+            return songs;
+        }
+        else {
+            displayResults(null, false);
+            return null;
+        }
+
 	}
 }

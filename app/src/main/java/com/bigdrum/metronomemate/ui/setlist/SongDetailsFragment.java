@@ -11,11 +11,13 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SongDetailsFragment extends DialogFragment {
 	
-	Model song;
+	Model selectedSong;
+    Model selectedSetlist;
     DataService dbService;
 	
 	/**
@@ -27,9 +29,9 @@ public class SongDetailsFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         String message = "";
 
-        if (song.isSetlist()) {
+        if (selectedSong.isSetlist()) {
             try {
-                List<Model> songs = dbService.getSongsInSetlist(song.getId());
+                List<Model> songs = dbService.getSongsInSetlistExcludingSubsets(selectedSong.getId());
 
                 message = getString(R.string.setlist_summary, String.valueOf(songs.size())) + "\n" +
                         getString(R.string.total_set_time, totalTime(songs)) + "\n\n" +
@@ -39,15 +41,19 @@ public class SongDetailsFragment extends DialogFragment {
                 Toast.makeText(getActivity(), e.getReason(), Toast.LENGTH_LONG).show();
             }
         }
-        else if (song.isSubsetItem()) {
-        	message = getString(R.string.subset_marker_text);
+        else if (selectedSong.isSubsetItem()) {
+            try {
+                message = createSubsetInfo();
+            } catch (DataServiceException e) {
+                Toast.makeText(getActivity(), e.getReason(), Toast.LENGTH_LONG).show();
+            }
         }
         else {
-        	message = "Song: " + song.getName() + "\n" +
- 				   "Artist: " + song.getArtist() + "\n" +
-		           "Tempo: " + song.getTempo() + "\n" +
-                    "Duration: " + formatTime(song.getDuration()) + "\n" +
- 				   "Key: " + getResources().getStringArray(R.array.keys_array)[song.getKey()] + "\n\n" +
+        	message = "Song: " + selectedSong.getName() + "\n" +
+ 				   "Artist: " + selectedSong.getArtist() + "\n" +
+		           "Tempo: " + selectedSong.getTempo() + "\n" +
+                    "Duration: " + formatTime(selectedSong.getDuration()) + "\n" +
+ 				   "Key: " + getResources().getStringArray(R.array.keys_array)[selectedSong.getKey()] + "\n\n" +
                     getString(R.string.long_click_tip);
         }
         
@@ -63,8 +69,39 @@ public class SongDetailsFragment extends DialogFragment {
 
 
     /**
+     * Creates a String containing information about the subset
+     * @return String
+     */
+    private String createSubsetInfo() throws DataServiceException {
+
+        int subsetPosition = selectedSong.getPosition();
+        String info = null;
+        List<Model> songs = dbService.getSongsInSetlist(selectedSetlist.getId());
+        List<Model> songsInSubset = new ArrayList<Model>();
+
+        for (Model song : songs) {
+            if (song.getPosition() < subsetPosition) {
+                continue;
+            }
+            if (song.getPosition() > subsetPosition && !song.isSubsetItem()) {
+                songsInSubset.add(song);
+            }
+            if (song.getPosition() > subsetPosition && song.isSubsetItem()) {
+                break;
+            }
+        }
+
+        info = getString(R.string.subset_summary, String.valueOf(songsInSubset.size())) + "\n" +
+                getString(R.string.total_set_time, totalTime(songsInSubset)) + "\n\n" +
+                getString(R.string.long_click_tip);
+
+        return info;
+    }
+
+
+    /**
      *
-     * @param seconds: song time in seconds
+     * @param seconds: selectedSong time in seconds
      * @return time: time in minutes and seconds
      */
     public static String formatTime(double seconds) {
@@ -102,12 +139,16 @@ public class SongDetailsFragment extends DialogFragment {
 	 * 
 	 *
 	 */
-	public void setSong(Model song) {
-		this.song = song;
+	public void setSelectedSong(Model selectedSong) {
+		this.selectedSong = selectedSong;
 	}
 
     public void setDbService(DataService dbService) {
         this.dbService = dbService;
+    }
+
+    public void setSelectedSetlist(Model setlist) {
+        this.selectedSetlist = setlist;
     }
 
 }

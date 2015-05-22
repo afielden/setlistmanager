@@ -10,12 +10,14 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -32,6 +34,7 @@ public class SearchActivity extends Activity implements OnClickListener {
 	private EditText artistName;
 	private EditText songTitle;
 	private EditText songInfoPane;
+    private CheckBox setlistSearchCheckbox;
 	public static final String SONG_LIST = "songList";
 	public static final String SONG_SELECTED = "songSelected";
 	public static final int SEARCH_SONG = 1;
@@ -48,6 +51,7 @@ public class SearchActivity extends Activity implements OnClickListener {
 		artistName = (EditText)findViewById(R.id.artistName);
 		songTitle = (EditText)findViewById(R.id.songTitle);
 		songInfoPane = (EditText)findViewById(R.id.songInfo);
+        setlistSearchCheckbox = (CheckBox)findViewById(R.id.localSearchCheckBox);
 		songInfoPane.setKeyListener(null);
 		
 		createUIComponents();
@@ -91,7 +95,7 @@ public class SearchActivity extends Activity implements OnClickListener {
 		p.includeAudioSummary();
 
 		songInfoPane.setText(R.string.searching);
-		findSongTask = new FindSongTask(this);
+		findSongTask = new FindSongTask(this, setlistSearchCheckbox.isChecked());
 		findSongTask.execute(p);
 	}
 	
@@ -100,7 +104,7 @@ public class SearchActivity extends Activity implements OnClickListener {
 	/**
 	 * 
 	 */
-	public void showSearchResultsOnUiThread(final ArrayList<MySong> songs) {
+	public void showSearchResultsOnUiThread(final ArrayList<MySong> songs, final boolean isLocal) {
 		
 		handler.post(new Runnable() {
 
@@ -111,6 +115,12 @@ public class SearchActivity extends Activity implements OnClickListener {
 					songList.clear();
 					songList.addAll(songs);
 					listAdapter.notifyDataSetChanged();
+					if (isLocal) {
+                        songInfoPane.setText(R.string.local_songs);
+                    }
+                    else {
+                        songInfoPane.setText(R.string.remote_songs);
+                    }
 				}
 				else {
 					songInfoPane.setText(R.string.nothing_found);
@@ -165,7 +175,7 @@ public class SearchActivity extends Activity implements OnClickListener {
 			selectButton.setOnClickListener(new Button.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Log.d("beatbuddy", "ITEM SELECTED");
+					Log.d("setlistManager", "ITEM SELECTED");
 					Intent resultIntent = new Intent();
 					resultIntent.putExtra(Constants.SONG_SELECTED, thisSong);
 					setResult(Activity.RESULT_OK, resultIntent);
@@ -202,4 +212,35 @@ public class SearchActivity extends Activity implements OnClickListener {
 			}
 		}
 	}
+
+
+    /**
+     *
+     * @param item the menuItem which was tapped
+     * @return true if the menuItem was handled
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.action_help:
+                displayHelpDialog();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    /**
+     *
+     */
+    private void displayHelpDialog() {
+        HelpDialogFragment help = new HelpDialogFragment();
+
+        help.setMessageAndTitle(getString(R.string.help_search_song),
+                        getString(R.string.help_search_song_title));
+
+        help.show(getFragmentManager(), "");
+    }
 }

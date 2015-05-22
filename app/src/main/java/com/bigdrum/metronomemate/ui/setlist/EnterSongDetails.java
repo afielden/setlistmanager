@@ -93,8 +93,8 @@ public class EnterSongDetails extends Activity implements OnItemSelectedListener
 
 
     /**
-     * Initialise the song duration text fields hh:mm:ss
-     * @param seconds : total song time in seconds
+     * Initialise the selectedSong duration text fields hh:mm:ss
+     * @param seconds : total selectedSong time in seconds
      */
     private void initialiseDuration(double seconds) {
 

@@ -9,6 +9,7 @@
     <string name="title_section4">About</string>
     <string name="artist_label">Artist:</string>
     <string name="song_label">Title:</string>
+    <string name="search_local">Setlist</string>
     <string name="search_button">Search</string>
     <string name="searching">Searching...</string>
     <string name="add_label">Add</string>
@@ -16,11 +17,13 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_song_list">SongListActivity</string>
     <string name="nothing_found">No matching songs found</string>
+    <string name="local_songs">All matching songs in the setlists</string>
+    <string name="remote_songs">All matching songs</string>
     <string name="add_song_button_label">New Song</string>
     <string name="title_activity_search">Search for songs</string>
     <string name="play_button_label">Play</string>
     <string name="set_list_label">Set Lists</string>
-    <string name="no_song_selected_label">No song selected</string>
+    <string name="no_song_selected_label">No selectedSong selected</string>
     <string name="song_tempo_label">Tempo:</string>
     <string name="title_activity_view_setlist">View setlist</string>
     <string name="add_new_set_list">Add new set list</string>
@@ -33,19 +36,21 @@
     <string name="action_help">Help</string>
     <string name="duplicate_set_list_name">Setlist name already exists</string>
     <string name="setlist_non_existant">Setlist %s not found in database</string>
-    <string name="title_activity_enter_song_details">Enter song details</string>
+    <string name="title_activity_enter_song_details">Enter selectedSong details</string>
     <string name="song_timesig_label">Beats in a bar</string>
     <string name="song_duration_label">Duration</string>
-    <string name="missing_song_name">A song title must be entered</string>
+    <string name="missing_song_name">A selectedSong title must be entered</string>
     <string name="missing_tempo">Enter a value for the tempo</string>
     <string name="missing_timesig">Enter the number of beats in a bar (max 12)</string>
     <string name="invalid_timesig">Beast in a bar must be a number between 1 and 12</string>
-    <string name="invalid_duration">Enter a valid song duration (hh:mm:ss)</string>
+    <string name="invalid_duration">Enter a valid selectedSong duration (hh:mm:ss)</string>
     <string name="ok">Ok</string>
     <string name="cancel">Cancel</string>
     <string name="title_activity_select_setlist">SelectSetlist</string>
     <string name="copy_to_setlist">Copied selected songs to %s</string>
     <string name="cancelled">Cancelled</string>
+    <string name="song_added">Added song to setlist</string>
+    <string name="song_already_added">Song not added - already in the setlist</string>
     <string name="null_set_list">A setlist name must be entered</string>
     <string name="title_activity_add_venue">AddVenue</string>
     <string name="add_venue_address">Address</string>
@@ -101,11 +106,11 @@
     <string name="tooltip_edit_setlist">Edit selected setlist</string>
     <string name="tooltip_delete_setlist">Delete selected setlist(s)</string>
     <string name="tooltip_add_subsection">Add a subset marker</string>
-    <string name="tooltip_copy_songs">Copy selected song(s) to another setlist</string>
-    <string name="tooltip_add_song">Manually enter new song details</string>
-    <string name="tooltip_search_song">Search for a new song</string>
-    <string name="tooltip_edit_song">Edit selected song</string>
-    <string name="tooltip_delete_song">Delete selected song(s)</string>
+    <string name="tooltip_copy_songs">Copy selected selectedSong(s) to another setlist</string>
+    <string name="tooltip_add_song">Manually enter new selectedSong details</string>
+    <string name="tooltip_search_song">Search for a new selectedSong</string>
+    <string name="tooltip_edit_song">Edit selected selectedSong</string>
+    <string name="tooltip_delete_song">Delete selected selectedSong(s)</string>
     <string name="tooltip_add_gig">Add a new gig</string>
     <string name="tooltip_edit_gig">Edit selected gig</string>
     <string name="tooltip_delete_gig">Delete selected gig</string>
@@ -139,14 +144,14 @@ SetlistManager is an app aimed at musicians in a band. It provides the following
 </ul>
 <center><h2>Getting Started</h2></center>
 Go to the Setlist tab and click the \'+\' action to create a new setlist. Populate it with all the songs you wish to perform.
-SetlistManager can search for songs by title, and/or artist. Details associated with a song, such as tempo, time signature and key
+SetlistManager can search for songs by title, and/or artist. Details associated with a selectedSong, such as tempo, time signature and key
 are automatically populated.
 <p>
 <center><h2>Setlists</h2></center>
 Setlists contain groups of songs. Tapping any setlist will show a summary of the number of songs it contains, and total play duration.
 Tap and hold to display a list of songs in the setlist. You can copy all the songs in a setlist to another setlist.
 <center><h2>Songs</h2></center>
-Tap a song to display a summary. Tap and hold on a song to edit the song details. You may add new songs by searching,
+Tap a selectedSong to display a summary. Tap and hold on a selectedSong to edit the selectedSong details. You may add new songs by searching,
 or enter details manually. The order of songs in the list can be changed by selecting \'Edit\' mode.
 <p>
 You can also group the songs into \'subsets\' by adding subset markers into the list of songs.
@@ -166,14 +171,14 @@ Design and programming &copy; 2014 <b>Andrew Fielden</b>
 Mark one or more setlists for deletion.
 Mark one setlist for editing.	    </string>
     <string name="help_songlist_title">Songs</string>
-    <string name="help_songlist">Add songs to this setlist. You can click the magnifying glass icon to search for a song.
+    <string name="help_songlist">Add songs to this setlist. You can click the magnifying glass icon to search for a selectedSong.
 This will automatically fill in the details like tempo, time signature and key.
-Click on the \'+\' icon to enter all the song details manually.
-Click and hold on a song to display the details.</string>
+Click on the \'+\' icon to enter all the selectedSong details manually.
+Click and hold on a selectedSong to display the details.</string>
     <string name="help_songlist_edit_title">Edit Songs</string>
     <string name="help_songlist_edit">Songs can be re-ordered using the drag icon.
 Mark one or more songs for deletion, or copying to another setlist.
-Mark one song for editing.  </string>
+Mark one selectedSong for editing.  </string>
     <string name="help_gig_mgmt_title">Gig Management</string>
     <string name="help_gig_mgmt">A gig has an associated venue, and optional setlist. Gig details can be emailed to 
 other people.   </string>
@@ -182,20 +187,24 @@ other people.   </string>
     <string name="help_no_setlists_title">No setlists</string>
     <string name="help_no_setlists">There are no Setlists. To create a new setlist, click the \'+\' action item.</string>
     <string name="help_no_songs_title">No songs in this setlist</string>
-    <string name="help_no_songs">This setlist contains no Songs. You can search for a song by click the magnifying glass icon,
-or enter song details manually by clicking the \'+\' icon. Subset markers can be added by clicking the \'v\' icon.</string>
+    <string name="help_no_songs">This setlist contains no Songs. You can search for a selectedSong by click the magnifying glass icon,
+or enter selectedSong details manually by clicking the \'+\' icon. Subset markers can be added by clicking the \'v\' icon.</string>
     <string name="help_no_gigs_title">No gigs</string>
     <string name="help_no_gigs">There are no Gigs. First go to the Venue tab and create at least one Venue.
 Then create a new gig (at a selected Venue) on this tab by clicking the \'+\' icon.</string>
     <string name="help_no_venues_title">No venues</string>
     <string name="help_no_venues">There are no Venues. Add a new Venue by clicking the \'+\' icon.</string>
+    <string name="help_search_song_title">Song Search</string>
+    <string name="help_search_song">Enter the selectedSong or artist name. Partial words are allowed. Ticking the \'Setlists\' checkbox
+    restricts the selectedSong search to the current Setlists</string>
     <string name="title_activity_about_fragment">About BeatBuddy</string>
     <string name="gig_name_label">Name</string>
     <string name="select_target_setlist">Select the target setlist</string>
     <string name="new_setlist_text">Enter the setlist name</string>
     <string name="edit_setlist_text">Edit the setlist name</string>
     <string name="long_click_tip">(Click and hold to edit)</string>
-    <string name="setlist_summary">Contains %s songs</string>
+    <string name="setlist_summary">Setlist contains %s songs</string>
+    <string name="subset_summary">Subset contains %s songs</string>
     <string name="total_set_time">Total song time %s</string>
 
 </resources>
