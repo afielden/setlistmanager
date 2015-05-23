@@ -34,7 +34,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.bigdrum.metronomemate.R;
 import com.bigdrum.metronomemate.network.MySong;
-import com.bigdrum.metronomemate.ui.setlist.Model;
+import com.bigdrum.metronomemate.ui.setlistmanagement.Model;
 import com.echonest.api.v4.SongParams;
 
 public class DataService extends SQLiteOpenHelper {

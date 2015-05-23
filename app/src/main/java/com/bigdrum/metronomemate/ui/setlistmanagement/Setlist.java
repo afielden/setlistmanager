@@ -1,4 +1,4 @@
-package com.bigdrum.metronomemate.ui.setlist;
+package com.bigdrum.metronomemate.ui.setlistmanagement;
 
 import android.os.Parcel;
 import android.os.Parcelable;

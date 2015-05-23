@@ -1,4 +1,4 @@
-package com.bigdrum.metronomemate.ui.setlist;
+package com.bigdrum.metronomemate.ui.setlistmanagement;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -34,7 +34,7 @@ import com.bigdrum.metronomemate.database.Constants;
 import com.bigdrum.metronomemate.database.DataService;
 import com.bigdrum.metronomemate.database.DataServiceException;
 import com.bigdrum.metronomemate.network.MySong;
-import com.bigdrum.metronomemate.ui.setlist.ConfirmationDialogFragment.ConfirmationDialogCallback;
+import com.bigdrum.metronomemate.ui.setlistmanagement.ConfirmationDialogFragment.ConfirmationDialogCallback;
 import com.mobeta.android.dslv.DragSortController;
 import com.mobeta.android.dslv.DragSortListView;
 import com.mobeta.android.dslv.DragSortListView.DropListener;
@@ -391,7 +391,8 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 		
 		playAction.setVisible(false);
 		emailAction.setVisible(false);
-		
+
+        editModeAction.setTitle(editMode?R.string.action_done:R.string.action_edit);
 		editModeAction.setVisible(listAdapter.getCount() != 0);
 	}
 	
@@ -534,9 +535,12 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 						Toast.makeText(getActivity(), e.getReason(), Toast.LENGTH_LONG).show();
 					}
 
+                    editMode = false;
 					displaySetlists();
+                    setActionItemVisibility();
+//                    editModeAction.setTitle(R.string.action_edit);
 
-					String message = getString(R.string.copy_to_setlist, targetSetlist);
+                            String message = getString(R.string.copy_to_setlist, targetSetlist);
 					Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
 				}
 				else if (resultCode == Activity.RESULT_CANCELED) {
@@ -771,15 +775,16 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 	private void deleteSetlists() throws DataServiceException {
 
         List<Model> remainingSetlists = dbService.deleteSetlists(itemList);
-        listAdapter.clear();
-        listAdapter.addAll(remainingSetlists);
-        listAdapter.notifyDataSetChanged();
 
         reorderUnselectedItems();
         if (remainingSetlists.size() == 0) {
             editMode = false;
             setActionItemVisibility();
         }
+
+        listAdapter.clear();
+        listAdapter.addAll(remainingSetlists);
+        listAdapter.notifyDataSetChanged();
 	}
 	
 	

@@ -1,4 +1,4 @@
-package com.bigdrum.metronomemate.ui.setlist;
+package com.bigdrum.metronomemate.ui.setlistmanagement;
 
 public class Model {
 	private long setlistId;

@@ -1,4 +1,4 @@
-package com.bigdrum.metronomemate.ui.setlist;
+package com.bigdrum.metronomemate.ui.setlistmanagement;
 
 import com.bigdrum.metronomemate.R;
 import com.bigdrum.metronomemate.database.DataService;

@@ -15,7 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bigdrum.metronomemate.info.AboutFragment;
-import com.bigdrum.metronomemate.ui.setlist.MetronomeFragment;
+import com.bigdrum.metronomemate.ui.setlistmanagement.MetronomeFragment;
 
 public class MainActivity extends FragmentActivity implements
 		ActionBar.TabListener {

@@ -1,10 +1,12 @@
-package com.bigdrum.metronomemate.ui.setlist;
+package com.bigdrum.metronomemate.ui.setlistmanagement;
 
 import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -53,6 +55,7 @@ public class SearchActivity extends Activity implements OnClickListener {
 		songInfoPane = (EditText)findViewById(R.id.songInfo);
         setlistSearchCheckbox = (CheckBox)findViewById(R.id.localSearchCheckBox);
 		songInfoPane.setKeyListener(null);
+        songInfoPane.requestFocus();
 		
 		createUIComponents();
 	}
@@ -75,6 +78,12 @@ public class SearchActivity extends Activity implements OnClickListener {
 		ListView songListView = (ListView)findViewById(R.id.searchResults);
 		listAdapter = new SongListAdapter(this);
 		songListView.setAdapter(listAdapter);
+
+        if (!networkIsAvailable()) {
+            songInfoPane.setText(R.string.no_network_connection);
+            setlistSearchCheckbox.setChecked(true);
+            setlistSearchCheckbox.setEnabled(false);
+        }
 	}
 	
 	
@@ -130,6 +139,18 @@ public class SearchActivity extends Activity implements OnClickListener {
 		});
 	}
 
+
+    /**
+     * Detects if there is a WAN connection available
+     * @return true if network available
+     */
+    private boolean networkIsAvailable() {
+
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
 	
 //	
 //	@Override 

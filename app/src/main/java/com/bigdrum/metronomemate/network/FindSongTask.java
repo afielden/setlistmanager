@@ -7,7 +7,7 @@ import android.os.AsyncTask;
 
 import com.bigdrum.metronomemate.R;
 import com.bigdrum.metronomemate.database.DataService;
-import com.bigdrum.metronomemate.ui.setlist.SearchActivity;
+import com.bigdrum.metronomemate.ui.setlistmanagement.SearchActivity;
 import com.echonest.api.v4.EchoNestAPI;
 import com.echonest.api.v4.EchoNestException;
 import com.echonest.api.v4.Song;

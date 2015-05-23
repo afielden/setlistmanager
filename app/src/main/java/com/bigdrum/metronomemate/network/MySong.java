@@ -4,7 +4,7 @@ import android.content.res.TypedArray;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.bigdrum.metronomemate.ui.setlist.SongDetailsFragment;
+import com.bigdrum.metronomemate.ui.setlistmanagement.SongDetailsFragment;
 import com.echonest.api.v4.EchoNestException;
 import com.echonest.api.v4.Song;
 

@@ -1,4 +1,4 @@
-package com.bigdrum.metronomemate.ui.setlist;
+package com.bigdrum.metronomemate.ui.setlistmanagement;
 
 import android.app.Activity;
 import android.content.Intent;
