@@ -13,6 +13,8 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/dragSortListview" />
             <option value="$PROJECT_DIR$/dragSortListviewDemo" />
+            <option value="$PROJECT_DIR$/library" />
+            <option value="$PROJECT_DIR$/showcaseView" />
           </set>
         </option>
       </GradleProjectSettings>

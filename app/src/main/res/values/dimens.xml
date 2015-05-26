@@ -5,4 +5,8 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="item_height">67dp</dimen>
     <dimen name="section_div_height">20dp</dimen>
+
+    <dimen name="showcase_radius">54dp</dimen>
+    <dimen name="showcase_radius_inner">46dp</dimen>
+    <dimen name="showcase_radius_outer">98dp</dimen>
 </resources>

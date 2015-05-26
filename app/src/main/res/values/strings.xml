@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">MetronomeMate</string>
+    <string name="app_name">SetlistManager</string>
     <string name="action_settings">Settings</string>
     <string name="title_section1">Setlists</string>
     <string name="title_section2">Gigs</string>
@@ -198,6 +198,23 @@ Then create a new gig (at a selected Venue) on this tab by clicking the \'+\' ic
     <string name="help_search_song_title">Song Search</string>
     <string name="help_search_song">Enter the selectedSong or artist name. Partial words are allowed. Ticking the \'Setlists\' checkbox
     restricts the selectedSong search to the current Setlists</string>
+    <string name="help_action_add_setlist">Add a new setlist</string>
+    <string name="help_action_setlist_editmode">Setlist management: Re-order, delete, edit selected setlists</string>
+    <string name="help_action_setlist_editmode_cancel">Finish setlist mangement</string>
+    <string name="help_action_copy">Copy all songs in a setlist to another setlist</string>
+    <string name="help_action_edit_setlist">Change the name of the selected setlist</string>
+    <string name="help_action_delete_setlist">Delete the selected setlist(s)</string>
+    <string name="help_next_item">(Tap the screen to display next help item)</string>
+    <string name="help_action_setlists">Return to the setlist screen</string>
+    <string name="help_action_song_search">Search for a song in the setlists, or in the database, and add it to this setlist</string>
+    <string name="help_action_add_section">Add a subset marker. Subsets are used to partition your set into different sections.
+        Setlistmanager calculates the total song play time for each subset</string>
+    <string name="help_action_manually_add_song">Manually enter details of a song, and add it to this setlist</string>
+    <string name="help_action_songlist_editmode">Songlist management: Re-order delete, edit selected songs</string>
+    <string name="help_action_songlist_editmode_cancel">Finish songlist mangement</string>
+    <string name="help_action_song_copy">Copy the selected song(s) to another setlist</string>
+    <string name="help_action_song_edit">Edit the details of the selected song</string>
+    <string name="help_action_song_delete">Delete the selected song(s)</string>
     <string name="title_activity_about_fragment">About BeatBuddy</string>
     <string name="gig_name_label">Name</string>
     <string name="select_target_setlist">Select the target setlist</string>

@@ -235,8 +235,13 @@ public class CustomAdapter extends ArrayAdapter<Model> implements OnCheckedChang
 		Model element = (Model) buttonView.getTag();
 		element.setSelected(buttonView.isChecked());
 
-		getItem(element.getPosition()).setSelected(isChecked);
-		checked[element.getPosition()] = isChecked;
+        int position = element.getPosition();
+        if (position >= getCount()) {
+            position = getCount() - 1;
+        }
+
+		getItem(position).setSelected(isChecked);
+		checked[position] = isChecked;
 		
 	}
 	

@@ -69,7 +69,7 @@ public interface Constants extends BaseColumns {
 
     public static final String MATCHING_SONG_QUERY = "SELECT s.*, l." + SONG_SET_SONG_POS + " FROM " + SONG_TABLE + " s "
             + "INNER JOIN " + SONG_SET_TABLE_NAME + " l ON s." + SONG_PRIMARYKEY + " = l." + SONG_SET_SONG_ID
-            + " WHERE l." + SONG_SET_SETLIST_ID + "=? AND s." + SONG_ARTIST + " =? AND s." + SONG_NAME + " = ?"
+            + " WHERE l." + SONG_SET_SETLIST_ID + "=? AND s." + SONG_ARTIST + " =? AND s." + SONG_NAME + " = ? AND s." + SONG_ARTIST + " <> '<subset>'"
             + " ORDER BY l." + SONG_SET_SONG_POS;
 	
 	public static final String SETLIST_HEADING = 

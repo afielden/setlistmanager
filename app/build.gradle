@@ -22,6 +22,7 @@ dependencies {
     compile 'com.android.support:support-v4:21.0.3'
     compile 'com.android.support:appcompat-v7:21+'
     compile project(':dragSortListview')
+    compile 'com.github.amlcurran.showcaseview:library:5.0.0'
     compile files('/home/andrew/AndroidstudioProjects/MetronomeMate/jEN.jar')
     compile files('/home/andrew/AndroidstudioProjects/MetronomeMate/json_simple-1.1.jar')
 }

@@ -1,6 +1,7 @@
 /home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/classes/debug
 /home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/debug/support-annotations-22.1.1-72ee8c282b43786b2c829b8862355654a56383a2.jar
 /home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/debug/json_simple-1.1-1e9511addf7aa3dd3d7d6b46733687f5276505c4.jar
+/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/debug/classes-44e64391d23f6617a2cdf2d50f90a34e73ef6cf1.jar
 /home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/debug/classes-5ed19c53808562d8989caaa9059dae5b1616fb86.jar
 /home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/debug/internal_impl-22.1.1-4aa4586ff29574f97e72f5acc6880bf7f8754017.jar
 /home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/debug/jEN-f463fbe66e1a1a257db1c0930592f471f37758ea.jar

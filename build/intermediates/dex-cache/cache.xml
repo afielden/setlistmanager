@@ -2,32 +2,25 @@
 <items version="2" >
 
     <item
-        jar="/home/andrew/AndroidstudioProjects/MetronomeMate/jEN.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="a75550e25ddc1d5b104babd16012588005508913">
-        <dex dex="/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/debug/jEN-f463fbe66e1a1a257db1c0930592f471f37758ea.jar" />
-    </item>
-    <item
-        jar="/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/exploded-aar/MetronomeMate/dragSortListview/unspecified/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="0d7510a415c34310978b8c90c0ed4e6caa3761d0">
-        <dex dex="/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/debug/classes-5ed19c53808562d8989caaa9059dae5b1616fb86.jar" />
-    </item>
-    <item
-        jar="/home/andrew/AndroidstudioProjects/MetronomeMate/json_simple-1.1.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="5e303a03d04e6788dddfa3655272580ae0fc13bb">
-        <dex dex="/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/debug/json_simple-1.1-1e9511addf7aa3dd3d7d6b46733687f5276505c4.jar" />
-    </item>
-    <item
         jar="/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
         <dex dex="/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/debug/classes-4b0669df30d9c7c6ff25ac5261d0c85d8150fedf.jar" />
+    </item>
+    <item
+        jar="/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/exploded-aar/com.github.amlcurran.showcaseview/library/5.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="8b3d9a7b348d8bcfb4d740dfaf70bc374cdae9d6">
+        <dex dex="/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/debug/classes-44e64391d23f6617a2cdf2d50f90a34e73ef6cf1.jar" />
+    </item>
+    <item
+        jar="/home/andrew/AndroidstudioProjects/MetronomeMate/jEN.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a75550e25ddc1d5b104babd16012588005508913">
+        <dex dex="/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/debug/jEN-f463fbe66e1a1a257db1c0930592f471f37758ea.jar" />
     </item>
     <item
         jar="/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.1.1/classes.jar"
@@ -42,6 +35,20 @@
         revision="21.1.2"
         sha1="9e070ad32b2700b0343e8e0cccc437733d91ba3a">
         <dex dex="/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/debug/internal_impl-22.1.1-4aa4586ff29574f97e72f5acc6880bf7f8754017.jar" />
+    </item>
+    <item
+        jar="/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/exploded-aar/MetronomeMate/dragSortListview/unspecified/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="0d7510a415c34310978b8c90c0ed4e6caa3761d0">
+        <dex dex="/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/debug/classes-5ed19c53808562d8989caaa9059dae5b1616fb86.jar" />
+    </item>
+    <item
+        jar="/home/andrew/AndroidstudioProjects/MetronomeMate/json_simple-1.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="5e303a03d04e6788dddfa3655272580ae0fc13bb">
+        <dex dex="/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/debug/json_simple-1.1-1e9511addf7aa3dd3d7d6b46733687f5276505c4.jar" />
     </item>
     <item
         jar="/home/andrew/android/Sdk/extras/android/m2repository/com/android/support/support-annotations/22.1.1/support-annotations-22.1.1.jar"

@@ -348,7 +348,7 @@ public class DataService extends SQLiteOpenHelper {
 		String cols[] = { SONG_PRIMARYKEY };
 		
 		Cursor cursor = db.query(SONG_TABLE, cols, SONG_NAME + " = '" + song.getName().replaceAll("'","''")
-				+ "' AND " + SONG_ARTIST + " = '" + song.getArtist().replaceAll("'","''")
+				+ "' AND " + SONG_ARTIST + " = '" + song.getArtist().replaceAll("'","''") + "' AND " + SONG_ARTIST + " <> '<subset>"
 				+ "' AND " + SONG_TEMPO + " = " + song.getTempo()
 				+ " AND " + SONG_TIMESIG + " = " + song.getTimeSignature()
 				+ " AND " + SONG_KEY + " = " + song.getKey(), 
