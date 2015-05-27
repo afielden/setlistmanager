@@ -217,6 +217,7 @@ or enter selectedSong details manually by clicking the \'+\' icon. Subset marker
     <string name="title_activity_about_fragment">About BeatBuddy</string>
     <string name="gig_name_label">Name</string>
     <string name="select_target_setlist">Select the target setlist</string>
+    <string name="select_venue">Select the venue</string>
     <string name="new_setlist_text">Enter the setlist name</string>
     <string name="edit_setlist_text">Edit the setlist name</string>
     <string name="long_click_tip">(Click and hold to edit)</string>

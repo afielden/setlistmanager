@@ -4,6 +4,7 @@ import java.util.Locale;
 
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -11,11 +12,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.bigdrum.metronomemate.gig.GigManagementFragment;
 import com.bigdrum.metronomemate.info.AboutFragment;
+import com.bigdrum.metronomemate.prefs.Prefs;
 import com.bigdrum.metronomemate.ui.setlistmanagement.MetronomeFragment;
 import com.bigdrum.metronomemate.venue.VenueManagementFragment;
 
@@ -200,25 +204,26 @@ public class MainActivity extends FragmentActivity implements
 			return rootView;
 		}
 	}
-	
-//	@Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.settings, menu);
-//        return true;
-//    }
-// 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-// 
-//        case R.id.menu_settings:
-//            Intent i = new Intent(this, Prefs.class);
-//            startActivity(i);
-//            return true;
-// 
-//        }
-// 
-//        return false;
-//    }
+
+
+	@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.settings, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+        case R.id.menu_settings:
+            Intent i = new Intent(this, Prefs.class);
+            startActivity(i);
+            return true;
+
+        }
+
+        return false;
+    }
 
 }

@@ -4,7 +4,12 @@
         android:showAsAction="always"
         android:icon="@android:drawable/ic_menu_revert"
         android:title="@string/tooltip_cancel"/>
-    
+
+    <item android:id="@+id/action_add"
+        android:showAsAction="always"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="@string/hello_world"/>
+
     <item android:id="@+id/action_ok"
         android:showAsAction="always"
         android:icon="@android:drawable/checkbox_on_background"

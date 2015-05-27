@@ -184,6 +184,10 @@ public class AddGig extends Activity implements OnClickListener, OnDateSetListen
 			if (resultCode == Activity.RESULT_OK) {
 				selectedVenue = (Venue)data.getParcelableExtra(Constants.VENUE);
 				venue.setText(selectedVenue.getName());
+
+				if (nameEditText.getText() == null || nameEditText.getText().length() == 0) {
+					nameEditText.setText(selectedVenue.getName());
+				}
 			}
 			break;
 		}

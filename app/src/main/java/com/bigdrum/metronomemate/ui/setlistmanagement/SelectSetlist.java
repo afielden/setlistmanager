@@ -58,6 +58,7 @@ public class SelectSetlist extends Activity {
 	 */
 	private void createSetlistView() {
 		DataService dbService = DataService.getDataService(this);
+        final Activity activity = this;
 		
 		setlists = filterOutSourceSetlist(dbService.getAllSetlists());
         arrayAdapter = new ArrayAdapter<Model>(this, R.layout.select_setlist_row_layout, R.id.select_setlist_name, setlists);
@@ -75,6 +76,7 @@ public class SelectSetlist extends Activity {
 				selectedView = view;
 				view.setSelected(true);
 				view.setBackgroundColor(Color.GREEN);
+                view.setBackground(activity.getDrawable(R.drawable.gradient_vertical_selected));
 				okAction.setVisible(true);
 			}
 		});

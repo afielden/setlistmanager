@@ -75,6 +75,10 @@
             android:name="com.bigdrum.metronomemate.export.SelectRecipients"
             android:label="@string/title_activity_select_recipients" >
         </activity>
+        <activity
+            android:name="com.bigdrum.metronomemate.prefs.Prefs"
+            android:label="@string/title_activity_prefs" >
+        </activity>
     </application>
 
 </manifest>

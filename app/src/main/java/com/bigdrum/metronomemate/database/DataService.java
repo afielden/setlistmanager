@@ -783,6 +783,26 @@ public class DataService extends SQLiteOpenHelper {
 
 	/**
 	 *
+	 * @param name
+	 * @return
+	 */
+	public long getVenueIdByName(String name) {
+
+		String[] cols = { VENUE_PRIMARYKEY };
+		long venueId = -1;
+		Cursor cursor = db.query(VENUE_TABLE, cols, VENUE_NAME + "='" + name.replaceAll("'","''") +"'", null, null, null, null, null);
+
+		if (cursor.moveToFirst()) {
+			venueId = cursor.getLong(0);
+		}
+
+		cursor.close();
+		return venueId;
+	}
+
+
+	/**
+	 *
 	 */
 	public List<Venue> readAllVenues() {
 		List<Venue> venues = new ArrayList<Venue>();

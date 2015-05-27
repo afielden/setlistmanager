@@ -59,7 +59,7 @@ public class VenueManagementFragment extends Fragment implements OnItemClickList
 		dbService.init();
 		
 		help = new HelpDialogFragment();
-		populateVenues();
+//		populateVenues();
 		
 		return rootView;
 	}
@@ -94,8 +94,14 @@ public class VenueManagementFragment extends Fragment implements OnItemClickList
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
+
         if (isVisibleToUser) {
-            if (arrayAdapter.getCount() == 0) {
+            // The user may have added a new venue via the 'add gig' tab, so repopulate the listview
+            if (venueListview != null) {
+                populateVenues();
+            }
+
+            if (arrayAdapter != null && arrayAdapter.getCount() == 0) {
                 showHelp();
             }
         }
@@ -114,7 +120,7 @@ public class VenueManagementFragment extends Fragment implements OnItemClickList
 		actionMenu.findItem(R.id.action_setlists).setVisible(false);
 		actionMenu.findItem(R.id.action_editmode).setVisible(false);
 		actionMenu.findItem(R.id.action_edit).setVisible(false);
-		actionMenu.findItem(R.id.action_delete).setVisible(false);
+        actionMenu.findItem(R.id.action_delete).setVisible(false);
 		actionMenu.findItem(R.id.action_play).setVisible(false);
 		actionMenu.findItem(R.id.action_search).setVisible(false);
 		actionMenu.findItem(R.id.action_email).setVisible(false);
@@ -196,8 +202,8 @@ public class VenueManagementFragment extends Fragment implements OnItemClickList
 		switch (requestCode) {
 		case Constants.ADD_VENUE:
 			if (resultCode == Activity.RESULT_OK) {
-				Venue venue = (Venue)data.getExtras().get(Constants.VENUE);
-				dbService.addVenue(venue);
+				Venue venue = (Venue)data.getParcelableExtra(Constants.VENUE);
+                dbService.addVenue(venue);
 				venueDetails.setText("");
 				((InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE)).
 					hideSoftInputFromWindow(rootView.getWindowToken(),0);
@@ -291,7 +297,8 @@ public class VenueManagementFragment extends Fragment implements OnItemClickList
 		setVenueDetails(selectedVenue);
 		selectedView = view;
 		selectedView.setBackgroundColor(Color.GREEN);
-		
+        selectedView.setBackground(getActivity().getDrawable(R.drawable.gradient_vertical_selected));
+
 		actionMenu.findItem(R.id.action_edit).setVisible(true).setTitle(R.string.tooltip_edit_venue);
 		actionMenu.findItem(R.id.action_delete).setVisible(true).setTitle(R.string.tooltip_delete_venue);
 	}

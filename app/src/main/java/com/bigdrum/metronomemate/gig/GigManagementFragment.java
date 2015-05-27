@@ -145,8 +145,13 @@ public class GigManagementFragment extends Fragment implements OnItemClickListen
 	@Override
 	public void setUserVisibleHint(boolean isVisibleToUser) {
 		super.setUserVisibleHint(isVisibleToUser);
+
+        if (listview != null) {
+            populateGigs();
+        }
+
 		if (isVisibleToUser) {
-			if (arrayAdapter.getCount() == 0) {
+			if (arrayAdapter != null && arrayAdapter.getCount() == 0) {
 				showHelp();
 			}
 		}
@@ -216,6 +221,7 @@ public class GigManagementFragment extends Fragment implements OnItemClickListen
 		setGigDetails(selectedGig);
 		selectedView = view;
 		selectedView.setBackgroundColor(Color.GREEN);
+        selectedView.setBackground(getActivity().getDrawable(R.drawable.gradient_vertical_selected));
 		
 		actionMenu.findItem(R.id.action_edit).setVisible(true).setTitle(R.string.tooltip_edit_gig);
 		actionMenu.findItem(R.id.action_delete).setVisible(true).setTitle(R.string.tooltip_delete_gig);
