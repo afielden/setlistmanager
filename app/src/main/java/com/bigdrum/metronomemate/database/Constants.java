@@ -28,6 +28,28 @@ public interface Constants extends BaseColumns {
 	public static final String SONG_SET_SETLIST_ID = "setlistid";
 	public static final String SONG_SET_SONG_ID = "songid";
 	public static final String SONG_SET_SONG_POS = "songposition";
+
+	// Gig table
+	public static final String GIG_TABLE = "gigs";
+	public static final String GIG_PRIMARYKEY = "_id";
+	public static final String GIG_NAME = "name";
+	public static final String GIG_VENUE_ID = "venueid";
+	public static final String GIG_DATE_TIME = "date";
+	public static final String GIG_SETLIST_ID = "setlistid";
+	public static final String GIG_NOTES = "notes";
+
+	// Venue table
+	public static final String VENUE_TABLE = "venues";
+	public static final String VENUE_PRIMARYKEY = "_id";
+	public static final String VENUE_CONTACT_NAME = "contactname";
+	public static final String VENUE_PHONE = "phone";
+	public static final String VENUE_NAME = "name";
+	public static final String VENUE_STREET = "streetname";
+	public static final String VENUE_TOWN = "town";
+	public static final String VENUE_POSTCODE = "postcode";
+	public static final String VENUE_COUNTRY = "country";
+	public static final String VENUE_EMAIL = "email";
+	public static final String VENUE_LAST_GIG_ID = "lastgigid";
 	
 	
 	// Activity constants
@@ -51,6 +73,17 @@ public interface Constants extends BaseColumns {
 	public static final int EDIT_SONG = 6;
 	public static final int SELECT_SETLIST = 7;
 	public static final int EDIT_SETLIST = 8;
+	public static final int ADD_VENUE = 9;
+	public static final int EDIT_VENUE = 10;
+	public static final int ADD_GIG = 11;
+	public static final int SELECT_VENUE = 12;
+	public static final int EDIT_GIG = 13;
+	public static final int SELECT_RECIPIENTS = 14;
+	public static final int SEND_EMAIL = 15;
+
+	public static final String prefs_email_user="pref_email_user";
+	public static final String prefs_email_password="pref_email_password";
+	public static final String prefs_band_name="pref_band_name";
 	
 	public static final String SONGLIST_QUERY = "SELECT s.*, l." + SONG_SET_SONG_POS + " FROM " + SONG_TABLE + " s " 
 				+ "INNER JOIN " + SONG_SET_TABLE_NAME + " l ON s." + SONG_PRIMARYKEY + " = l." + SONG_SET_SONG_ID

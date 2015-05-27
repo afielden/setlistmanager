@@ -88,6 +88,11 @@ public class SelectSetlist extends Activity {
 	private List<Model> filterOutSourceSetlist(List<Model> setlists) {
 
 		List<Model> filteredSetlist = new ArrayList<Model>();
+
+		if (getIntent().getExtras() == null) {
+			return setlists;
+		}
+
 		long setlistId = getIntent().getExtras().getLong(Constants.SETLISTPRIMARYKEY);
 
 		for (Model model : setlists) {

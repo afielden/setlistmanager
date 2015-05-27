@@ -262,6 +262,6 @@ public class SearchActivity extends Activity implements OnClickListener {
         help.setMessageAndTitle(getString(R.string.help_search_song),
                         getString(R.string.help_search_song_title));
 
-        help.show(getFragmentManager(), "");
+//        help.show(getSupportFragmentManager(), "");
     }
 }

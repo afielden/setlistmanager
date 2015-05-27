@@ -14,8 +14,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bigdrum.metronomemate.gig.GigManagementFragment;
 import com.bigdrum.metronomemate.info.AboutFragment;
 import com.bigdrum.metronomemate.ui.setlistmanagement.MetronomeFragment;
+import com.bigdrum.metronomemate.venue.VenueManagementFragment;
 
 public class MainActivity extends FragmentActivity implements
 		ActionBar.TabListener {
@@ -122,19 +124,29 @@ public class MainActivity extends FragmentActivity implements
 			Bundle args = new Bundle();
 			
 			switch(position) {
-			case 0:
-				fragment = new MetronomeFragment();
-				
-				args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
-				fragment.setArguments(args);
+				case 0:
+					fragment = new MetronomeFragment();
+
+					args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
+					fragment.setArguments(args);
+					return fragment;
+				case 1:
+					fragment = new GigManagementFragment();
+					args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
+					fragment.setArguments(args);
 				return fragment;
-			case 1:
-				fragment = new AboutFragment();
-				args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
-				fragment.setArguments(args);
-				return fragment;
-			default:
-				return null;
+				case 2:
+					fragment = new VenueManagementFragment();
+					args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
+					fragment.setArguments(args);
+					return fragment;
+				case 3:
+					fragment = new AboutFragment();
+					args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
+					fragment.setArguments(args);
+					return fragment;
+				default:
+					return null;
 			}
 			
 		}
@@ -142,17 +154,21 @@ public class MainActivity extends FragmentActivity implements
 		@Override
 		public int getCount() {
 			// Show 3 total pages.
-			return 2;
+			return 4;
 		}
 
 		@Override
 		public CharSequence getPageTitle(int position) {
 			Locale l = Locale.getDefault();
 			switch (position) {
-			case 0:
-				return getString(R.string.title_section1).toUpperCase(l);
-			case 1:
-				return getString(R.string.title_section4).toUpperCase(l);
+				case 0:
+					return getString(R.string.title_section1).toUpperCase(l);
+				case 1:
+					return getString(R.string.title_section2).toUpperCase(l);
+				case 2:
+					return getString(R.string.title_section3).toUpperCase(l);
+				case 3:
+					return getString(R.string.title_section4).toUpperCase(l);
 			}
 			return null;
 		}

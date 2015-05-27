@@ -186,15 +186,14 @@ other people.   </string>
     <string name="help_venue_mgmt_title">Venue Management</string>
     <string name="help_venue_mgmt">Add details of all your gig venues, including address and contact name.</string>
     <string name="help_no_setlists_title">No setlists</string>
-    <string name="help_no_setlists">There are no Setlists. To create a new setlist, click the \'+\' action item.</string>
+    <string name="help_no_setlists">There are no Setlists. To create a new setlist, tap this icon</string>
     <string name="help_no_songs_title">No songs in this setlist</string>
     <string name="help_no_songs">This setlist contains no Songs. You can search for a selectedSong by click the magnifying glass icon,
 or enter selectedSong details manually by clicking the \'+\' icon. Subset markers can be added by clicking the \'v\' icon.</string>
     <string name="help_no_gigs_title">No gigs</string>
-    <string name="help_no_gigs">There are no Gigs. First go to the Venue tab and create at least one Venue.
-Then create a new gig (at a selected Venue) on this tab by clicking the \'+\' icon.</string>
+    <string name="help_no_gigs">There are no gigs. Add a new gig by tapping this icon.</string>
     <string name="help_no_venues_title">No venues</string>
-    <string name="help_no_venues">There are no Venues. Add a new Venue by clicking the \'+\' icon.</string>
+    <string name="help_no_venues">There are no venues. Add a new venue by tapping this icon.</string>
     <string name="help_search_song_title">Song Search</string>
     <string name="help_search_song">Enter the selectedSong or artist name. Partial words are allowed. Ticking the \'Setlists\' checkbox
     restricts the selectedSong search to the current Setlists</string>

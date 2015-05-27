@@ -5,7 +5,7 @@
     android:background="@drawable/gradient"
     android:orientation="vertical" >
 
-    <LinearLayout
+    <!--LinearLayout
         android:id="@+id/beats_group_layout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -18,14 +18,14 @@
             android:layout_height="wrap_content"
             android:src="@drawable/play_button" />
 
-    </LinearLayout>
+    </LinearLayout-->
 
-    <TextView
+    <!--TextView
         android:id="@+id/no_setlists_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="@string/help_no_setlists" />
+        android:text="@string/help_no_setlists" /-->
 
     <LinearLayout
         android:layout_width="match_parent"

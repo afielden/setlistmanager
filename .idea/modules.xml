@@ -2,11 +2,18 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/samples/HelloFacebookSample/HelloFacebookSample.iml" filepath="$PROJECT_DIR$/samples/HelloFacebookSample/HelloFacebookSample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/samples/MessengerSendSample/MessengerSendSample.iml" filepath="$PROJECT_DIR$/samples/MessengerSendSample/MessengerSendSample.iml" />
       <module fileurl="file://$PROJECT_DIR$/MetronomeMate.iml" filepath="$PROJECT_DIR$/MetronomeMate.iml" />
+      <module fileurl="file://$PROJECT_DIR$/samples/RPSSample/RPSSample.iml" filepath="$PROJECT_DIR$/samples/RPSSample/RPSSample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/samples/Scrumptious/Scrumptious.iml" filepath="$PROJECT_DIR$/samples/Scrumptious/Scrumptious.iml" />
+      <module fileurl="file://$PROJECT_DIR$/samples/SwitchUserSample/SwitchUserSample.iml" filepath="$PROJECT_DIR$/samples/SwitchUserSample/SwitchUserSample.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/dragSortListview/dragSortListview.iml" filepath="$PROJECT_DIR$/dragSortListview/dragSortListview.iml" />
       <module fileurl="file://$PROJECT_DIR$/dragSortListviewDemo/dragSortListviewDemo.iml" filepath="$PROJECT_DIR$/dragSortListviewDemo/dragSortListviewDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/facebook/facebook.iml" filepath="$PROJECT_DIR$/facebook/facebook.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/samples/samples.iml" filepath="$PROJECT_DIR$/samples/samples.iml" />
       <module fileurl="file://$PROJECT_DIR$/showcaseView/showcaseView.iml" filepath="$PROJECT_DIR$/showcaseView/showcaseView.iml" />
     </modules>
   </component>

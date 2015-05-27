@@ -13,7 +13,14 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/dragSortListview" />
             <option value="$PROJECT_DIR$/dragSortListviewDemo" />
+            <option value="$PROJECT_DIR$/facebook" />
             <option value="$PROJECT_DIR$/library" />
+            <option value="$PROJECT_DIR$/samples" />
+            <option value="$PROJECT_DIR$/samples/HelloFacebookSample" />
+            <option value="$PROJECT_DIR$/samples/MessengerSendSample" />
+            <option value="$PROJECT_DIR$/samples/RPSSample" />
+            <option value="$PROJECT_DIR$/samples/Scrumptious" />
+            <option value="$PROJECT_DIR$/samples/SwitchUserSample" />
             <option value="$PROJECT_DIR$/showcaseView" />
           </set>
         </option>

@@ -93,9 +93,9 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 		
 		help = new HelpDialogFragment();
 		
-		playImage = (ImageView)rootView.findViewById(R.id.beat_play);
-		playImage.setVisibility(View.INVISIBLE);
-		playImage.setOnClickListener(this);
+//		playImage = (ImageView)rootView.findViewById(R.id.beat_play);
+//		playImage.setVisibility(View.INVISIBLE);
+//		playImage.setOnClickListener(this);
 		itemList = new ArrayList<>();
 		createUI();
 		beatViews = new ArrayList<>();
@@ -103,6 +103,10 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 		handler = new Handler();
 
         this.thisActivity = getActivity();
+
+        populateSetlistView();
+        createItemlistListener();
+
 
 //		rootView.setBackgroundColor(R.drawable.background);
 		return rootView;
@@ -165,6 +169,46 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 //        });
 //    }
 
+
+
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+
+            // The user may have added a new setlist via the 'add gig' tab, so repopulate the listview
+            if (listView != null) {
+                populateSetlistView();
+            }
+
+            if (listAdapter != null && listAdapter.getCount() == 0) {
+                showHelp();
+            }
+        }
+        else {
+        }
+    }
+
+
+    /**
+     *
+     */
+    private void showHelp() {
+        ActionItemTarget target = new ActionItemTarget(getActivity(), R.id.action_add);
+
+        new ShowcaseView.Builder(getActivity())
+                .setTarget(target)
+                .setContentTitle("")
+                .hideOnTouchOutside()
+                .setStyle(R.style.CustomShowcaseTheme3)
+                .setTarget(target)
+                .setContentText(R.string.help_no_setlists)
+                .build();
+
+
+    }
+
 	
 	/**
 	 * 
@@ -183,8 +227,8 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 	 * 
 	 */
 	private void createUI() {
-		populateSetlistView();
-		createItemlistListener();
+//		populateSetlistView();
+//		createItemlistListener();
 		setlistMode(true);
 		setSongInformationVisibility(View.INVISIBLE);
 //		helpMessage(DataService.firstTimeUser);
@@ -210,7 +254,7 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 	private void displayWelcomeMessage() {
 		help.setMessageAndTitleHtml(getString(R.string.help_welcome),
                 getString(R.string.help_welcome_title), getActivity());
-		help.show(getActivity().getFragmentManager(), "");
+		help.show(getActivity().getSupportFragmentManager(), "");
 	}
 	
 	
@@ -241,9 +285,9 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 		listAdapter = new CustomAdapter(this.getActivity(), R.layout.list_item_handle_left, R.id.setlist_row_name, itemList, this);
 		listView.setAdapter(listAdapter);
 		
-		if (listAdapter.getCount() > 0) {
-			removeHelpMessage();
-		}
+//		if (listAdapter.getCount() == 0) {
+//			showHelp();
+//		}
 		
 		DragSortController controller = new MyDragSortController(listView);
 	    controller.setDragHandleId(R.id.setlist_row_handler);
@@ -337,8 +381,8 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 	private void displaySetlists() {
 		TextView heading = (TextView)rootView.findViewById(R.id.items_textview_title);
 		heading.setText(R.string.set_list_label);
-		setSongInformationVisibility(View.INVISIBLE);
-		playImage.setVisibility(View.INVISIBLE);
+//		setSongInformationVisibility(View.INVISIBLE);
+//		playImage.setVisibility(View.INVISIBLE);
 		listAdapter.clear();
 		listAdapter.addAll(dbService.getAllSetlists());
 		listAdapter.notifyDataSetChangedAndReset();
@@ -426,6 +470,8 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
         editModeAction.setTitle(editMode ? R.string.action_done : R.string.action_edit);
         editModeAction.setIcon(editMode?android.R.drawable.ic_menu_close_clear_cancel:android.R.drawable.ic_menu_manage);
 		editModeAction.setVisible(listAdapter.getCount() != 0);
+
+        helpDialogFragment.setNumberOfListItems(listAdapter.getCount());
 	}
 	
 	
@@ -601,6 +647,7 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 					itemList.add(newSongModel);
 					listAdapter.notifyDataSetChangedAndReset();
 					editModeAction.setVisible(true);
+                    helpDialogFragment.setNumberOfListItems(listAdapter.getCount());
 				}
 				else if (resultCode == Activity.RESULT_CANCELED) {
 					Toast.makeText(getActivity(), R.string.cancelled, Toast.LENGTH_LONG).show();
@@ -641,6 +688,7 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
                             Toast.makeText(getActivity(), R.string.song_already_added, Toast.LENGTH_LONG).show();
                         }
 						editModeAction.setVisible(true);
+                        helpDialogFragment.setNumberOfListItems(listAdapter.getCount());
 
 					} catch (DataServiceException e) {
 
@@ -659,6 +707,7 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 				if (resultCode == Activity.RESULT_OK) {
 					addNewSetlistToDb(data.getStringExtra(Constants.NEW_SETLIST_NAME));
 					editModeAction.setVisible(true);
+					helpDialogFragment.setNumberOfListItems(listAdapter.getCount());
 					removeHelpMessage();
 				}
 				else if (resultCode == Activity.RESULT_CANCELED) {
@@ -706,8 +755,10 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
                         getString(R.string.help_songlist_edit_title));
 	    	}
     	}
-		
-		helpDialogFragment.show(getActivity().getFragmentManager(), "");
+
+        helpDialogFragment.setDisplayShowcaseView(true);
+
+		helpDialogFragment.show(getActivity().getSupportFragmentManager(), "");
 	}
 	
 	
@@ -718,27 +769,27 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 	@SuppressWarnings("unused")
     private void createBeatIcons(Model selectedSong) {
 		
-		currentBeat = 0;
-		beatsViewgroup = (ViewGroup)rootView.findViewById(R.id.beats_group_layout);
-		beatsViewgroup.removeAllViews();
-
-		beatsViewgroup.setVisibility(View.VISIBLE);
-		beatViews.clear();
-
-		if (!selectedSong.isSubsetItem()) {
-			playImage.setVisibility(View.VISIBLE);
-			beatsViewgroup.addView(playImage);
-		}
-		
-		for (int beat = 1; beat <= selectedSong.getTimeSignature(); beat++) {
-			ImageView i = new ImageView(this.getActivity());
-			i.setImageResource(R.drawable.beat_off);
-			i.setAdjustViewBounds(true);
-			i.setVisibility(View.VISIBLE);
-			i.setEnabled(true);
-			beatsViewgroup.addView(i);
-			beatViews.add(i);
-		}
+//		currentBeat = 0;
+//		beatsViewgroup = (ViewGroup)rootView.findViewById(R.id.beats_group_layout);
+//		beatsViewgroup.removeAllViews();
+//
+//		beatsViewgroup.setVisibility(View.VISIBLE);
+//		beatViews.clear();
+//
+//		if (!selectedSong.isSubsetItem()) {
+//			playImage.setVisibility(View.VISIBLE);
+//			beatsViewgroup.addView(playImage);
+//		}
+//
+//		for (int beat = 1; beat <= selectedSong.getTimeSignature(); beat++) {
+//			ImageView i = new ImageView(this.getActivity());
+//			i.setImageResource(R.drawable.beat_off);
+//			i.setAdjustViewBounds(true);
+//			i.setVisibility(View.VISIBLE);
+//			i.setEnabled(true);
+//			beatsViewgroup.addView(i);
+//			beatViews.add(i);
+//		}
 	}
 	
 	
@@ -809,14 +860,15 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
         List<Model> remainingSetlists = dbService.deleteSetlists(itemList);
 
         reorderUnselectedItems();
-        if (remainingSetlists.size() == 0) {
-            editMode = false;
-            setActionItemVisibility();
-        }
 
         listAdapter.clear();
         listAdapter.addAll(remainingSetlists);
         listAdapter.notifyDataSetChanged();
+
+        if (remainingSetlists.size() == 0) {
+            editMode = false;
+            setActionItemVisibility();
+        }
 	}
 	
 	

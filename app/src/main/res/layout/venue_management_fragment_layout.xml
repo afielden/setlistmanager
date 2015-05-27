@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient"
+    android:orientation="vertical" >
+
+    <!--TextView
+        android:id="@+id/no_venues_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/help_no_venues" /-->
+
+    <TextView
+        android:id="@+id/venue_list_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/venue_list"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textStyle="bold"
+        android:textSize="@dimen/abc_text_size_large_material"/>
+
+    <ListView
+        android:id="@+id/venue_listview"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@id/venue_list_title" >
+
+    </ListView>
+
+    <TextView
+        android:id="@+id/venue_details_title"
+        android:layout_width="wrap_content"
+        android:layout_height="29dp"
+        android:layout_below="@id/venue_listview"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:gravity="top"
+        android:height="10dp"
+        android:text="@string/venue_details"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textStyle="bold"
+        android:textSize="@dimen/abc_text_size_large_material"/>
+
+    <EditText
+        android:id="@+id/venue_details_textbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tempo_label"
+        android:layout_weight="0.92"
+        android:enabled="false"
+        android:height="100dp"
+        android:inputType="textMultiLine" >
+
+        <requestFocus />
+    </EditText>
+
+</LinearLayout>

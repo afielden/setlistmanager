@@ -3,17 +3,22 @@ package com.bigdrum.metronomemate.ui.setlistmanagement;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
+import android.app.FragmentManager;
+import android.support.v4.app.DialogFragment;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.View;
 import android.webkit.WebView;
 
+import com.bigdrum.metronomemate.MainActivity;
 import com.bigdrum.metronomemate.R;
 import com.github.amlcurran.showcaseview.OnShowcaseEventListener;
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.ActionItemTarget;
+
+import java.util.List;
 
 public class HelpDialogFragment extends DialogFragment implements View.OnClickListener, OnShowcaseEventListener {
 	
@@ -24,11 +29,13 @@ public class HelpDialogFragment extends DialogFragment implements View.OnClickLi
     private int[] allItems = {R.id.action_setlists, R.id.action_search, R.id.action_add_section, R.id.action_add,
         R.id.action_copy, R.id.action_edit, R.id.action_delete};
 
+    private int[] setlistNoListItems = {R.id.action_add};
     private int[] setlist = {R.id.action_add, R.id.action_editmode};
     private int[] setlistEditMultipleSelected = {R.id.action_delete, R.id.action_editmode};
     private int[] setlistEditSingleSelected = {R.id.action_copy, R.id.action_edit, R.id.action_delete, R.id.action_editmode};
     private int[] setlistEditNoneSelected = {R.id.action_editmode};
 
+    private int[] songlistNoListItems = {R.id.action_setlists, R.id.action_search, R.id.action_add_section, R.id.action_add};
     private int[] songlist = {R.id.action_setlists, R.id.action_search, R.id.action_add_section, R.id.action_add, R.id.action_editmode};
     private int[] songlistEditMultipleSelected = {R.id.action_setlists, R.id.action_copy, R.id.action_delete, R.id.action_editmode};
     private int[] songlistEditSingleSelected = {R.id.action_setlists, R.id.action_copy, R.id.action_edit, R.id.action_delete, R.id.action_editmode};
@@ -42,6 +49,8 @@ public class HelpDialogFragment extends DialogFragment implements View.OnClickLi
     private boolean editMode = false;
     private int numberOfSelectedItems = 0;
     private boolean showcaseHelpAvailable = false;
+    private int numberOfListItems = 0;
+    private boolean displayShowcaseView;
 	
 	/**
 	 * 
@@ -111,7 +120,7 @@ public class HelpDialogFragment extends DialogFragment implements View.OnClickLi
             showcaseHelpAvailable = false;
         }
 
-        if (showcaseHelpAvailable) {
+        if (displayShowcaseView) {
             ActionItemTarget target = new ActionItemTarget(activity, currentItemList[currentItem]);
             helpMessage = activity.getString(msgId) + "\n" + activity.getString(R.string.help_next_item);
 
@@ -307,6 +316,31 @@ public class HelpDialogFragment extends DialogFragment implements View.OnClickLi
                 currentItemList = songlistEditMultipleSelected;
             }
         }
+    }
+
+
+    /**
+     *
+     * @param listItems
+     */
+    public void setNumberOfListItems(int listItems) {
+        this.numberOfListItems = listItems;
+
+        if (numberOfListItems == 0) {
+            currentItemList = setlistMode?setlistNoListItems:songlistNoListItems;
+        }
+        else {
+            currentItemList = setlistMode?setlist:songlist;
+        }
+    }
+
+
+    /**
+     *
+     * @param show
+     */
+    public void setDisplayShowcaseView(boolean show) {
+        this.displayShowcaseView = show;
     }
 
 

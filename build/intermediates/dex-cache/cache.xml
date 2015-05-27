@@ -30,6 +30,13 @@
         <dex dex="/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/debug/classes-072c82c88666b11e4f44781e78c3f2086ea602f4.jar" />
     </item>
     <item
+        jar="/home/andrew/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-android/1.2.0/6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd/bolts-android-1.2.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd">
+        <dex dex="/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/debug/bolts-android-1.2.0-f72bfc12e98861805c5defb4a2f3b3c705d035ab.jar" />
+    </item>
+    <item
         jar="/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.1.1/libs/internal_impl-22.1.1.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -37,11 +44,32 @@
         <dex dex="/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/debug/internal_impl-22.1.1-4aa4586ff29574f97e72f5acc6880bf7f8754017.jar" />
     </item>
     <item
+        jar="/home/andrew/android_developer_toolkit/activation.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="d1257cbff6faa44c1f325ae0d9413522d4644383">
+        <dex dex="/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/debug/activation-bb1b8c26d585095f6c9cd6fd497ca1a38eb24ac4.jar" />
+    </item>
+    <item
         jar="/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/exploded-aar/MetronomeMate/dragSortListview/unspecified/classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="0d7510a415c34310978b8c90c0ed4e6caa3761d0">
         <dex dex="/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/debug/classes-5ed19c53808562d8989caaa9059dae5b1616fb86.jar" />
+    </item>
+    <item
+        jar="/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.1.2/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="71a1c9453be81003c09c74773f8eb98b93344e22">
+        <dex dex="/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/debug/classes-f4b1db1bb6f79fe724f9acaf011084bdfef7eceb.jar" />
+    </item>
+    <item
+        jar="/home/andrew/android_developer_toolkit/mail.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="428e267abff0d10802ccde86b915da2c20471160">
+        <dex dex="/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/debug/mail-777c75c0e1b524af9295b56fd6112c4458ffff93.jar" />
     </item>
     <item
         jar="/home/andrew/AndroidstudioProjects/MetronomeMate/json_simple-1.1.jar"

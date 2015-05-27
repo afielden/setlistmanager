@@ -58,6 +58,23 @@
             android:name="com.bigdrum.metronomemate.ui.setlistmanagement.SelectSetlist"
             android:label="@string/title_activity_select_setlist" >
         </activity>
+        <activity
+            android:name="com.bigdrum.metronomemate.venue.AddVenue"
+            android:label="@string/title_activity_add_venue" >
+        </activity>
+        <activity
+            android:name="com.bigdrum.metronomemate.gig.AddGig"
+            android:label="@string/title_activity_add_gig"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
+            android:name="com.bigdrum.metronomemate.venue.SelectVenue"
+            android:label="@string/title_activity_select_venue" >
+        </activity>
+        <activity
+            android:name="com.bigdrum.metronomemate.export.SelectRecipients"
+            android:label="@string/title_activity_select_recipients" >
+        </activity>
     </application>
 
 </manifest>
