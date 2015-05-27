@@ -590,7 +590,7 @@ public class GigManagementFragment extends Fragment implements OnItemClickListen
       	m.setBody("Email body."); 
  
       try { 
-        m.addAttachment(buildEmailContent().getAbsolutePath()); 
+        m.addAttachment(buildEmailContent().getAbsolutePath());
  
         if(m.send()) { 
           Toast.makeText(getActivity(), "Email was sent successfully.", Toast.LENGTH_LONG).show(); 
@@ -600,7 +600,8 @@ public class GigManagementFragment extends Fragment implements OnItemClickListen
           return Boolean.FALSE;
         } 
       } 
-      catch(Exception e) { 
+      catch(Exception e) {
+		  Log.d("SetlistManager", "failed to send email:" + e.toString());
         return Boolean.FALSE;
       } 
    }

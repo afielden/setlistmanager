@@ -5,6 +5,7 @@
 /home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/debug/bolts-android-1.2.0-f72bfc12e98861805c5defb4a2f3b3c705d035ab.jar
 /home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/debug/activation-bb1b8c26d585095f6c9cd6fd497ca1a38eb24ac4.jar
 /home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/debug/classes-5ed19c53808562d8989caaa9059dae5b1616fb86.jar
+/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/debug/additionnal-78e6c300e102b220cad88e280fbe18606bcb44f2.jar
 /home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/debug/internal_impl-22.1.1-4aa4586ff29574f97e72f5acc6880bf7f8754017.jar
 /home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/debug/jEN-f463fbe66e1a1a257db1c0930592f471f37758ea.jar
 /home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/debug/classes-4b0669df30d9c7c6ff25ac5261d0c85d8150fedf.jar

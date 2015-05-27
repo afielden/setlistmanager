@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:windowBackground="@drawable/gradient"
     android:title="Preferences" >
 
     <PreferenceCategory android:title="Band Details" >
@@ -18,6 +19,7 @@
             android:key="pref_email_user"
             android:summary="@string/pref_email_user_summary"
             android:inputType="textEmailAddress"
+            android:textColor="#000000"
             android:persistent="true" />
 
         <EditTextPreference
@@ -26,6 +28,7 @@
             android:summary="@string/pref_email_password_summary"
             android:persistent="true"
             android:inputType="textPassword"
+            android:textColor="#000000"
             android:title="****" />
     </PreferenceCategory>
 

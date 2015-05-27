@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 21
+    compileSdkVersion 22
     buildToolsVersion "21.1.2"
 
     defaultConfig {
@@ -28,4 +28,5 @@ dependencies {
     compile files('/home/andrew/AndroidstudioProjects/MetronomeMate/json_simple-1.1.jar')
     compile files('/home/andrew/android_developer_toolkit/mail.jar')
     compile files('/home/andrew/android_developer_toolkit/activation.jar')
+    compile files('/home/andrew/android_developer_toolkit/additionnal.jar')
 }
