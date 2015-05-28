@@ -140,6 +140,10 @@ public class AddGig extends Activity implements OnClickListener, OnDateSetListen
 					venueId = originalGig.getVenueId();
 					setlistId = originalGig.getSetlistId();
 				}
+
+				if (gigName != null) {
+					gigName = nameEditText.getText().toString();
+				}
 				if (selectedVenue != null) {
 					venueId = selectedVenue.getId();
 				}

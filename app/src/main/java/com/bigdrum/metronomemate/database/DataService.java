@@ -808,7 +808,7 @@ public class DataService extends SQLiteOpenHelper {
 		List<Venue> venues = new ArrayList<Venue>();
 		String[] cols = { VENUE_PRIMARYKEY, VENUE_NAME, VENUE_STREET, VENUE_TOWN, VENUE_POSTCODE, VENUE_COUNTRY, VENUE_CONTACT_NAME,
 				VENUE_PHONE, VENUE_EMAIL, VENUE_LAST_GIG_ID};
-		Cursor cursor = db.query(VENUE_TABLE, cols, null, null, null, null, VENUE_PRIMARYKEY, null);
+		Cursor cursor = db.query(VENUE_TABLE, cols, null, null, null, null, VENUE_NAME, null);
 
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
@@ -913,13 +913,13 @@ public class DataService extends SQLiteOpenHelper {
 	 */
 	public List<Gig> readAllGigs() {
 		List<Gig> gigs = new ArrayList<Gig>();
-		String[] cols = { GIG_PRIMARYKEY, GIG_NAME, GIG_VENUE_ID, GIG_SETLIST_ID, GIG_DATE_TIME };
-		Cursor cursor = db.query(GIG_TABLE, cols, null, null, null, null, GIG_PRIMARYKEY, null);
+
+		Cursor cursor = db.rawQuery(ALLGIGS_QUERY, null);
 
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
-			Gig gig = new Gig(cursor.getInt(0), cursor.getString(1), cursor.getInt(2), cursor.getInt(3),
-					cursor.getString(4));
+			Gig gig = new Gig(cursor.getInt(0), cursor.getString(1), cursor.getLong(2), cursor.getLong(4),
+					cursor.getString(3));
 			gigs.add(gig);
 			cursor.moveToNext();
 		}

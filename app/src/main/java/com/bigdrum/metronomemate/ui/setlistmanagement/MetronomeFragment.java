@@ -554,6 +554,7 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
             helpDialogFragment.setEditMode(editMode);
 	    	editModeAction.setTitle(editMode?R.string.action_done:R.string.action_edit);
 	    	setActionItemVisibility();
+			listAdapter.clearAllCheckedItems();
 	    	listAdapter.notifyDataSetChanged();
 	    	return true;
 	    	

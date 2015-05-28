@@ -330,7 +330,12 @@ public class HelpDialogFragment extends DialogFragment implements View.OnClickLi
             currentItemList = setlistMode?setlistNoListItems:songlistNoListItems;
         }
         else {
-            currentItemList = setlistMode?setlist:songlist;
+            if (editMode) {
+                currentItemList = setlistMode ? setlistEditNoneSelected : songlistEditNoneSelected;
+            }
+            else {
+                currentItemList = setlistMode ? setlist : songlist;
+            }
         }
     }
 
