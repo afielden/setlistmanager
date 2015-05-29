@@ -49,7 +49,7 @@ public interface Constants extends BaseColumns {
 	public static final String VENUE_POSTCODE = "postcode";
 	public static final String VENUE_COUNTRY = "country";
 	public static final String VENUE_EMAIL = "email";
-	public static final String VENUE_LAST_GIG_ID = "lastgigid";
+	public static final String VENUE_LAST_GIG_DATE = "lastgigdate";
 	
 	
 	// Activity constants

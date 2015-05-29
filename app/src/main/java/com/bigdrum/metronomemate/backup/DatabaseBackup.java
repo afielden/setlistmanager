@@ -262,8 +262,8 @@ public class DatabaseBackup {
             element.appendChild(venue.getEmail());
             parent.appendChild(element);
 
-            element = new Element(VENUE_LAST_GIG_ID);
-            element.appendChild(String.valueOf(venue.getLastGigId()));
+            element = new Element(VENUE_LAST_GIG_DATE);
+            element.appendChild(String.valueOf(venue.getLastGigDate()));
             parent.appendChild(element);
 
             venueGroup.appendChild(parent);

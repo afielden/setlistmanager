@@ -136,8 +136,7 @@ public class DataService extends SQLiteOpenHelper {
                         + VENUE_TOWN + " TEXT, "
                         + VENUE_POSTCODE + " TEXT, "
                         + VENUE_COUNTRY + " TEXT, "
-                        + VENUE_LAST_GIG_ID + " INTEGER, "
-                        + "FOREIGN KEY(" + VENUE_LAST_GIG_ID + ") REFERENCES " + GIG_TABLE + "(" + GIG_PRIMARYKEY + "));"
+                        + VENUE_LAST_GIG_DATE + " TEXT);"
         );
 
         db.execSQL("CREATE TABLE " + GIG_TABLE + " ("
@@ -856,14 +855,13 @@ public class DataService extends SQLiteOpenHelper {
 	public List<Venue> readAllVenues() {
 		List<Venue> venues = new ArrayList<Venue>();
 		String[] cols = { VENUE_PRIMARYKEY, VENUE_NAME, VENUE_STREET, VENUE_TOWN, VENUE_POSTCODE, VENUE_COUNTRY, VENUE_CONTACT_NAME,
-				VENUE_PHONE, VENUE_EMAIL, VENUE_LAST_GIG_ID};
+				VENUE_PHONE, VENUE_EMAIL, VENUE_LAST_GIG_DATE};
 		Cursor cursor = db.query(VENUE_TABLE, cols, null, null, null, null, VENUE_NAME, null);
 
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
 			Venue venue = new Venue(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4),
-					cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getInt(9), "");
-			setLastGigDateForVenue(venue);
+					cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9));
 			venues.add(venue);
 			cursor.moveToNext();
 		}
@@ -873,21 +871,21 @@ public class DataService extends SQLiteOpenHelper {
 	}
 
 
-	/**
-	 *
-	 * @param venue
-	 * @return
-	 */
-	public void setLastGigDateForVenue(Venue venue) {
-		String[] cols = { GIG_DATE_TIME };
-		Cursor cursor = db.query(GIG_TABLE, cols, GIG_PRIMARYKEY + " = '" + venue.getLastGigId() + "'", null, null, null, null);
-
-		if (cursor.moveToFirst()) {
-			venue.setLastGigDate(cursor.getString(0));
-		}
-
-		cursor.close();
-	}
+//	/**
+//	 *
+//	 * @param venue
+//	 * @return
+//	 */
+//	public void setLastGigDateForVenue(Venue venue) {
+//		String[] cols = { GIG_DATE_TIME };
+//		Cursor cursor = db.query(GIG_TABLE, cols, GIG_PRIMARYKEY + " = '" + venue.getLastGigId() + "'", null, null, null, null);
+//
+//		if (cursor.moveToFirst()) {
+//			venue.setLastGigDate(cursor.getString(0));
+//		}
+//
+//		cursor.close();
+//	}
 
 
 	/**

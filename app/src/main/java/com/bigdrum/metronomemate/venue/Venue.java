@@ -14,7 +14,6 @@ public class Venue implements Parcelable {
 	private String contactName;
 	private String phone;
 	private String email;
-	private long lastGigId;
 	private String lastGigDate;
 	
 	
@@ -39,7 +38,7 @@ public class Venue implements Parcelable {
 	
 	
 	public Venue(long id, String name, String street, String town, String postcode, String country,
-			String contactName, String phone, String email, long lastGigId, String lastGigDate) {
+			String contactName, String phone, String email, String lastGigDate) {
 		this.id = id;
 		this.name = name;
 		this.street = street;
@@ -49,7 +48,6 @@ public class Venue implements Parcelable {
 		this.contactName = contactName;
 		this.phone = phone;
 		this.email = email;
-		this.lastGigId = lastGigId;
 		this.lastGigDate = lastGigDate;
 	}
 	
@@ -78,7 +76,6 @@ public class Venue implements Parcelable {
 		dest.writeString(contactName);
 		dest.writeString(phone);
 		dest.writeString(email);
-		dest.writeLong(lastGigId);
 		dest.writeString(lastGigDate);
 	}
 	
@@ -96,7 +93,6 @@ public class Venue implements Parcelable {
 		contactName = parcel.readString();
 		phone = parcel.readString();
 		email = parcel.readString();
-		lastGigId = parcel.readLong();
 		lastGigDate = parcel.readString();
 	}
 
@@ -194,16 +190,6 @@ public class Venue implements Parcelable {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-
-	public long getLastGigId() {
-		return lastGigId;
-	}
-
-
-	public void setLastGigId(long lastGigId) {
-		this.lastGigId = lastGigId;
 	}
 
 
