@@ -61,4 +61,8 @@
         android:icon="@android:drawable/ic_menu_manage"
         android:title="@string/action_edit"/>
 
+    <item android:id="@+id/action_backup"
+        android:showAsAction="never"
+        android:title="@string/action_backup"></item>
+
 </menu>

@@ -174,7 +174,7 @@ public class HelpDialogFragment extends DialogFragment implements View.OnClickLi
                 msgId = R.string.help_action_add_setlist;
                 break;
             case R.id.action_editmode:
-                msgId = R.string.help_action_setlist_editmode;
+                msgId = editMode?R.string.help_action_setlist_editmode_cancel:R.string.help_action_setlist_editmode;
                 break;
             case R.id.action_copy:
                 msgId = R.string.help_action_copy;
@@ -224,7 +224,7 @@ public class HelpDialogFragment extends DialogFragment implements View.OnClickLi
                 msgId = R.string.help_action_song_delete;
                 break;
             case R.id.action_editmode:
-                msgId = R.string.help_action_songlist_editmode_cancel;
+                msgId = editMode?R.string.help_action_songlist_editmode_cancel:R.string.help_action_songlist_editmode;
                 break;
         }
 

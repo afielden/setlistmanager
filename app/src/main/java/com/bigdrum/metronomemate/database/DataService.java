@@ -50,81 +50,81 @@ import static com.bigdrum.metronomemate.database.Constants.*;
 
 public class DataService extends SQLiteOpenHelper {
 
-	private static final String DBNAME = "metronomemate.db";
-	private static final int DBVERSION = 1;
-	private Cursor setlistCursor;
-	private Cursor songCursor;
-	private Context context;
-	private Integer numberOfSetlists;
-	private static SQLiteDatabase db;
-	private static DataService dataService;
-	public static boolean firstTimeUser;
-	
-	
-	/**
-	 * 
-	 *
-	 */
-	private DataService(Context context) {
-		super(context, DBNAME, null, DBVERSION);
-		this.context = context;
-		
-		
-		// Uncomment for unit testing
+    private static final String DBNAME = "metronomemate.db";
+    private static final int DBVERSION = 1;
+    private Cursor setlistCursor;
+    private Cursor songCursor;
+    private Context context;
+    private Integer numberOfSetlists;
+    private static SQLiteDatabase db;
+    private static DataService dataService;
+    public static boolean firstTimeUser;
+
+
+    /**
+     *
+     *
+     */
+    private DataService(Context context) {
+        super(context, DBNAME, null, DBVERSION);
+        this.context = context;
+
+
+        // Uncomment for unit testing
 //		context.deleteDatabase(DBNAME);
-	}
-	
-	
-	public static DataService getDataService(Context context) {
-		if (dataService == null) {
-			dataService = new DataService(context);
-		}
-		
-		return dataService;
-	}
-	
+    }
 
-	/**
-	 * 
-	 */
-	public void init() {
-		if (db == null) {
-			db = getWritableDatabase();
-			db.execSQL("PRAGMA foreign_keys=ON;");
-		}
-	}
 
-	
-	/**
-	 * 
-	 */
-	@Override
-	public void onCreate(SQLiteDatabase db) {
-		db.execSQL("CREATE TABLE " + SETLIST_TABLE + " (" 
-				+ SETLISTPRIMARYKEY + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-				+ SETLISTNAME + " TEXT NOT NULL, "
-				+ SETLISTPOS + " INTEGER NOT NULL);"
-				);
-		
-		db.execSQL("CREATE TABLE " + SONG_TABLE + " ("
-				+ SONG_PRIMARYKEY + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-				+ SONG_NAME + " TEXT NOT NULL, "
-				+ SONG_ARTIST + " TEXT NOT NULL, "
-				+ SONG_TEMPO + " REAL NOT NULL, "
-				+ SONG_TIMESIG + " INTEGER NOT NULL, "
-				+ SONG_KEY + " INTEGER, "
-				+ SONG_SETLIST_COUNT + " INTEGER NOT NULL, "
-				+ SONG_DURATION + " REAL NOT NULL);"
-				);
-		
-		db.execSQL("CREATE TABLE " + SONG_SET_TABLE_NAME + " ("
-				+ SONG_SET_PRIMARY_KEY + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-				+ SONG_SET_SETLIST_ID + " INTEGER NOT NULL, "
-				+ SONG_SET_SONG_ID + " INTEGER NOT NULL, "
-				+ SONG_SET_SONG_POS + " INTEGER NOT NULL, "
-				+ "FOREIGN KEY(" + SONG_SET_SETLIST_ID + ") REFERENCES " + SETLIST_TABLE + "(" + SETLISTPRIMARYKEY + "), "
-				+ "FOREIGN KEY(" + SONG_SET_SONG_ID + ") REFERENCES " + SONG_TABLE + "(" + SONG_PRIMARYKEY + "));"
-				);
+    public static DataService getDataService(Context context) {
+        if (dataService == null) {
+            dataService = new DataService(context);
+        }
+
+        return dataService;
+    }
+
+
+    /**
+     *
+     */
+    public void init() {
+        if (db == null) {
+            db = getWritableDatabase();
+            db.execSQL("PRAGMA foreign_keys=ON;");
+        }
+    }
+
+
+    /**
+     *
+     */
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE " + SETLIST_TABLE + " ("
+                        + SETLISTPRIMARYKEY + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                        + SETLISTNAME + " TEXT NOT NULL, "
+                        + SETLISTPOS + " INTEGER NOT NULL);"
+        );
+
+        db.execSQL("CREATE TABLE " + SONG_TABLE + " ("
+                        + SONG_PRIMARYKEY + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                        + SONG_NAME + " TEXT NOT NULL, "
+                        + SONG_ARTIST + " TEXT NOT NULL, "
+                        + SONG_TEMPO + " REAL NOT NULL, "
+                        + SONG_TIMESIG + " INTEGER NOT NULL, "
+                        + SONG_KEY + " INTEGER, "
+                        + SONG_SETLIST_COUNT + " INTEGER NOT NULL, "
+                        + SONG_DURATION + " REAL NOT NULL);"
+        );
+
+        db.execSQL("CREATE TABLE " + SONG_SET_TABLE_NAME + " ("
+                        + SONG_SET_PRIMARY_KEY + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                        + SONG_SET_SETLIST_ID + " INTEGER NOT NULL, "
+                        + SONG_SET_SONG_ID + " INTEGER NOT NULL, "
+                        + SONG_SET_SONG_POS + " INTEGER NOT NULL, "
+                        + "FOREIGN KEY(" + SONG_SET_SETLIST_ID + ") REFERENCES " + SETLIST_TABLE + "(" + SETLISTPRIMARYKEY + "), "
+                        + "FOREIGN KEY(" + SONG_SET_SONG_ID + ") REFERENCES " + SONG_TABLE + "(" + SONG_PRIMARYKEY + "));"
+        );
 
         db.execSQL("CREATE TABLE " + VENUE_TABLE + " ("
                         + VENUE_PRIMARYKEY + " INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -152,85 +152,134 @@ public class DataService extends SQLiteOpenHelper {
         );
 
         db.execSQL("PRAGMA foreign_keys=ON;");
-		
-		firstTimeUser = true;
-	}
 
-	
-	/**
-	 * 
-	 */
-	@Override
-	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		// TODO Auto-generated method stub
+        firstTimeUser = true;
+    }
 
-	}
 
-	
-	/**
-	 *
-	 */
-	public void addSetlistName(String setlistName) {
-		
-		if (numberOfSetlists == null) {
-			List<Model> setlists = getAllSetlists();
-			numberOfSetlists = setlists.size();
-		}
-		
-		ContentValues values = new ContentValues();
-		values.put(SETLISTNAME, setlistName);
-		values.put(SETLISTPOS, numberOfSetlists++);
-		db.insertOrThrow(SETLIST_TABLE, null, values);
-	}
-	
-	
-	/**
-	 *
-	 */
-	public void changeSetlistName(String newSetlistName, Model selectedSetlist) {
-		
-		ContentValues values = new ContentValues();
-		String origSetlistName = selectedSetlist.getName().replaceAll("'","''");
-		newSetlistName=newSetlistName.replaceAll("'", "''");
+    /**
+     *
+     */
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // TODO Auto-generated method stub
+
+    }
+
+
+    /**
+     *
+     */
+    public void addSetlistName(String setlistName) {
+
+        if (numberOfSetlists == null) {
+            List<Model> setlists = getAllSetlists();
+            numberOfSetlists = setlists.size();
+        }
+
+        ContentValues values = new ContentValues();
+        values.put(SETLISTNAME, setlistName);
+        values.put(SETLISTPOS, numberOfSetlists++);
+        db.insertOrThrow(SETLIST_TABLE, null, values);
+    }
+
+
+    /**
+     *
+     */
+    public void changeSetlistName(String newSetlistName, Model selectedSetlist) {
+
+        ContentValues values = new ContentValues();
+        String origSetlistName = selectedSetlist.getName().replaceAll("'", "''");
+        newSetlistName = newSetlistName.replaceAll("'", "''");
         values.put(SETLISTNAME, newSetlistName);
         db.update(SETLIST_TABLE, values, SETLISTNAME + "='" + origSetlistName + "' AND "
                 + SETLISTPOS + "=" + selectedSetlist.getPosition(), null);
-	}
-	
-	
-	/**
-	 * 
-	 */
-	public List<Model> getAllSetlists() {
-		List<Model> setLists = new ArrayList<Model>();
-		String[] cols = { SETLISTPRIMARYKEY, SETLISTNAME, SETLISTPOS };
-		Cursor cursor = db.query(SETLIST_TABLE, cols, null, null, null, null, SETLISTPOS, null);
-		
-		cursor.moveToFirst();
-	    while (!cursor.isAfterLast()) {
-	      Model setList = new Model(cursor.getInt(0), cursor.getString(1), cursor.getInt(2));
-	      setLists.add(setList);
-	      cursor.moveToNext();
-	    }
-	    // Make sure to close the cursor
-	    cursor.close();
-	    numberOfSetlists = setLists.size();
-	    return setLists;
-	}
+    }
 
-	
-	/**
-	 * 
-	 */
-	public Cursor getSetlistCursor() {
-		String[] cols = { SETLISTPRIMARYKEY, SETLISTNAME };
-		Cursor cursor = db.query(SETLIST_TABLE, cols, null, null, null, null, null, null);
-		
+
+    /**
+     *
+     */
+    public List<Model> getAllSetlists() {
+        List<Model> setLists = new ArrayList<Model>();
+        String[] cols = {SETLISTPRIMARYKEY, SETLISTNAME, SETLISTPOS};
+        Cursor cursor = db.query(SETLIST_TABLE, cols, null, null, null, null, SETLISTPOS, null);
+
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                Model setList = new Model(cursor.getInt(0), cursor.getString(1), cursor.getInt(2));
+                setLists.add(setList);
+                cursor.moveToNext();
+            }
+        }
+
+        // Make sure to close the cursor
+        cursor.close();
+        numberOfSetlists = setLists.size();
+        return setLists;
+    }
+
+
+    /**
+     *
+     */
+    public Cursor getSetlistCursor() {
+        String[] cols = {SETLISTPRIMARYKEY, SETLISTNAME};
+        Cursor cursor = db.query(SETLIST_TABLE, cols, null, null, null, null, null, null);
+
 //		cursor.moveToFirst();
-		return cursor;
-	}
+        return cursor;
+    }
 
 
+    /**
+     * @return
+     */
+    public List<Model> getAllSongs() {
+
+        List<Model> songs = new ArrayList<Model>();
+        Cursor cursor = db.query(SONG_TABLE, null, null, null, null, null, null, null);
+
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+
+            while (!cursor.isAfterLast()) {
+                Model song = new Model(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getDouble(3),
+                        cursor.getInt(4), cursor.getInt(5), cursor.getInt(6), cursor.getDouble(7));
+                songs.add(song);
+                cursor.moveToNext();
+            }
+        }
+
+        cursor.close();
+        return songs;
+    }
+
+
+    /**
+     *
+     * @return
+     */
+    public List<Model> getAllSongSetRecords() {
+
+        List<Model> records = new ArrayList<Model>();
+        Cursor cursor = db.query(SONG_SET_TABLE_NAME, null, null, null, null, null, null, null);
+
+        if(cursor.getCount() > 0) {
+            cursor.moveToFirst();
+
+            while (!cursor.isAfterLast()) {
+                Model song = new Model(cursor.getLong(0), cursor.getLong(1), cursor.getLong(2), cursor.getInt(3));
+                records.add(song);
+                cursor.moveToNext();
+            }
+        }
+
+        cursor.close();
+        return records;
+    }
 	
 	
 	/**
@@ -927,6 +976,27 @@ public class DataService extends SQLiteOpenHelper {
 		cursor.close();
 		return gigs;
 	}
+
+
+    public List<Gig> findAllGigsOrderById() {
+
+        List<Gig> gigs = new ArrayList<Gig>();
+        Cursor cursor = db.query(GIG_TABLE, null, null, null, null, null, null, null);
+
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+
+            while (!cursor.isAfterLast()) {
+                Gig gig = new Gig(cursor.getInt(0), cursor.getString(1), cursor.getLong(2), cursor.getLong(4),
+                        cursor.getString(3));
+                gigs.add(gig);
+                cursor.moveToNext();
+            }
+        }
+
+        cursor.close();
+        return gigs;
+    }
 
 
 	/**

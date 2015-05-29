@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:weightSum="1">
+
+    <TextView
+        android:id="@+id/gig_name"
+        android:layout_width="0dip"
+        android:layout_height="40dp"
+        android:text="TextView"
+        android:layout_weight="0.5"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:gravity="left"
+        android:paddingLeft="10dp" />
+
+    <TextView
+        android:id="@+id/gig_date"
+        android:layout_width="0dip"
+        android:layout_height="40dp"
+        android:text="TextView"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_weight="0.5"
+        android:gravity="right"
+        android:paddingRight="10dp" />
+    
+</LinearLayout>

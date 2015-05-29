@@ -89,7 +89,7 @@ public class Gig implements Parcelable {
 	
 	
 	public String toString() {
-		return name + " - " + date.toString();
+		return String.format("%1$-20s %2$20s", name, date.toString());
 	}
 
 

@@ -173,7 +173,7 @@ public class EnterSongDetails extends Activity implements OnItemSelectedListener
 			Toast.makeText(this, R.string.invalid_timesig, Toast.LENGTH_SHORT).show();
 			return false;
 		}
-		else if (!subset && (hourStr == null || Integer.valueOf(hourStr) < 0 || Integer.valueOf(hourStr)> 24
+		else if (!subset && (hourStr == null || hourStr.equals("") || Integer.valueOf(hourStr) < 0 || Integer.valueOf(hourStr)> 24
                 || Integer.valueOf(minStr) < 0 || Integer.valueOf(minStr) > 60
                 || Integer.valueOf(secStr) < 0 || Integer.valueOf(secStr) > 60)) {
 			Toast.makeText(this, R.string.invalid_duration, Toast.LENGTH_SHORT).show();

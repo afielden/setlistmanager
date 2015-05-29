@@ -7,6 +7,7 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
@@ -31,6 +32,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bigdrum.metronomemate.R;
+import com.bigdrum.metronomemate.backup.DatabaseBackup;
 import com.bigdrum.metronomemate.database.Constants;
 import com.bigdrum.metronomemate.database.DataService;
 import com.bigdrum.metronomemate.database.DataServiceException;
@@ -78,7 +80,7 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 	private HelpDialogFragment help;
     private Activity thisActivity;
     private final HelpDialogFragment helpDialogFragment = new HelpDialogFragment();
-
+    private DatabaseBackup dbBackupService;
 
     @Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -107,9 +109,17 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
         populateSetlistView();
         createItemlistListener();
 
-
 //		rootView.setBackgroundColor(R.drawable.background);
-		return rootView;
+
+
+        try {
+            String packageName = getActivity().getPackageName();
+            dbBackupService = new DatabaseBackup(dbService, getActivity().getPackageManager().getPackageInfo(packageName, 0).versionName);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return rootView;
 	}
 	
 	
@@ -307,7 +317,7 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 //				new String[] {Constants.SETLISTNAME},
 //				new int[] {R.id.setlist_row_name},
 //				CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
-		
+
 
 	}
 
@@ -516,71 +526,77 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    // Handle presses on the action bar items
 	    switch (item.getItemId()) {
-	    case R.id.action_copy:
-	    	copySongs();
-	    	return true;
-	    	
-	    case R.id.action_search:
-	    	searchForSong();
-	    	return true;
-	    	
-	    case R.id.action_add:
-	    	if (setlistMode) {
-	    		addSetlist();
-	    	}
-	    	else {
-	    		addSong();
-	    	}
-        	return true;
-        	
-	    case R.id.action_add_section:
-	    	addSection();
-	    	return true;
-        	
-	    case R.id.action_setlists:
-	    	listAdapter.setSelectedPosition(-1);
-	    	showSetlists();
-	    	editMode = false;
-	    	actionMenu.findItem(R.id.action_editmode).setTitle(R.string.action_edit);
-	    	setActionItemVisibility();
-	    	return true;
-	    	
-	    case R.id.action_play:
-	    	controlBeats();
-	    	return true;
-	    	
-	    case R.id.action_editmode:
-	    	editMode = !editMode;
-            helpDialogFragment.setEditMode(editMode);
-	    	editModeAction.setTitle(editMode?R.string.action_done:R.string.action_edit);
-	    	setActionItemVisibility();
-			listAdapter.clearAllCheckedItems();
-	    	listAdapter.notifyDataSetChanged();
-	    	return true;
-	    	
-	    case R.id.action_delete:
+            case R.id.action_copy:
+                copySongs();
+                return true;
 
-            if (setlistMode) {
-                showConfirmationDialog(getResources().getString(R.string.confirm_delete_setlists));
-            }
-            else {
-                showConfirmationDialog(getResources().getString(R.string.confirm_delete_songs));
-            }
+            case R.id.action_search:
+                searchForSong();
+                return true;
 
-	    	return true;
+            case R.id.action_add:
+                if (setlistMode) {
+                    addSetlist();
+                }
+                else {
+                    addSong();
+                }
+                return true;
+
+            case R.id.action_add_section:
+                addSection();
+                return true;
+
+            case R.id.action_setlists:
+                listAdapter.setSelectedPosition(-1);
+                showSetlists();
+                editMode = false;
+                helpDialogFragment.setEditMode(editMode);
+                actionMenu.findItem(R.id.action_editmode).setTitle(R.string.action_edit);
+                setActionItemVisibility();
+                return true;
+
+            case R.id.action_play:
+                controlBeats();
+                return true;
+
+            case R.id.action_editmode:
+                editMode = !editMode;
+                helpDialogFragment.setEditMode(editMode);
+                editModeAction.setTitle(editMode?R.string.action_done:R.string.action_edit);
+                setActionItemVisibility();
+                listAdapter.clearAllCheckedItems();
+                listAdapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.action_delete:
+
+                if (setlistMode) {
+                    showConfirmationDialog(getResources().getString(R.string.confirm_delete_setlists));
+                }
+                else {
+                    showConfirmationDialog(getResources().getString(R.string.confirm_delete_songs));
+                }
+
+                return true;
 	    	
-	    case R.id.action_edit:
-	    	if (setlistMode) {
-	    		editSetlist();
-	    	}
-	    	else {
-	    		editSong();
-	    	}
-	    	return true;
-	    	
-	    case R.id.action_help:
-	    	displayHelpDialog();
-			return true;
+            case R.id.action_edit:
+                if (setlistMode) {
+                    editSetlist();
+                }
+                else {
+                    editSong();
+                }
+                return true;
+
+            case R.id.action_help:
+                displayHelpDialog();
+                return true;
+
+            case R.id.action_backup:
+                dbBackupService.backupDatabase();
+                return true;
+
 	    	
 	    default:
 	        return super.onOptionsItemSelected(item);
@@ -1153,6 +1169,18 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 	}
 
 
+    /**
+     *
+     * @param editMode
+     */
+    public void setEditMode(boolean editMode) {
+
+        this.editMode = editMode;
+
+        helpDialogFragment.setEditMode(editMode);
+    }
+
+
 	/**
 	 * 
 	 *
@@ -1218,6 +1246,7 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 
         } else {
             editMode = false;
+            helpDialogFragment.setEditMode(editMode);
             editModeAction.setTitle(R.string.action_edit);
             selectedSetlist = itemList.get(position);
             displaySongsInSetlist();

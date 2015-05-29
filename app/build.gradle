@@ -29,4 +29,5 @@ dependencies {
     compile files('/home/andrew/android_developer_toolkit/mail.jar')
     compile files('/home/andrew/android_developer_toolkit/activation.jar')
     compile files('/home/andrew/android_developer_toolkit/additionnal.jar')
+    compile files('/home/andrew/AndroidstudioProjects/XOM/XOM/xom-1.2.10.jar')
 }

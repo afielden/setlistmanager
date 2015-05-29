@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,7 +27,7 @@ import java.util.Locale;
 
 public class MainActivity2 extends FragmentActivity {
 
-    private FragmentPagerAdapter adapterViewPager;
+    private MyPagerAdapter adapterViewPager;
 
     /**
      *
@@ -46,6 +47,7 @@ public class MainActivity2 extends FragmentActivity {
         // Center the tabs in the layout
         slidingTabLayout.setDistributeEvenly(true);
         slidingTabLayout.setViewPager(vpPager);
+        slidingTabLayout.setOnPageChangeListener(adapterViewPager);
 //        slidingTabLayout.setSelectedIndicatorColors(android.R.color.holo_blue_light);
     }
 
@@ -83,7 +85,9 @@ public class MainActivity2 extends FragmentActivity {
 
 
 
-    class MyPagerAdapter extends FragmentPagerAdapter {
+    class MyPagerAdapter extends FragmentPagerAdapter implements ViewPager.OnPageChangeListener {
+
+        private MetronomeFragment metronomeFragment;
 
         /**
          *
@@ -142,10 +146,10 @@ public class MainActivity2 extends FragmentActivity {
 
             switch(position) {
                 case 0:
-                    fragment = new MetronomeFragment();
+                    metronomeFragment = new MetronomeFragment();
 
-                    fragment.setArguments(args);
-                    return fragment;
+                    metronomeFragment.setArguments(args);
+                    return metronomeFragment;
                 case 1:
                     fragment = new GigManagementFragment();
                     fragment.setArguments(args);
@@ -161,6 +165,23 @@ public class MainActivity2 extends FragmentActivity {
                 default:
                     return null;
             }
+        }
+
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+            if (position == 0) {
+                metronomeFragment.setEditMode(false);
+            }
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
         }
     }
 }

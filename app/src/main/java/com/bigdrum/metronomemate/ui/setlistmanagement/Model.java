@@ -12,6 +12,7 @@ public class Model {
 	private int key;
 	private int setlistCount;
 	private double duration;
+    private long songId;
 
 	
 	/**
@@ -47,6 +48,45 @@ public class Model {
 		this.selected = false;
 		this.duration = duration;
 	}
+
+
+	/**
+	 *
+	 * @param name
+	 * @param artist
+	 * @param tempo
+	 * @param timeSignature
+	 * @param key
+	 * @param setlistCount
+	 * @param duration
+	 */
+	public Model(long id, String name, String artist, double tempo, int timeSignature, int key, int setlistCount, double duration) {
+
+        this.id = id;
+		this.name = name;
+		this.artist = artist;
+		this.tempo = tempo;
+		this.timeSignature = timeSignature;
+		this.key = key;
+		this.setlistCount = setlistCount;
+		this.duration = duration;
+	}
+
+
+    /**
+     *
+     * @param setlistId
+     * @param songId
+     * @param position
+     */
+    public Model(long id, long setlistId, long songId, int position) {
+
+        this.id = id;
+        this.setlistId = setlistId;
+        this.songId = songId;
+        this.position = position;
+    }
+
 
 	public String getName() {
 		return name;
@@ -131,6 +171,10 @@ public class Model {
 	public double getDuration() { return duration; }
 
 	public void setDuration(double duration) { this.duration = duration; }
+
+    public long getSongId() {
+        return songId;
+    }
 	
 	public int incrementSetlistCount() {
 		this.setlistCount++;

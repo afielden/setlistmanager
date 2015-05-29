@@ -35,6 +35,7 @@
     <string name="action_edit">Edit</string>
     <string name="action_done">Done</string>
     <string name="action_help">Help</string>
+    <string name="action_backup">Backup/Restore</string>
     <string name="duplicate_set_list_name">Setlist name already exists</string>
     <string name="setlist_non_existant">Setlist %s not found in database</string>
     <string name="title_activity_enter_song_details">Enter selectedSong details</string>
@@ -129,7 +130,7 @@
     <string name="crash_dialog_title">CrashTest has crashed</string>
     <string name="crash_dialog_text">An unexpected error occurred forcing the
     application to stop. Please help us fix this by sending us error data,
-    all you have to do is click OK.</string>
+    all you have to do is tap OK.</string>
     <string name="crash_dialog_comment_prompt">You might add your comments about the problem below:</string>
     <string name="crash_dialog_ok_toast">Thank you !</string>
     <string name="exception_error">BeatBuddy encountered an unexpected problem.
@@ -144,7 +145,7 @@ SetlistManager is an app aimed at musicians in a band. It provides the following
 <li><b>Setlist Management:</b>Group your songs into setlists.</li>
 </ul>
 <center><h2>Getting Started</h2></center>
-Go to the Setlist tab and click the \'+\' action to create a new setlist. Populate it with all the songs you wish to perform.
+Go to the Setlist tab and tap the \'+\' action to create a new setlist. Populate it with all the songs you wish to perform.
 SetlistManager can search for songs by title, and/or artist. Details associated with a selectedSong, such as tempo, time signature and key
 are automatically populated.
 <p>
@@ -172,10 +173,10 @@ Design and programming &copy; 2014 <b>Andrew Fielden</b>
 Mark one or more setlists for deletion.
 Mark one setlist for editing.	    </string>
     <string name="help_songlist_title">Songs</string>
-    <string name="help_songlist">Add songs to this setlist. You can click the magnifying glass icon to search for a selectedSong.
+    <string name="help_songlist">Add songs to this setlist. You can tap the magnifying glass icon to search for a selectedSong.
 This will automatically fill in the details like tempo, time signature and key.
-Click on the \'+\' icon to enter all the selectedSong details manually.
-Click and hold on a selectedSong to display the details.</string>
+tap on the \'+\' icon to enter all the selectedSong details manually.
+tap and hold on a selectedSong to display the details.</string>
     <string name="help_songlist_edit_title">Edit Songs</string>
     <string name="help_songlist_edit">Songs can be re-ordered using the drag icon.
 Mark one or more songs for deletion, or copying to another setlist.
@@ -188,8 +189,8 @@ other people.   </string>
     <string name="help_no_setlists_title">No setlists</string>
     <string name="help_no_setlists">There are no Setlists. To create a new setlist, tap this icon</string>
     <string name="help_no_songs_title">No songs in this setlist</string>
-    <string name="help_no_songs">This setlist contains no Songs. You can search for a selectedSong by click the magnifying glass icon,
-or enter selectedSong details manually by clicking the \'+\' icon. Subset markers can be added by clicking the \'v\' icon.</string>
+    <string name="help_no_songs">This setlist contains no Songs. You can search for a selectedSong by tapping the magnifying glass icon,
+or enter selectedSong details manually by tapping the \'+\' icon. Subset markers can be added by tapping the \'v\' icon.</string>
     <string name="help_no_gigs_title">No gigs</string>
     <string name="help_no_gigs">There are no gigs. Add a new gig by tapping this icon.</string>
     <string name="help_no_venues_title">No venues</string>
@@ -220,7 +221,7 @@ or enter selectedSong details manually by clicking the \'+\' icon. Subset marker
     <string name="select_venue">Select the venue</string>
     <string name="new_setlist_text">Enter the setlist name</string>
     <string name="edit_setlist_text">Edit the setlist name</string>
-    <string name="long_click_tip">(Click and hold to edit)</string>
+    <string name="long_click_tip">(Tap and hold to edit)</string>
     <string name="setlist_summary">Setlist contains %s songs</string>
     <string name="subset_summary">Subset contains %s songs</string>
     <string name="total_set_time">Total song time %s</string>

@@ -82,6 +82,8 @@ public class SlidingTabsBasicFragment extends Fragment {
      */
     class SamplePagerAdapter extends FragmentPagerAdapter {
 
+        private MetronomeFragment metronomeFragment;
+
         /**
          *
          * @param fm
@@ -146,10 +148,9 @@ public class SlidingTabsBasicFragment extends Fragment {
 
             switch(position) {
                 case 0:
-                    fragment = new MetronomeFragment();
+                    metronomeFragment = new MetronomeFragment();
 
-                    args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
-                    fragment.setArguments(args);
+
                     return fragment;
                 case 1:
                     fragment = new GigManagementFragment();

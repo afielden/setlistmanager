@@ -109,6 +109,7 @@ public class GigManagementFragment extends Fragment implements OnItemClickListen
 		dbService.init();
 		
 		help = new HelpDialogFragment();
+        help.setDisplayShowcaseView(false);
 		populateGigs();
 		
 		return rootView;
@@ -201,7 +202,8 @@ public class GigManagementFragment extends Fragment implements OnItemClickListen
 	 * 
 	 */
 	private void populateGigs() {
-		arrayAdapter = new ArrayAdapter<Gig>(getActivity(), R.layout.venue_row_layout, R.id.artist_label);
+//		arrayAdapter = new ArrayAdapter<Gig>(getActivity(), R.layout.gig_row_layout, R.id.artist_label);
+        arrayAdapter = new GigCustomAdapter(getActivity(), R.layout.gig_row_layout, R.id.gig_name);
 		arrayAdapter.addAll(dbService.readAllGigs());
 		listview.setAdapter(arrayAdapter);
 		listview.setOnItemClickListener(this);

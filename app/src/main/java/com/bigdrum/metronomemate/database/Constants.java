@@ -105,7 +105,7 @@ public interface Constants extends BaseColumns {
             + " WHERE l." + SONG_SET_SETLIST_ID + "=? AND s." + SONG_ARTIST + " =? AND s." + SONG_NAME + " = ? AND s." + SONG_ARTIST + " <> '<subset>'"
             + " ORDER BY l." + SONG_SET_SONG_POS;
 
-	public static final String ALLGIGS_QUERY = "SELECT * FROM " + GIG_TABLE + " ORDER BY " + GIG_DATE_TIME + " DESC";
+	public static final String ALLGIGS_QUERY = "SELECT * FROM " + GIG_TABLE + " ORDER BY " + GIG_DATE_TIME + " ASC";
 	
 	public static final String SETLIST_HEADING = 
 "<html> " +
