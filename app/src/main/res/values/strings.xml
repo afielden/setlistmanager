@@ -35,7 +35,8 @@
     <string name="action_edit">Edit</string>
     <string name="action_done">Done</string>
     <string name="action_help">Help</string>
-    <string name="action_backup">Backup/Restore</string>
+    <string name="action_backup">Backup database</string>
+    <string name="action_restore">Restore database</string>
     <string name="duplicate_set_list_name">Setlist name already exists</string>
     <string name="setlist_non_existant">Setlist %s not found in database</string>
     <string name="title_activity_enter_song_details">Enter selectedSong details</string>
@@ -126,16 +127,16 @@
     <string name="tooltip_ok">Save and finish</string>
     <string name="confirm_delete_setlists">"Delete the selected setlists?</string>
     <string name="confirm_delete_songs">"Delete the selected songs?</string>
-    <string name="crash_toast_text">Sorry, BeatBuddy crashed. Please allow diagnostic information to be sent to the developer</string>
+    <string name="crash_toast_text">Sorry, SetlistManager crashed. Please allow diagnostic information to be sent to the developer</string>
     <string name="crash_dialog_title">CrashTest has crashed</string>
     <string name="crash_dialog_text">An unexpected error occurred forcing the
     application to stop. Please help us fix this by sending us error data,
     all you have to do is tap OK.</string>
     <string name="crash_dialog_comment_prompt">You might add your comments about the problem below:</string>
     <string name="crash_dialog_ok_toast">Thank you !</string>
-    <string name="exception_error">BeatBuddy encountered an unexpected problem.
+    <string name="exception_error">SetlistManager encountered an unexpected problem.
 	    Please contact technical support for further help. Contact details are on the \'About\' page</string>
-    <string name="help_welcome_title">Welcome to BeatBuddy</string>
+    <string name="help_welcome_title">Welcome to SetlistManager</string>
     <string name="help_welcome">
 <![CDATA[
 <html>
@@ -159,7 +160,7 @@ or enter details manually. The order of songs in the list can be changed by sele
 You can also group the songs into \'subsets\' by adding subset markers into the list of songs.
 <center><h2>Contact</h2></center>
 For questions or problems with this app, please contact 
-<a href="mailto:bigdrumsoftware@gmail.com?Subject=BeatBuddy">Bigdrum Software</a>
+<a href="mailto:bigdrumsoftware@gmail.com?Subject=SetlistManager">Bigdrum Software</a>
 <center><h2>Credits</h2></center>
 Design and programming &copy; 2014 <b>Andrew Fielden</b>
 </body>
@@ -215,7 +216,7 @@ or enter selectedSong details manually by tapping the \'+\' icon. Subset markers
     <string name="help_action_song_copy">Copy the selected song(s) to another setlist</string>
     <string name="help_action_song_edit">Edit the details of the selected song</string>
     <string name="help_action_song_delete">Delete the selected song(s)</string>
-    <string name="title_activity_about_fragment">About BeatBuddy</string>
+    <string name="title_activity_about_fragment">About SetlistManager</string>
     <string name="gig_name_label">Name</string>
     <string name="select_target_setlist">Select the target setlist</string>
     <string name="select_venue">Select the venue</string>
@@ -225,5 +226,13 @@ or enter selectedSong details manually by tapping the \'+\' icon. Subset markers
     <string name="setlist_summary">Setlist contains %s songs</string>
     <string name="subset_summary">Subset contains %s songs</string>
     <string name="total_set_time">Total song time %s</string>
+    <string name="error_restore_no_file">Database backup file does not exist</string>
+    <string name="backup_success">Successfully backed up the database</string>
+    <string name="restore_success">Successfully restored the database from backup file</string>
+    <string name="restore_xml_read_fail">Problem restoring the backup file</string>
+
+    <string name="title_activity_backup">BackupActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 
 </resources>

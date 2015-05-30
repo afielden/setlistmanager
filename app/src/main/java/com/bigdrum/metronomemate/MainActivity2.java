@@ -175,7 +175,9 @@ public class MainActivity2 extends FragmentActivity {
         @Override
         public void onPageSelected(int position) {
             if (position == 0) {
-                metronomeFragment.setEditMode(false);
+                if (metronomeFragment != null) {
+                    metronomeFragment.setEditMode(false);
+                }
             }
         }
 

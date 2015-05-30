@@ -32,6 +32,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bigdrum.metronomemate.R;
+import com.bigdrum.metronomemate.backup.BackupActivity;
 import com.bigdrum.metronomemate.backup.DatabaseBackup;
 import com.bigdrum.metronomemate.database.Constants;
 import com.bigdrum.metronomemate.database.DataService;
@@ -114,7 +115,7 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 
         try {
             String packageName = getActivity().getPackageName();
-            dbBackupService = new DatabaseBackup(dbService, getActivity().getPackageManager().getPackageInfo(packageName, 0).versionName);
+            dbBackupService = new DatabaseBackup(dbService, getActivity().getPackageManager().getPackageInfo(packageName, 0).versionName, thisActivity);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
@@ -389,8 +390,8 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 	 * 
 	 */
 	private void displaySetlists() {
-		TextView heading = (TextView)rootView.findViewById(R.id.items_textview_title);
-		heading.setText(R.string.set_list_label);
+//		TextView heading = (TextView)rootView.findViewById(R.id.items_textview_title);
+//		heading.setText(R.string.set_list_label);
 //		setSongInformationVisibility(View.INVISIBLE);
 //		playImage.setVisibility(View.INVISIBLE);
 		listAdapter.clear();
@@ -500,8 +501,8 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 //			}
 			
 			listAdapter.notifyDataSetChangedAndReset();
-			TextView heading = (TextView)rootView.findViewById(R.id.items_textview_title);
-			heading.setText(selectedSetlist.getName());
+//			TextView heading = (TextView)rootView.findViewById(R.id.items_textview_title);
+//			heading.setText(selectedSetlist.getName());
 			
 //			if (listAdapter.getCount() == 0) {
 //				help.setMessageAndTitle(getString(R.string.help_no_songs), 
@@ -514,8 +515,8 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 			Toast.makeText(getActivity(), e.getReason(), Toast.LENGTH_SHORT).show();
 		}
 	}
-	
-	
+
+
 	
 	/*************************************************
 	 * 
@@ -594,8 +595,13 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
                 return true;
 
             case R.id.action_backup:
+//                Intent intent = new Intent(getActivity(), BackupActivity.class);
+//                startActivityForResult(intent, Constants.BACKUP);
                 dbBackupService.backupDatabase();
                 return true;
+
+            case R.id.action_restore:
+                dbBackupService.restoreDatabase();
 
 	    	
 	    default:

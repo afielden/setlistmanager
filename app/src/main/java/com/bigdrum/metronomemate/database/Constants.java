@@ -80,10 +80,13 @@ public interface Constants extends BaseColumns {
 	public static final int EDIT_GIG = 13;
 	public static final int SELECT_RECIPIENTS = 14;
 	public static final int SEND_EMAIL = 15;
+    public static final int BACKUP = 16;
 
 	public static final String prefs_email_user="pref_email_user";
 	public static final String prefs_email_password="pref_email_password";
 	public static final String prefs_band_name="pref_band_name";
+
+    public static final String DB_BACKUP_FILE="setlistmgr_db_backup.xml";
 	
 	public static final String SONGLIST_QUERY = "SELECT s.*, l." + SONG_SET_SONG_POS + " FROM " + SONG_TABLE + " s " 
 				+ "INNER JOIN " + SONG_SET_TABLE_NAME + " l ON s." + SONG_PRIMARYKEY + " = l." + SONG_SET_SONG_ID

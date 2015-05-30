@@ -1,7 +1,10 @@
 package com.bigdrum.metronomemate.backup;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.bigdrum.metronomemate.R;
 import com.bigdrum.metronomemate.database.DataService;
 import com.bigdrum.metronomemate.gig.Gig;
 import com.bigdrum.metronomemate.ui.setlistmanagement.Model;
@@ -9,12 +12,21 @@ import com.bigdrum.metronomemate.venue.Venue;
 
 import static com.bigdrum.metronomemate.database.Constants.*;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 
+import nu.xom.Builder;
 import nu.xom.Document;
 import nu.xom.Element;
+import nu.xom.Elements;
+import nu.xom.ParsingException;
 import nu.xom.Serializer;
+import nu.xom.ValidityException;
 
 
 /**
@@ -25,18 +37,32 @@ import nu.xom.Serializer;
  */
 public class DatabaseBackup {
 
-    Document document;
-    DataService dbService;
-    String appVersion;
+    public static final String SETLIST_TABLE = "Setlist_Table";
+    public static final String APP_VERSION = "App_Version";
+    public static final String VERSION = "version";
+    public static final String SETLIST = "setlist";
+    public static final String SONG_TABLE = "Song_Table";
+    public static final String SONG = "song";
+    public static final String SONG_SET_TABLE = "Song_Set_Table";
+    public static final String SONGSET = "songset";
+    public static final String VENUE_TABLE = "Venue_Table";
+    public static final String VENUE = "venue";
+    public static final String GIG_TABLE = "Gig_Table";
+    public static final String GIG = "gig";
+    private Document document;
+    private DataService dbService;
+    private String appVersion;
+    private Context context;
 
 
     /**
      *
      * @param dbService
      */
-    public DatabaseBackup(DataService dbService, String appVersion) {
+    public DatabaseBackup(DataService dbService, String appVersion, Context context) {
         this.dbService = dbService;
         this.appVersion = appVersion;
+        this.context = context;
     }
 
 
@@ -44,7 +70,7 @@ public class DatabaseBackup {
      *
      *
      */
-   public void backupDatabase() {
+   public boolean backupDatabase() {
 
        Element root = new Element("root");
 
@@ -57,20 +83,91 @@ public class DatabaseBackup {
 
        document = new Document(root);
 
-       serializeDocument();
+       saveDocument(getOutputStream());
+
+       Toast.makeText(context, R.string.backup_success, Toast.LENGTH_LONG).show();
+
+       return true;
    }
 
 
-    private void serializeDocument() {
+    /**
+     *
+     * @return
+     */
+    public boolean restoreDatabase() {
+
+        FileInputStream inputStream = getInputStream();
+
+        Builder parser = new Builder();
         try {
-            Serializer serializer = new Serializer(System.out, "ISO-8859-1");
-            serializer.setIndent(4);
-            serializer.setMaxLength(64);
-            serializer.write(document);
+            document = parser.build(inputStream);
+            saveDocument(System.out);
+        }
+        catch (ParsingException ex) {
+            Toast.makeText(context, R.string.restore_xml_read_fail, Toast.LENGTH_LONG).show();
         }
         catch (IOException ex) {
-            System.err.println(ex);
+            Toast.makeText(context, R.string.restore_xml_read_fail, Toast.LENGTH_LONG).show();
         }
+
+        Toast.makeText(context, R.string.restore_success, Toast.LENGTH_LONG).show();
+
+        return true;
+    }
+
+
+    /**
+     *
+     * @return
+     */
+    private FileInputStream getInputStream() {
+
+        try {
+            return context.openFileInput(DB_BACKUP_FILE);
+        }
+        catch (FileNotFoundException e) {
+            Toast.makeText(context, R.string.error_restore_no_file, Toast.LENGTH_LONG).show();
+        }
+
+        return null;
+    }
+
+
+    /**
+     *
+     */
+    private void saveDocument(OutputStream outputStream) {
+        try {
+//            FileOutputStream outputStream = getOutputStream();
+
+            if (outputStream != null) {
+                Serializer serializer = new Serializer(outputStream, "ISO-8859-1");
+                serializer.setIndent(4);
+                serializer.setMaxLength(64);
+                serializer.write(document);
+            }
+        }
+        catch (IOException ex) {
+            Toast.makeText(context, ex.toString(), Toast.LENGTH_LONG).show();
+        }
+    }
+
+
+    /**
+     *
+     */
+    private FileOutputStream getOutputStream() {
+
+        FileOutputStream outputStream = null;
+
+        try {
+            outputStream = context.openFileOutput(DB_BACKUP_FILE, Context.MODE_PRIVATE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return outputStream;
     }
 
 
@@ -80,8 +177,8 @@ public class DatabaseBackup {
      */
     private void dumpAppVersion(Element root) {
 
-        Element appVersionInfo = new Element("App_Version");
-        Element version = new Element("version");
+        Element appVersionInfo = new Element(APP_VERSION);
+        Element version = new Element(VERSION);
         version.appendChild(appVersion);
 
         appVersionInfo.appendChild(version);
@@ -96,11 +193,11 @@ public class DatabaseBackup {
 
         List<Model> setlists = dbService.getAllSetlists();
 
-        Element setlistGroup = new Element("Setlist_Table");
+        Element setlistGroup = new Element(SETLIST_TABLE);
         Element element = null;
 
         for (Model setlist : setlists) {
-            Element setlistEl = new Element("setlist");
+            Element setlistEl = new Element(SETLIST);
 
             element = new Element(SETLISTPRIMARYKEY);
             element.appendChild(String.valueOf(setlist.getId()));
@@ -129,11 +226,11 @@ public class DatabaseBackup {
 
         List<Model> songs = dbService.getAllSongs();
 
-        Element songGroup = new Element("Song_Table");
+        Element songGroup = new Element(SONG_TABLE);
         Element element = null;
 
         for (Model song : songs) {
-            Element songEl = new Element("song");
+            Element songEl = new Element(SONG);
 
             element = new Element(SONG_PRIMARYKEY);
             element.appendChild(String.valueOf(song.getId()));
@@ -182,11 +279,11 @@ public class DatabaseBackup {
 
         List<Model> songSets = dbService.getAllSongSetRecords();
 
-        Element songSetGroup = new Element("Song_Set_Table");
+        Element songSetGroup = new Element(SONG_SET_TABLE);
         Element element = null;
 
         for (Model songSet : songSets) {
-            Element parent = new Element("song_set");
+            Element parent = new Element(SONGSET);
 
             element = new Element(SONG_SET_PRIMARY_KEY);
             element.appendChild(String.valueOf(songSet.getId()));
@@ -219,12 +316,12 @@ public class DatabaseBackup {
 
         List<Venue> venues = dbService.readAllVenues();
 
-        Element venueGroup = new Element("Venue_Table");
+        Element venueGroup = new Element(VENUE_TABLE);
         Element element = null;
 
         for (Venue venue : venues) {
 
-            Element parent = new Element("venue");
+            Element parent = new Element(VENUE);
 
             element = new Element(VENUE_PRIMARYKEY);
             element.appendChild(String.valueOf(venue.getId()));
@@ -281,12 +378,12 @@ public class DatabaseBackup {
 
         List<Gig> gigs = dbService.findAllGigsOrderById();
 
-        Element gigGroup = new Element("Gig_Table");
+        Element gigGroup = new Element(GIG_TABLE);
         Element element = null;
 
         for (Gig gig : gigs) {
 
-            Element parent = new Element("gig");
+            Element parent = new Element(GIG);
 
             element = new Element(GIG_PRIMARYKEY);
             element.appendChild(String.valueOf(gig.getId()));
@@ -316,5 +413,62 @@ public class DatabaseBackup {
         }
 
         root.appendChild(gigGroup);
+    }
+
+
+    /*********************************************************************
+     *
+     * Restore database methods
+     *
+     *********************************************************************/
+
+    /**
+     *
+     */
+    private void restoreSetlistTable() {
+
+        Element setlistTable = document.getRootElement().getFirstChildElement(SETLIST_TABLE);
+
+        Elements setlists = setlistTable.getChildElements(SETLIST);
+
+        for (int index = 0; index < setlists.size(); index++) {
+
+            Element setlist = setlists.get(index);
+            String setlistName = setlist.getFirstChildElement(SETLISTNAME).getValue();
+            Integer position = Integer.valueOf(setlist.getFirstChildElement(SETLISTPOS).getValue());
+
+            dbService.addSetlistAtPosition(setlistName, position);
+        }
+    }
+
+
+    /**
+     *
+     */
+    private void restoreSongTable() {
+
+        Element songTable = document.getRootElement().getFirstChildElement(SONG_TABLE);
+
+        Elements songs = songTable.getChildElements(SONG);
+        Model songDb = null;
+
+        for (int index = 0; index < songs.size(); index++) {
+
+            Element song = songs.get(index);
+            songDb = new Model(-1, song.getFirstChildElement(SONG_NAME).getValue(), song.getFirstChildElement(SONG_ARTIST).getValue(),
+                    Double.valueOf(song.getFirstChildElement(SONG_TEMPO).getValue()), Integer.valueOf(song.getFirstChildElement(SONG_TIMESIG).getValue()),
+                    Integer.valueOf(song.getFirstChildElement(SONG_KEY).getValue()), Integer.valueOf(song.getFirstChildElement(SONG_SETLIST_COUNT).getValue()),
+                    Double.valueOf(song.getFirstChildElement(SONG_DURATION).getValue()));
+
+            dbService.addSong(songDb);
+        }
+    }
+
+
+    /**
+     *
+     */
+    private void restoreSongSetTable() {
+
     }
 }

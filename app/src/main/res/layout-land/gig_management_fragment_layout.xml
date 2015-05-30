@@ -13,36 +13,34 @@
         android:layout_gravity="center_horizontal"
         android:text="@string/help_no_gigs" /-->
 
-    <ListView
-        android:id="@+id/gig_listview"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:paddingTop="10dp">
-    </ListView>
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/gig_details_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/gig_details"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textStyle="bold"
-        android:textSize="@dimen/abc_text_size_large_material"/>
+        <ListView
+            android:id="@+id/gig_listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:paddingTop="10dp">
+        </ListView>
 
-    <EditText
-        android:id="@+id/gig_details_textbox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.95"
-        android:ems="10"
-        android:enabled="false"
-        android:textColor="#000000"
-        android:textStyle="bold"
-        android:inputType="textMultiLine" >
+        <EditText
+            android:id="@+id/gig_details_textbox"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:ems="10"
+            android:enabled="false"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:inputType="textMultiLine"
+            android:text="Test">
 
-        <requestFocus />
-    </EditText>
+            <requestFocus />
+        </EditText>
+    </LinearLayout>
 
     <!--
          com.facebook.widget.LoginButton

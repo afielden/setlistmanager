@@ -4,13 +4,21 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
-    
     <uses-sdk
         android:minSdkVersion="16"
         android:targetSdkVersion="17" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
+    <android:uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
 
     <application
         android:allowBackup="true"
@@ -18,7 +26,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.bigdrum.metronomemate.MainActivity2"
+            android:name=".MainActivity2"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,8 +34,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-                <activity
-            android:name="com.bigdrum.metronomemate.ListActivity"
+        <activity
+            android:name=".ListActivity"
             android:label="@string/title_activity_list"
             android:parentActivityName="android.app.ListActivity" >
             <meta-data
@@ -35,51 +43,57 @@
                 android:value="android.app.ListActivity" />
         </activity>
         <activity
-            android:name="com.bigdrum.metronomemate.ui.setlistmanagement.SongListActivity"
+            android:name=".ui.setlistmanagement.SongListActivity"
             android:label="@string/title_activity_song_list" >
         </activity>
         <activity
-            android:name="com.bigdrum.metronomemate.ui.setlistmanagement.SearchActivity"
+            android:name=".ui.setlistmanagement.SearchActivity"
             android:label="@string/title_activity_search" >
         </activity>
         <activity
-            android:name="com.bigdrum.metronomemate.ui.setlistmanagement.ViewSetlistActivity"
+            android:name=".ui.setlistmanagement.ViewSetlistActivity"
             android:label="@string/title_activity_view_setlist"
             android:theme="@style/Theme.AppCompat.Light" >
         </activity>
         <activity
-            android:name="com.bigdrum.metronomemate.ui.setlistmanagement.AddSetlistActivity"
+            android:name=".ui.setlistmanagement.AddSetlistActivity"
             android:label="@string/title_activity_add_setlist" >
         </activity>
         <activity
-            android:name="com.bigdrum.metronomemate.ui.setlistmanagement.EnterSongDetails"
+            android:name=".ui.setlistmanagement.EnterSongDetails"
             android:label="@string/title_activity_enter_song_details" >
         </activity>
         <activity
-            android:name="com.bigdrum.metronomemate.ui.setlistmanagement.SelectSetlist"
+            android:name=".ui.setlistmanagement.SelectSetlist"
             android:label="@string/title_activity_select_setlist" >
         </activity>
         <activity
-            android:name="com.bigdrum.metronomemate.venue.AddVenue"
+            android:name=".venue.AddVenue"
             android:label="@string/title_activity_add_venue" >
         </activity>
         <activity
-            android:name="com.bigdrum.metronomemate.gig.AddGig"
+            android:name=".gig.AddGig"
             android:label="@string/title_activity_add_gig"
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
-            android:name="com.bigdrum.metronomemate.venue.SelectVenue"
+            android:name=".venue.SelectVenue"
             android:label="@string/title_activity_select_venue" >
         </activity>
         <activity
-            android:name="com.bigdrum.metronomemate.export.SelectRecipients"
+            android:name=".export.SelectRecipients"
             android:label="@string/title_activity_select_recipients" >
         </activity>
         <activity
-            android:name="com.bigdrum.metronomemate.prefs.Prefs"
+            android:name=".prefs.Prefs"
             android:label="@string/title_activity_prefs"
-            android:theme="@style/Theme.SettingsBackground">
+            android:theme="@style/Theme.SettingsBackground" >
+        </activity>
+        <activity
+            android:name=".backup.BackupActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_backup"
+            android:theme="@style/FullscreenTheme" >
         </activity>
     </application>
 

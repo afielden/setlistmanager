@@ -185,6 +185,20 @@ public class DataService extends SQLiteOpenHelper {
 
     /**
      *
+     * @param setlistName
+     * @param position
+     */
+    public void addSetlistAtPosition(String setlistName, int position) {
+        ContentValues values = new ContentValues();
+        values.put(SETLISTNAME, setlistName);
+        values.put(SETLISTPOS, position);
+        numberOfSetlists = position;
+        db.insertOrThrow(SETLIST_TABLE, null, values);
+    }
+
+
+    /**
+     *
      */
     public void changeSetlistName(String newSetlistName, Model selectedSetlist) {
 
@@ -340,9 +354,9 @@ public class DataService extends SQLiteOpenHelper {
 	 */
 	public long getSetlistId(Model setlist) throws DataServiceException {
 		String[] cols = { SETLISTPRIMARYKEY };
-		Cursor cursor = db.query(SETLIST_TABLE, cols, SETLISTNAME + " = '" + setlist.getName() 
-				+ "' AND " + SETLISTPOS + " = " + setlist.getPosition(), 
-				null, null, null, null, null);
+		Cursor cursor = db.query(SETLIST_TABLE, cols, SETLISTNAME + " = '" + setlist.getName()
+                        + "' AND " + SETLISTPOS + " = " + setlist.getPosition(),
+                null, null, null, null, null);
 		
 		if (!cursor.moveToFirst()) {
 			String msg = context.getString(R.string.setlist_non_existant, setlist.getName());
@@ -383,7 +397,7 @@ public class DataService extends SQLiteOpenHelper {
 		String[] cols = { SETLISTNAME };
 		String name = null;
 		Cursor cursor = db.query(SETLIST_TABLE, cols, SETLISTPRIMARYKEY + "= " + id,
-				null, null, null, null, null);
+                null, null, null, null, null);
 		
 		if (cursor.moveToFirst()) {
 			name = cursor.getString(0);
@@ -493,6 +507,26 @@ public class DataService extends SQLiteOpenHelper {
 
         return true;
 	}
+
+
+    /**
+     *
+     * @param song
+     */
+    public void addSong(Model song) {
+
+        ContentValues values = new ContentValues();
+
+        values.put(SONG_NAME, song.getName().replaceAll("'","''"));
+        values.put(SONG_ARTIST, song.getArtist().replaceAll("'","''"));
+        values.put(SONG_TEMPO, song.getTempo());
+        values.put(SONG_TIMESIG, song.getTimeSignature());
+        values.put(SONG_KEY, song.getKey());
+        values.put(SONG_SETLIST_COUNT, song.getSetlistCount());
+        values.put(SONG_DURATION, song.getDuration());
+
+        long songId = db.insertOrThrow(SONG_TABLE, null, values);
+    }
 	
 	
 	/**

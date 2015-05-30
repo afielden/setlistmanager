@@ -65,4 +65,8 @@
         android:showAsAction="never"
         android:title="@string/action_backup"></item>
 
+    <item android:id="@+id/action_restore"
+        android:showAsAction="never"
+        android:title="@string/action_restore"></item>
+
 </menu>

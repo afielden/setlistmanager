@@ -30,13 +30,6 @@
         <dex dex="/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/debug/classes-5ed19c53808562d8989caaa9059dae5b1616fb86.jar" />
     </item>
     <item
-        jar="/home/andrew/AndroidstudioProjects/MetronomeMate/json_simple-1.1.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="5e303a03d04e6788dddfa3655272580ae0fc13bb">
-        <dex dex="/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/debug/json_simple-1.1-1e9511addf7aa3dd3d7d6b46733687f5276505c4.jar" />
-    </item>
-    <item
         jar="/home/andrew/AndroidstudioProjects/XOM/XOM/xom-1.2.10.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -44,11 +37,18 @@
         <dex dex="/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/debug/xom-1.2.10-b1cf93593481fab59aaeb3f61f2b6fd4660fa68c.jar" />
     </item>
     <item
-        jar="/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
+        jar="/home/andrew/AndroidstudioProjects/MetronomeMate/json_simple-1.1.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
-        <dex dex="/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/debug/classes-4b0669df30d9c7c6ff25ac5261d0c85d8150fedf.jar" />
+        sha1="5e303a03d04e6788dddfa3655272580ae0fc13bb">
+        <dex dex="/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/debug/json_simple-1.1-1e9511addf7aa3dd3d7d6b46733687f5276505c4.jar" />
+    </item>
+    <item
+        jar="/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a3ff3c506644c820eb2bdf06e8339f72be578551">
+        <dex dex="/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/debug/classes-3d7c9478c658b37f6c550a838b8953c515d8ec42.jar" />
     </item>
     <item
         jar="/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.1.1/classes.jar"
