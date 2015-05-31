@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.bigdrum.metronomemate"
+    package="com.bigdrum.setlistmanager"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -26,7 +26,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity2"
+            android:name="com.bigdrum.setlistmanager.MainActivity2"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -43,54 +43,54 @@
                 android:value="android.app.ListActivity" />
         </activity>
         <activity
-            android:name=".ui.setlistmanagement.SongListActivity"
+            android:name="com.bigdrum.setlistmanager.ui.setlistmanagement.SongListActivity"
             android:label="@string/title_activity_song_list" >
         </activity>
         <activity
-            android:name=".ui.setlistmanagement.SearchActivity"
+            android:name="com.bigdrum.setlistmanager.ui.setlistmanagement.SearchActivity"
             android:label="@string/title_activity_search" >
         </activity>
         <activity
-            android:name=".ui.setlistmanagement.ViewSetlistActivity"
+            android:name="com.bigdrum.setlistmanager.ui.setlistmanagement.ViewSetlistActivity"
             android:label="@string/title_activity_view_setlist"
             android:theme="@style/Theme.AppCompat.Light" >
         </activity>
         <activity
-            android:name=".ui.setlistmanagement.AddSetlistActivity"
+            android:name="com.bigdrum.setlistmanager.ui.setlistmanagement.AddSetlistActivity"
             android:label="@string/title_activity_add_setlist" >
         </activity>
         <activity
-            android:name=".ui.setlistmanagement.EnterSongDetails"
+            android:name="com.bigdrum.setlistmanager.ui.setlistmanagement.EnterSongDetails"
             android:label="@string/title_activity_enter_song_details" >
         </activity>
         <activity
-            android:name=".ui.setlistmanagement.SelectSetlist"
+            android:name="com.bigdrum.setlistmanager.ui.setlistmanagement.SelectSetlist"
             android:label="@string/title_activity_select_setlist" >
         </activity>
         <activity
-            android:name=".venue.AddVenue"
+            android:name="com.bigdrum.setlistmanager.venue.AddVenue"
             android:label="@string/title_activity_add_venue" >
         </activity>
         <activity
-            android:name=".gig.AddGig"
+            android:name="com.bigdrum.setlistmanager.gig.AddGig"
             android:label="@string/title_activity_add_gig"
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
-            android:name=".venue.SelectVenue"
+            android:name="com.bigdrum.setlistmanager.venue.SelectVenue"
             android:label="@string/title_activity_select_venue" >
         </activity>
         <activity
-            android:name=".export.SelectRecipients"
+            android:name="com.bigdrum.setlistmanager.export.SelectRecipients"
             android:label="@string/title_activity_select_recipients" >
         </activity>
         <activity
-            android:name=".prefs.Prefs"
+            android:name="com.bigdrum.setlistmanager.prefs.Prefs"
             android:label="@string/title_activity_prefs"
             android:theme="@style/Theme.SettingsBackground" >
         </activity>
         <activity
-            android:name=".backup.BackupActivity"
+            android:name="com.bigdrum.setlistmanager.backup.BackupActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_backup"
             android:theme="@style/FullscreenTheme" >
