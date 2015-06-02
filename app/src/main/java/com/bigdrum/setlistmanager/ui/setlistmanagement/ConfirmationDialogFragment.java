@@ -18,7 +18,7 @@ public class ConfirmationDialogFragment extends DialogFragment {
     private ConfirmationDialogCallback callback;
 
 
-    interface ConfirmationDialogCallback {
+    public interface ConfirmationDialogCallback {
         public void positiveButtonClicked();
         public void negativeButtonClicked();
     }

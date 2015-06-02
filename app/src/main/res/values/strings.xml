@@ -127,6 +127,8 @@
     <string name="tooltip_ok">Save and finish</string>
     <string name="confirm_delete_setlists">"Delete the selected setlists?</string>
     <string name="confirm_delete_songs">"Delete the selected songs?</string>
+    <string name="confirm">Confirm</string>
+    <string name="warning">Warning</string>
     <string name="crash_toast_text">Sorry, SetlistManager crashed. Please allow diagnostic information to be sent to the developer</string>
     <string name="crash_dialog_title">CrashTest has crashed</string>
     <string name="crash_dialog_text">An unexpected error occurred forcing the
@@ -230,6 +232,7 @@ or enter selectedSong details manually by tapping the \'+\' icon. Subset markers
     <string name="backup_success">Successfully backed up the database</string>
     <string name="restore_success">Successfully restored the database from backup file</string>
     <string name="restore_xml_read_fail">Problem restoring the backup file</string>
+    <string name="restore_warn">WARNING: This will destroy all data currently contained in your database. Continue?</string>
 
     <string name="title_activity_backup">BackupActivity</string>
     <string name="dummy_button">Dummy Button</string>

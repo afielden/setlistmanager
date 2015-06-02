@@ -169,6 +169,18 @@ public class DataService extends SQLiteOpenHelper {
     /**
      *
      */
+    public void deleteEntireDatabase() {
+        db.delete(SONG_SET_TABLE_NAME, null, null);
+        db.delete(GIG_TABLE, null, null);
+        db.delete(SONG_TABLE, null, null);
+        db.delete(SETLIST_TABLE, null, null);
+        db.delete(VENUE_TABLE, null, null);
+    }
+
+
+    /**
+     *
+     */
     public void addSetlistName(String setlistName) {
 
         if (numberOfSetlists == null) {
@@ -532,7 +544,7 @@ public class DataService extends SQLiteOpenHelper {
 	/**
 	 *
 	 */
-	private void createSongSetlistLinkRecord(Model song, long setlistId) {
+	public void createSongSetlistLinkRecord(Model song, long setlistId) {
 		ContentValues values = new ContentValues();
 		values.put(SONG_SET_SETLIST_ID, setlistId);
 		values.put(SONG_SET_SONG_ID, song.getId());

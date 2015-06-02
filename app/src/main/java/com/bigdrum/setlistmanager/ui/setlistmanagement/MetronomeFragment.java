@@ -920,7 +920,7 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 
 		ConfirmationDialogFragment confirmDialog = new ConfirmationDialogFragment();
 
-		confirmDialog.setMessageAndTitle(message, "Confirm");
+		confirmDialog.setMessageAndTitle(message, getResources().getString(R.string.confirm));
         confirmDialog.setFragmentCallbackClass(this);
 
 		confirmDialog.show(getActivity().getFragmentManager(), "");

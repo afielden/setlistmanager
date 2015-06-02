@@ -1,11 +1,13 @@
 package com.bigdrum.setlistmanager.backup;
 
+import android.app.Activity;
 import android.content.Context;
 import android.widget.Toast;
 
 import com.bigdrum.setlistmanager.R;
 import com.bigdrum.setlistmanager.database.DataService;
 import com.bigdrum.setlistmanager.gig.Gig;
+import com.bigdrum.setlistmanager.ui.setlistmanagement.ConfirmationDialogFragment;
 import com.bigdrum.setlistmanager.ui.setlistmanagement.Model;
 import com.bigdrum.setlistmanager.venue.Venue;
 
@@ -32,7 +34,7 @@ import nu.xom.Serializer;
  * A class to provide the facility to backup and restore the application database
  *
  */
-public class DatabaseBackup {
+public class DatabaseBackup implements ConfirmationDialogFragment.ConfirmationDialogCallback {
 
     public static final String SETLIST_TABLE = "Setlist_Table";
     public static final String APP_VERSION = "App_Version";
@@ -96,19 +98,34 @@ public class DatabaseBackup {
 
         FileInputStream inputStream = getInputStream();
 
-        Builder parser = new Builder();
-        try {
-            document = parser.build(inputStream);
-            saveDocument(System.out);
-        }
-        catch (ParsingException ex) {
-            Toast.makeText(context, R.string.restore_xml_read_fail, Toast.LENGTH_LONG).show();
-        }
-        catch (IOException ex) {
-            Toast.makeText(context, R.string.restore_xml_read_fail, Toast.LENGTH_LONG).show();
+        if (inputStream == null) {
+
+            Toast.makeText(context, R.string.error_restore_no_file, Toast.LENGTH_LONG).show();
+
+            return false;
         }
 
-        Toast.makeText(context, R.string.restore_success, Toast.LENGTH_LONG).show();
+        ConfirmationDialogFragment confirmDialog = new ConfirmationDialogFragment();
+
+        confirmDialog.setMessageAndTitle(context.getResources().getString(R.string.restore_warn), context.getResources().getString(R.string.confirm));
+        confirmDialog.setFragmentCallbackClass(this);
+        confirmDialog.show(((Activity)context).getFragmentManager(), "");
+
+//        FileInputStream inputStream = getInputStream();
+//
+//        Builder parser = new Builder();
+//        try {
+//            document = parser.build(inputStream);
+//            saveDocument(System.out);
+//        }
+//        catch (ParsingException ex) {
+//            Toast.makeText(context, R.string.restore_xml_read_fail, Toast.LENGTH_LONG).show();
+//        }
+//        catch (IOException ex) {
+//            Toast.makeText(context, R.string.restore_xml_read_fail, Toast.LENGTH_LONG).show();
+//        }
+//
+//        Toast.makeText(context, R.string.restore_success, Toast.LENGTH_LONG).show();
 
         return true;
     }
@@ -466,6 +483,123 @@ public class DatabaseBackup {
      *
      */
     private void restoreSongSetTable() {
+
+        Element songSetTable = document.getRootElement().getFirstChildElement(SONG_SET_TABLE);
+
+        Elements songSets = songSetTable.getChildElements(SONGSET);
+        Model songSetDb = null;
+
+        for (int index = 0; index < songSets.size(); index++) {
+
+            Element songSet = songSets.get(index);
+            songSetDb = new Model(Long.valueOf(songSet.getFirstChildElement(SONG_SET_SONG_ID).getValue()),
+                    Long.valueOf(songSet.getFirstChildElement(SONG_SET_SETLIST_ID).getValue()),
+                    Long.valueOf(songSet.getFirstChildElement(SONG_SET_SONG_ID).getValue()),
+                    Integer.valueOf(songSet.getFirstChildElement(SONG_SET_SONG_POS).getValue()));
+
+            dbService.createSongSetlistLinkRecord(songSetDb, songSetDb.getSetlistId());
+        }
+    }
+
+
+    /**
+     *
+     */
+    private void restoreVenueTable() {
+
+        Element venueTable = document.getRootElement().getFirstChildElement(VENUE_TABLE);
+
+        Elements venues = venueTable.getChildElements(VENUE);
+        Venue venueDb = null;
+
+        for (int index = 0; index < venues.size(); index++) {
+
+            Element venue = venues.get(index);
+            venueDb = new Venue(-1, venue.getFirstChildElement(VENUE_NAME).getValue(), venue.getFirstChildElement(VENUE_STREET).getValue(),
+                    venue.getFirstChildElement(VENUE_TOWN).getValue(), venue.getFirstChildElement(VENUE_POSTCODE).getValue(),
+                    venue.getFirstChildElement(VENUE_COUNTRY).getValue(), venue.getFirstChildElement(VENUE_CONTACT_NAME).getValue(),
+                    venue.getFirstChildElement(VENUE_PHONE).getValue(), venue.getFirstChildElement(VENUE_EMAIL).getValue(),
+                    venue.getFirstChildElement(VENUE_LAST_GIG_DATE).getValue());
+
+            dbService.addVenue(venueDb);
+        }
+
+    }
+
+
+    /**
+     *
+     */
+    private void restoreGigTable() {
+
+        Element gigTable = document.getRootElement().getFirstChildElement(GIG_TABLE);
+
+        Elements gigs = gigTable.getChildElements(GIG);
+        Gig gigDb = null;
+
+        for (int index = 0; index < gigs.size(); index++) {
+
+            Element gig = gigs.get(index);
+            gigDb = new Gig(-1, gig.getFirstChildElement(GIG_NAME).getValue(),
+                    Long.valueOf(gig.getFirstChildElement(GIG_VENUE_ID).getValue()),
+                    Long.valueOf(gig.getFirstChildElement(GIG_SETLIST_ID).getValue()),
+                    gig.getFirstChildElement(GIG_DATE_TIME).getValue());
+        }
+    }
+
+
+    /**
+     *
+     * @return
+     */
+    public boolean appVersionIsCompatible() {
+
+        Element appVersionEl = document.getRootElement().getFirstChildElement(APP_VERSION);
+
+        return (appVersionEl.getValue().equals(appVersion));
+    }
+
+
+
+    /**
+     *
+     */
+    @Override
+    public void positiveButtonClicked() {
+
+        FileInputStream inputStream = getInputStream();
+
+        Builder parser = new Builder();
+        try {
+            document = parser.build(inputStream);
+
+            if (appVersionIsCompatible()) {
+
+                dbService.deleteEntireDatabase();
+
+                restoreSetlistTable();
+                restoreSongTable();
+                restoreSongSetTable();
+                restoreVenueTable();
+                restoreGigTable();
+            }
+        }
+        catch (ParsingException ex) {
+            Toast.makeText(context, R.string.restore_xml_read_fail, Toast.LENGTH_LONG).show();
+        }
+        catch (IOException ex) {
+            Toast.makeText(context, R.string.restore_xml_read_fail, Toast.LENGTH_LONG).show();
+        }
+
+        Toast.makeText(context, R.string.restore_success, Toast.LENGTH_LONG).show();
+    }
+
+
+    /**
+     *
+     */
+    @Override
+    public void negativeButtonClicked() {
 
     }
 }
