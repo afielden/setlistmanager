@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import com.bigdrum.setlistmanager.gig.GigManagementFragment;
 import com.bigdrum.setlistmanager.info.AboutFragment;
 import com.bigdrum.setlistmanager.prefs.Prefs;
+import com.bigdrum.setlistmanager.prefs.PrefsFragment;
 import com.bigdrum.setlistmanager.ui.setlistmanagement.MetronomeFragment;
 import com.bigdrum.setlistmanager.venue.VenueManagementFragment;
 
@@ -217,8 +218,12 @@ public class MainActivity extends FragmentActivity implements
         switch (item.getItemId()) {
 
         case R.id.menu_settings:
-            Intent i = new Intent(this, Prefs.class);
-            startActivity(i);
+//            Intent i = new Intent(this, Prefs.class);
+//            startActivity(i);
+
+			getFragmentManager().beginTransaction()
+					.replace(android.R.id.content, new PrefsFragment()).commit();
+
             return true;
 
         }

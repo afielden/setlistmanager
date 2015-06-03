@@ -111,22 +111,6 @@ public class DatabaseBackup implements ConfirmationDialogFragment.ConfirmationDi
         confirmDialog.setFragmentCallbackClass(this);
         confirmDialog.show(((Activity)context).getFragmentManager(), "");
 
-//        FileInputStream inputStream = getInputStream();
-//
-//        Builder parser = new Builder();
-//        try {
-//            document = parser.build(inputStream);
-//            saveDocument(System.out);
-//        }
-//        catch (ParsingException ex) {
-//            Toast.makeText(context, R.string.restore_xml_read_fail, Toast.LENGTH_LONG).show();
-//        }
-//        catch (IOException ex) {
-//            Toast.makeText(context, R.string.restore_xml_read_fail, Toast.LENGTH_LONG).show();
-//        }
-//
-//        Toast.makeText(context, R.string.restore_success, Toast.LENGTH_LONG).show();
-
         return true;
     }
 
@@ -153,7 +137,6 @@ public class DatabaseBackup implements ConfirmationDialogFragment.ConfirmationDi
      */
     private void saveDocument(OutputStream outputStream) {
         try {
-//            FileOutputStream outputStream = getOutputStream();
 
             if (outputStream != null) {
                 Serializer serializer = new Serializer(outputStream, "ISO-8859-1");

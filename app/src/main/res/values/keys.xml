@@ -14,5 +14,10 @@
         <item>Bb</item>
         <item>B</item>
     </string-array>
+
+    <string-array name="date_formats">
+        <item>dd/MM/yy</item>
+        <item>MM/dd/yy</item>
+    </string-array>
     
 </resources>

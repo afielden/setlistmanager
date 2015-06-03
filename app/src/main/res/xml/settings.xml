@@ -32,4 +32,14 @@
             android:title="****" />
     </PreferenceCategory>
 
+    <PreferenceCategory android:title="@string/pref_date_time_title">
+
+        <ListPreference
+            android:dialogTitle="@string/pref_date_format"
+            android:key="pref_date_format"
+            android:entries="@array/date_formats"
+            android:entryValues="@array/date_formats"
+            android:persistent="true" />
+    </PreferenceCategory>
+
 </PreferenceScreen>

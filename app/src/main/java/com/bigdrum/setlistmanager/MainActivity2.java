@@ -14,6 +14,7 @@ import com.bigdrum.setlistmanager.gig.GigManagementFragment;
 import com.bigdrum.setlistmanager.info.AboutFragment;
 import com.bigdrum.setlistmanager.prefs.Prefs;
 
+import com.bigdrum.setlistmanager.prefs.PrefsFragment;
 import com.bigdrum.setlistmanager.slidingtabview.SlidingTabLayout;
 import com.bigdrum.setlistmanager.ui.setlistmanagement.MetronomeFragment;
 import com.bigdrum.setlistmanager.venue.VenueManagementFragment;
@@ -71,6 +72,10 @@ public class MainActivity2 extends FragmentActivity {
             case R.id.menu_settings:
                 Intent i = new Intent(this, Prefs.class);
                 startActivity(i);
+
+//                getFragmentManager().beginTransaction()
+//                        .replace(android.R.id.content, new PrefsFragment()).commit();
+
                 return true;
 
         }
@@ -124,6 +129,7 @@ public class MainActivity2 extends FragmentActivity {
                     return getString(R.string.title_section3).toUpperCase(l);
                 case 3:
                     return getString(R.string.title_section4).toUpperCase(l);
+
             }
             return null;
         }

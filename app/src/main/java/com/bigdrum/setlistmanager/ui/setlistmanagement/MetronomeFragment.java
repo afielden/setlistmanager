@@ -590,14 +590,14 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
                 displayHelpDialog();
                 return true;
 
-            case R.id.action_backup:
-//                Intent intent = new Intent(getActivity(), BackupActivity.class);
-//                startActivityForResult(intent, Constants.BACKUP);
-                dbBackupService.backupDatabase();
-                return true;
-
-            case R.id.action_restore:
-                dbBackupService.restoreDatabase();
+//            case R.id.action_backup:
+////                Intent intent = new Intent(getActivity(), BackupActivity.class);
+////                startActivityForResult(intent, Constants.BACKUP);
+//                dbBackupService.backupDatabase();
+//                return true;
+//
+//            case R.id.action_restore:
+//                dbBackupService.restoreDatabase();
 
 	    	
 	    default:

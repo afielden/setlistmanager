@@ -6,7 +6,10 @@ import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.TimePickerDialog;
 import android.app.TimePickerDialog.OnTimeSetListener;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.ListPreference;
+import android.preference.PreferenceManager;
 import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -236,8 +239,9 @@ public class AddGig extends Activity implements OnClickListener, OnDateSetListen
 	 */
 	private void updateDate(Calendar myCalendar) {
 
-	    String myFormat = "MM/dd/yy"; //In which you need put here
-	    SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		String dateFormat = prefs.getString(Constants.prefs_date_format, getResources().getString(R.string.pref_default_date_format));
+	    SimpleDateFormat sdf = new SimpleDateFormat(dateFormat, Locale.getDefault());
 
 	    dateEditText.setText(sdf.format(myCalendar.getTime()));
 	}

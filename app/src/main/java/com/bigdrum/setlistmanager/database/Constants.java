@@ -85,6 +85,7 @@ public interface Constants extends BaseColumns {
 	public static final String prefs_email_user="pref_email_user";
 	public static final String prefs_email_password="pref_email_password";
 	public static final String prefs_band_name="pref_band_name";
+	public static final String prefs_date_format="pref_date_format";
 
     public static final String DB_BACKUP_FILE="setlistmgr_db_backup.xml";
 	
