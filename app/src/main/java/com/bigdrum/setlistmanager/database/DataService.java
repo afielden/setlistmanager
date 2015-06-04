@@ -17,8 +17,13 @@ import com.bigdrum.setlistmanager.ui.setlistmanagement.Model;
 import com.bigdrum.setlistmanager.venue.Venue;
 import com.echonest.api.v4.SongParams;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 //import static com.bigdrum.metronomemate.database.Constants.MATCHING_SONG_QUERY;
 //import static com.bigdrum.metronomemate.database.Constants.SETLISTNAME;
@@ -1130,4 +1135,37 @@ public class DataService extends SQLiteOpenHelper {
 		cur.close();
 		return contacts;
 	}
+
+
+    public void changeGigDateFormat(String dateFormat) throws ParseException {
+
+        List<Gig> gigs = readAllGigs();
+        StringBuilder dateStrbuilder = new StringBuilder();
+
+        for (Gig gig : gigs) {
+
+            Calendar cal = Calendar.getInstance(Locale.getDefault());
+            String date = gig.getDate();
+
+            if (dateFormat.charAt(0) == 'M') {
+                cal.set(Calendar.DAY_OF_MONTH, Integer.valueOf(date.substring(0, 2)));
+                cal.set(Calendar.MONTH, Integer.valueOf(date.substring(3, 5)) - 1);
+                cal.set(Calendar.YEAR, Integer.valueOf(date.substring(6)));
+            }
+            else {
+                cal.set(Calendar.DAY_OF_MONTH, Integer.valueOf(date.substring(3, 5)));
+                cal.set(Calendar.MONTH, Integer.valueOf(date.substring(0, 2)) - 1);
+                cal.set(Calendar.YEAR, Integer.valueOf(date.substring(6)));
+            }
+
+            SimpleDateFormat sdf = new SimpleDateFormat(dateFormat, Locale.getDefault());
+
+            String newDate = sdf.format(cal.getTime());
+            dateStrbuilder = new StringBuilder();
+            dateStrbuilder.append(newDate).append("-").append(gig.getTime());
+            gig.setDate(dateStrbuilder.toString());
+            updateGig(gig);
+
+        }
+    }
 }

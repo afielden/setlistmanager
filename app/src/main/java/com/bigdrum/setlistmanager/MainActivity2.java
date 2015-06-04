@@ -73,9 +73,6 @@ public class MainActivity2 extends FragmentActivity {
                 Intent i = new Intent(this, Prefs.class);
                 startActivity(i);
 
-//                getFragmentManager().beginTransaction()
-//                        .replace(android.R.id.content, new PrefsFragment()).commit();
-
                 return true;
 
         }

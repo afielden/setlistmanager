@@ -5,11 +5,14 @@ import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.bigdrum.setlistmanager.R;
 import com.bigdrum.setlistmanager.database.Constants;
+import com.bigdrum.setlistmanager.database.DataService;
 
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -57,9 +60,11 @@ public class PrefsFragment extends PreferenceFragment implements Preference.OnPr
             }
             emailUser.setTitle(newValue.toString());
         }
+
         else if (preference.getKey().equals(Constants.prefs_email_password)) {
 //			emailPassword.setTitle(newValue.toString());
         }
+
         else if (preference.getKey().equals(Constants.prefs_band_name)) {
             if (newValue == null || newValue.equals("")) {
                 Toast.makeText(this.getActivity(), R.string.null_string, Toast.LENGTH_LONG).show();
@@ -67,8 +72,22 @@ public class PrefsFragment extends PreferenceFragment implements Preference.OnPr
             }
             bandName.setTitle(newValue.toString());
         }
+
         else if (preference.getKey().equals(Constants.prefs_date_format)) {
+
+            if (!dateFormat.getValue().equals((String)newValue)) {
+
+                try {
+                    DataService.getDataService(getActivity()).changeGigDateFormat((String)newValue);
+                    Toast.makeText(this.getActivity(), R.string.date_update_success, Toast.LENGTH_LONG).show();
+                } catch (ParseException e) {
+                    Toast.makeText(this.getActivity(), R.string.date_update_failed, Toast.LENGTH_LONG).show();
+                    Log.d("SetlistManager", e.toString());
+                }
+            }
+
             dateFormat.setTitle(newValue.toString());
+
         }
 
         return true;

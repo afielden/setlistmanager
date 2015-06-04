@@ -168,6 +168,8 @@ public class VenueManagementFragment extends Fragment implements OnItemClickList
 	    	
 	    case R.id.action_add:
 	    	addVenue();
+            setActionItemVisibility();
+            venueListview.setFocusable(true);
 	    	return true;
 	    	
 	    case R.id.action_edit:
@@ -175,7 +177,9 @@ public class VenueManagementFragment extends Fragment implements OnItemClickList
 	    	return true;
 	    	
 	    case R.id.action_delete:
-	    	deleteVenue();
+	    	if (deleteVenue()) {
+                setActionItemVisibility();
+            }
 	    	return true;
 	    	
 	    case R.id.action_help:
@@ -203,6 +207,9 @@ public class VenueManagementFragment extends Fragment implements OnItemClickList
 				Venue venue = (Venue)data.getParcelableExtra(Constants.VENUE);
                 dbService.addVenue(venue);
 				venueDetails.setText("");
+                if (selectedView != null) {
+                    selectedView.setBackgroundColor(Color.TRANSPARENT);
+                }
 				((InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE)).
 					hideSoftInputFromWindow(rootView.getWindowToken(),0);
 				arrayAdapter.add(venue);
@@ -218,6 +225,10 @@ public class VenueManagementFragment extends Fragment implements OnItemClickList
 				Venue venue = (Venue)data.getExtras().get(Constants.VENUE);
 				setVenueDetails(venue);
 				dbService.updateVenue(venue);
+                venueDetails.setText("");
+                if (selectedView != null) {
+                    selectedView.setBackgroundColor(Color.TRANSPARENT);
+                }
 				arrayAdapter.add(venue);
 				arrayAdapter.notifyDataSetChanged();
 			}
@@ -254,9 +265,13 @@ public class VenueManagementFragment extends Fragment implements OnItemClickList
 	/**
 	 * 
 	 */
-	private void deleteVenue() {
+	private boolean deleteVenue() {
 		try {
+
 			dbService.deleteVenue(selectedVenue);
+			if (selectedView != null) {
+				selectedView.setBackgroundColor(Color.TRANSPARENT);
+			}
 			arrayAdapter.clear();
 			arrayAdapter.addAll(dbService.readAllVenues());
 			arrayAdapter.notifyDataSetChanged();
@@ -267,7 +282,10 @@ public class VenueManagementFragment extends Fragment implements OnItemClickList
 			}
 		} catch (DataServiceException e) {
 			Toast.makeText(getActivity(), e.getReason(), Toast.LENGTH_LONG).show();
+            return false;
 		}
+
+        return true;
 	}
 	
 	
@@ -275,7 +293,7 @@ public class VenueManagementFragment extends Fragment implements OnItemClickList
 	 * 
 	 */
 	private void editVenue() {
-		arrayAdapter.remove(selectedVenue);
+
 		Intent intent = new Intent(getActivity(), AddVenue.class);
 		intent.putExtra(Constants.VENUE, selectedVenue);
     	startActivityForResult(intent, Constants.EDIT_VENUE);

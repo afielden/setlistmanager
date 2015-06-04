@@ -301,6 +301,7 @@ public class GigManagementFragment extends Fragment implements OnItemClickListen
 	    	
 	    case R.id.action_add:
 	    	addGig();
+            setActionItemVisibility();
 	    	return true;
 	    	
 	    case R.id.action_edit:
@@ -309,6 +310,7 @@ public class GigManagementFragment extends Fragment implements OnItemClickListen
 	    	
 	    case R.id.action_delete:
 	    	deleteGig();
+            setActionItemVisibility();
 	    	return true;
 	    	
 	    case R.id.action_email:
@@ -395,6 +397,11 @@ public class GigManagementFragment extends Fragment implements OnItemClickListen
 	 * 
 	 */
 	private void deleteGig() {
+
+        if (selectedView != null) {
+            selectedView.setBackgroundColor(Color.TRANSPARENT);
+        }
+
 		gigDetails.setText("");
 		dbService.deleteGig(selectedGig);
 		arrayAdapter.clear();
