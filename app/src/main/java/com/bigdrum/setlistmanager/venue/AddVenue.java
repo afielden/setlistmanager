@@ -54,7 +54,7 @@ public class AddVenue extends Activity {
 		case R.id.action_ok:
 			long venueId = -1;
 			long lastGigId = -1;
-			String lastGigDate = "";
+			long lastGigDate = 0;
 			if (originalVenue != null) {
 				venueId = originalVenue.getId();
 				lastGigDate = originalVenue.getLastGigDate();
@@ -68,7 +68,7 @@ public class AddVenue extends Activity {
 					((EditText)findViewById(R.id.add_venue_contact_name)).getText().toString(),
 					((EditText)findViewById(R.id.add_venue_phone)).getText().toString(),
 					((EditText)findViewById(R.id.add_venue_email)).getText().toString(),
-					lastGigDate);
+					lastGigDate, this);
 			
 			if (valid(venue)) {
 				intent.putExtra(Constants.VENUE, venue);

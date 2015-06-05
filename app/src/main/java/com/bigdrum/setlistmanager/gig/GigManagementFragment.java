@@ -238,8 +238,10 @@ public class GigManagementFragment extends Fragment implements OnItemClickListen
 				Gig gig = (Gig)data.getExtras().get(Constants.GIG);
 				dbService.addGig(gig);
 				dbService.updateVenueGigDate(gig);
-				arrayAdapter.add(gig);
-				arrayAdapter.notifyDataSetChanged();
+                if (arrayAdapter != null) {
+                    arrayAdapter.add(gig);
+                    arrayAdapter.notifyDataSetChanged();
+                }
 			}
 			else if (resultCode == Activity.RESULT_CANCELED) {
 				Toast.makeText(this.getActivity(), R.string.cancelled, Toast.LENGTH_LONG).show();

@@ -212,8 +212,10 @@ public class VenueManagementFragment extends Fragment implements OnItemClickList
                 }
 				((InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE)).
 					hideSoftInputFromWindow(rootView.getWindowToken(),0);
-				arrayAdapter.add(venue);
-				arrayAdapter.notifyDataSetChanged();
+                if (arrayAdapter != null) {
+                    arrayAdapter.add(venue);
+                    arrayAdapter.notifyDataSetChanged();
+                }
 			}
 			else if (resultCode == Activity.RESULT_CANCELED) {
 				Toast.makeText(this.getActivity(), R.string.cancelled, Toast.LENGTH_LONG).show();
@@ -339,7 +341,7 @@ public class VenueManagementFragment extends Fragment implements OnItemClickList
 		details.append("Contact: ").append(venue.getContactName()).append("\n");
 		details.append("Phone: ").append(venue.getPhone()).append("\n");
 		details.append("Email: ").append(venue.getEmail()).append("\n");
-		details.append("Last gig date: ").append(venue.getLastGigDate());
+		details.append("Last gig date: ").append(venue.getDate());
 		venueDetails.setText(details.toString());
 	}
 }

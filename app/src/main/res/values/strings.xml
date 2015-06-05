@@ -216,7 +216,7 @@ or enter selectedSong details manually by tapping the \'+\' icon. Subset markers
     <string name="help_action_setlists">Return to the setlist screen</string>
     <string name="help_action_song_search">Search for a song in the setlists, or in the database, and add it to this setlist</string>
     <string name="help_action_add_section">Add a subset marker. Subsets are used to partition your set into different sections.
-        Setlistmanager calculates the total song play time for each subset</string>
+        The total song play time is calculated for each subset</string>
     <string name="help_action_manually_add_song">Manually enter details of a song, and add it to this setlist</string>
     <string name="help_action_songlist_editmode">Songlist management: Re-order delete, edit selected songs</string>
     <string name="help_action_songlist_editmode_cancel">Finish songlist mangement</string>

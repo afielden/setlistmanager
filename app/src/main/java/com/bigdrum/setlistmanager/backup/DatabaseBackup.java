@@ -497,14 +497,14 @@ public class DatabaseBackup implements ConfirmationDialogFragment.ConfirmationDi
 
         for (int index = 0; index < venues.size(); index++) {
 
-            Element venue = venues.get(index);
-            venueDb = new Venue(-1, venue.getFirstChildElement(VENUE_NAME).getValue(), venue.getFirstChildElement(VENUE_STREET).getValue(),
-                    venue.getFirstChildElement(VENUE_TOWN).getValue(), venue.getFirstChildElement(VENUE_POSTCODE).getValue(),
-                    venue.getFirstChildElement(VENUE_COUNTRY).getValue(), venue.getFirstChildElement(VENUE_CONTACT_NAME).getValue(),
-                    venue.getFirstChildElement(VENUE_PHONE).getValue(), venue.getFirstChildElement(VENUE_EMAIL).getValue(),
-                    venue.getFirstChildElement(VENUE_LAST_GIG_DATE).getValue());
-
-            dbService.addVenue(venueDb);
+//            Element venue = venues.get(index);
+//            venueDb = new Venue(-1, venue.getFirstChildElement(VENUE_NAME).getValue(), venue.getFirstChildElement(VENUE_STREET).getValue(),
+//                    venue.getFirstChildElement(VENUE_TOWN).getValue(), venue.getFirstChildElement(VENUE_POSTCODE).getValue(),
+//                    venue.getFirstChildElement(VENUE_COUNTRY).getValue(), venue.getFirstChildElement(VENUE_CONTACT_NAME).getValue(),
+//                    venue.getFirstChildElement(VENUE_PHONE).getValue(), venue.getFirstChildElement(VENUE_EMAIL).getValue(),
+//                    venue.getFirstChildElement(VENUE_LAST_GIG_DATE).getValue());
+//
+//            dbService.addVenue(venueDb);
         }
 
     }
@@ -522,11 +522,11 @@ public class DatabaseBackup implements ConfirmationDialogFragment.ConfirmationDi
 
         for (int index = 0; index < gigs.size(); index++) {
 
-            Element gig = gigs.get(index);
-            gigDb = new Gig(-1, gig.getFirstChildElement(GIG_NAME).getValue(),
-                    Long.valueOf(gig.getFirstChildElement(GIG_VENUE_ID).getValue()),
-                    Long.valueOf(gig.getFirstChildElement(GIG_SETLIST_ID).getValue()),
-                    gig.getFirstChildElement(GIG_DATE_TIME).getValue());
+//            Element gig = gigs.get(index);
+//            gigDb = new Gig(-1, gig.getFirstChildElement(GIG_NAME).getValue(),
+//                    Long.valueOf(gig.getFirstChildElement(GIG_VENUE_ID).getValue()),
+//                    Long.valueOf(gig.getFirstChildElement(GIG_SETLIST_ID).getValue()),
+//                    gig.getFirstChildElement(GIG_DATE_TIME).getValue());
         }
     }
 

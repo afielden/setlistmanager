@@ -141,14 +141,14 @@ public class DataService extends SQLiteOpenHelper {
                         + VENUE_TOWN + " TEXT, "
                         + VENUE_POSTCODE + " TEXT, "
                         + VENUE_COUNTRY + " TEXT, "
-                        + VENUE_LAST_GIG_DATE + " TEXT);"
+                        + VENUE_LAST_GIG_DATE + " INTEGER);"
         );
 
         db.execSQL("CREATE TABLE " + GIG_TABLE + " ("
                         + GIG_PRIMARYKEY + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                         + GIG_NAME + " TEXT NOT NULL, "
                         + GIG_VENUE_ID + " INTEGER NOT NULL, "
-                        + GIG_DATE_TIME + " TEXT, "
+                        + GIG_DATE_TIME + " INTEGER, "
                         + GIG_SETLIST_ID + " INTEGER, "
                         + GIG_NOTES + " TEXT, "
                         + "FOREIGN KEY(" + GIG_VENUE_ID + ") REFERENCES " + VENUE_TABLE + "(" + VENUE_PRIMARYKEY + "), "
@@ -912,7 +912,7 @@ public class DataService extends SQLiteOpenHelper {
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
 			Venue venue = new Venue(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4),
-					cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9));
+					cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getLong(9), context);
 			venues.add(venue);
 			cursor.moveToNext();
 		}
@@ -1006,7 +1006,7 @@ public class DataService extends SQLiteOpenHelper {
     public void updateVenueGigDate(Gig gig) {
 
         ContentValues values = new ContentValues();
-        values.put(VENUE_LAST_GIG_DATE, gig.getDateTime());
+        values.put(VENUE_LAST_GIG_DATE, gig.getDateInMilliseconds());
 
         db.update(VENUE_TABLE, values, VENUE_PRIMARYKEY + "=" + gig.getVenueId(), null);
     }
@@ -1029,8 +1029,8 @@ public class DataService extends SQLiteOpenHelper {
 
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
-			Gig gig = new Gig(cursor.getInt(0), cursor.getString(1), cursor.getLong(2), cursor.getLong(4),
-					cursor.getString(3));
+			Gig gig = new Gig(cursor.getLong(0), cursor.getString(1), cursor.getLong(2), cursor.getLong(3),
+					cursor.getLong(4), context);
 			gigs.add(gig);
 			cursor.moveToNext();
 		}
@@ -1049,8 +1049,8 @@ public class DataService extends SQLiteOpenHelper {
             cursor.moveToFirst();
 
             while (!cursor.isAfterLast()) {
-                Gig gig = new Gig(cursor.getInt(0), cursor.getString(1), cursor.getLong(2), cursor.getLong(4),
-                        cursor.getString(3));
+                Gig gig = new Gig(cursor.getInt(0), cursor.getString(1), cursor.getLong(2), cursor.getLong(3),
+                        cursor.getLong(4), context);
                 gigs.add(gig);
                 cursor.moveToNext();
             }
@@ -1070,7 +1070,7 @@ public class DataService extends SQLiteOpenHelper {
 		values.put(GIG_NAME, gig.getName());
 		values.put(GIG_VENUE_ID, gig.getVenueId());
 		values.put(GIG_SETLIST_ID, gig.getSetlistId());
-		values.put(GIG_DATE_TIME, gig.getDateTime());
+		values.put(GIG_DATE_TIME, gig.getDateInMilliseconds());
 
 		long id = db.insertOrThrow(GIG_TABLE, null, values);
 		gig.setId(id);
@@ -1097,7 +1097,7 @@ public class DataService extends SQLiteOpenHelper {
 		values.put(GIG_NAME, gig.getName());
 		values.put(GIG_VENUE_ID, gig.getVenueId());
 		values.put(GIG_SETLIST_ID, gig.getSetlistId());
-		values.put(GIG_DATE_TIME, gig.getDateTime());
+		values.put(GIG_DATE_TIME, gig.getDateInMilliseconds());
 
 		db.update(GIG_TABLE, values, GIG_PRIMARYKEY + "=" + gig.getId(), null);
 	}
@@ -1137,35 +1137,35 @@ public class DataService extends SQLiteOpenHelper {
 	}
 
 
-    public void changeGigDateFormat(String dateFormat) throws ParseException {
-
-        List<Gig> gigs = readAllGigs();
-        StringBuilder dateStrbuilder = new StringBuilder();
-
-        for (Gig gig : gigs) {
-
-            Calendar cal = Calendar.getInstance(Locale.getDefault());
-            String date = gig.getDate();
-
-            if (dateFormat.charAt(0) == 'M') {
-                cal.set(Calendar.DAY_OF_MONTH, Integer.valueOf(date.substring(0, 2)));
-                cal.set(Calendar.MONTH, Integer.valueOf(date.substring(3, 5)) - 1);
-                cal.set(Calendar.YEAR, Integer.valueOf(date.substring(6)));
-            }
-            else {
-                cal.set(Calendar.DAY_OF_MONTH, Integer.valueOf(date.substring(3, 5)));
-                cal.set(Calendar.MONTH, Integer.valueOf(date.substring(0, 2)) - 1);
-                cal.set(Calendar.YEAR, Integer.valueOf(date.substring(6)));
-            }
-
-            SimpleDateFormat sdf = new SimpleDateFormat(dateFormat, Locale.getDefault());
-
-            String newDate = sdf.format(cal.getTime());
-            dateStrbuilder = new StringBuilder();
-            dateStrbuilder.append(newDate).append("-").append(gig.getTime());
-            gig.setDate(dateStrbuilder.toString());
-            updateGig(gig);
-
-        }
-    }
+//    public void changeGigDateFormat(String dateFormat) throws ParseException {
+//
+//        List<Gig> gigs = readAllGigs();
+//        StringBuilder dateStrbuilder = new StringBuilder();
+//
+//        for (Gig gig : gigs) {
+//
+//            Calendar cal = Calendar.getInstance(Locale.getDefault());
+//            String date = gig.getDate();
+//
+//            if (dateFormat.charAt(0) == 'M') {
+//                cal.set(Calendar.DAY_OF_MONTH, Integer.valueOf(date.substring(0, 2)));
+//                cal.set(Calendar.MONTH, Integer.valueOf(date.substring(3, 5)) - 1);
+//                cal.set(Calendar.YEAR, Integer.valueOf(date.substring(6)));
+//            }
+//            else {
+//                cal.set(Calendar.DAY_OF_MONTH, Integer.valueOf(date.substring(3, 5)));
+//                cal.set(Calendar.MONTH, Integer.valueOf(date.substring(0, 2)) - 1);
+//                cal.set(Calendar.YEAR, Integer.valueOf(date.substring(6)));
+//            }
+//
+//            SimpleDateFormat sdf = new SimpleDateFormat(dateFormat, Locale.getDefault());
+//
+//            String newDate = sdf.format(cal.getTime());
+//            dateStrbuilder = new StringBuilder();
+//            dateStrbuilder.append(newDate).append("-").append(gig.getTime());
+//            gig.setDate(dateStrbuilder.toString());
+//            updateGig(gig);
+//
+//        }
+//    }
 }

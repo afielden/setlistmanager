@@ -155,7 +155,7 @@ public class AddGig extends Activity implements OnClickListener, OnDateSetListen
 				}
 				
 				Gig gig = new Gig(gigId, gigName, venueId, setlistId,
-						dateEditText.getText().toString() + "-" + timeEditText.getText().toString());
+						dateEditText.getText().toString(), timeEditText.getText().toString(), this);
 				intent.putExtra(Constants.GIG, gig);
 				setResult(Activity.RESULT_OK, intent);
 				finish();

@@ -75,16 +75,16 @@ public class PrefsFragment extends PreferenceFragment implements Preference.OnPr
 
         else if (preference.getKey().equals(Constants.prefs_date_format)) {
 
-            if (!dateFormat.getValue().equals((String)newValue)) {
-
-                try {
-                    DataService.getDataService(getActivity()).changeGigDateFormat((String)newValue);
-                    Toast.makeText(this.getActivity(), R.string.date_update_success, Toast.LENGTH_LONG).show();
-                } catch (ParseException e) {
-                    Toast.makeText(this.getActivity(), R.string.date_update_failed, Toast.LENGTH_LONG).show();
-                    Log.d("SetlistManager", e.toString());
-                }
-            }
+//            if (!dateFormat.getValue().equals((String)newValue)) {
+//
+//                try {
+//                    DataService.getDataService(getActivity()).changeGigDateFormat((String)newValue);
+//                    Toast.makeText(this.getActivity(), R.string.date_update_success, Toast.LENGTH_LONG).show();
+//                } catch (ParseException e) {
+//                    Toast.makeText(this.getActivity(), R.string.date_update_failed, Toast.LENGTH_LONG).show();
+//                    Log.d("SetlistManager", e.toString());
+//                }
+//            }
 
             dateFormat.setTitle(newValue.toString());
 

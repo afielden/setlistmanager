@@ -1,7 +1,17 @@
 package com.bigdrum.setlistmanager.venue;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.preference.PreferenceManager;
+
+import com.bigdrum.setlistmanager.R;
+import com.bigdrum.setlistmanager.database.Constants;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class Venue implements Parcelable {
 	
@@ -14,7 +24,9 @@ public class Venue implements Parcelable {
 	private String contactName;
 	private String phone;
 	private String email;
-	private String lastGigDate = "";
+	private long lastGigDate;
+    private String dateFormat;
+    private Calendar cal;
 	
 	
 	public static final Creator<Venue> CREATOR = new Creator<Venue>() {
@@ -38,7 +50,7 @@ public class Venue implements Parcelable {
 	
 	
 	public Venue(long id, String name, String street, String town, String postcode, String country,
-			String contactName, String phone, String email, String lastGigDate) {
+			String contactName, String phone, String email, long lastGigDate, Context context) {
 		this.id = id;
 		this.name = name;
 		this.street = street;
@@ -48,7 +60,10 @@ public class Venue implements Parcelable {
 		this.contactName = contactName;
 		this.phone = phone;
 		this.email = email;
-		this.lastGigDate = lastGigDate==null?"":lastGigDate;
+		this.lastGigDate = lastGigDate;
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        dateFormat = prefs.getString(Constants.prefs_date_format, context.getResources().getString(R.string.pref_default_date_format));
 	}
 	
 
@@ -76,7 +91,7 @@ public class Venue implements Parcelable {
 		dest.writeString(contactName);
 		dest.writeString(phone);
 		dest.writeString(email);
-		dest.writeString(lastGigDate);
+		dest.writeLong(lastGigDate);
 	}
 	
 	/**
@@ -93,7 +108,7 @@ public class Venue implements Parcelable {
 		contactName = parcel.readString();
 		phone = parcel.readString();
 		email = parcel.readString();
-		lastGigDate = parcel.readString();
+		lastGigDate = parcel.readLong();
 	}
 
 	
@@ -193,12 +208,47 @@ public class Venue implements Parcelable {
 	}
 
 
-	public String getLastGigDate() {
+	public long getLastGigDate() {
 		return lastGigDate;
 	}
 
 
-	public void setLastGigDate(String lastGigDate) {
+	public void setLastGigDate(long lastGigDate) {
 		this.lastGigDate = lastGigDate;
 	}
+
+
+	public String getDate() {
+
+		SimpleDateFormat sdf = new SimpleDateFormat(dateFormat, Locale.getDefault());
+
+		return sdf.format(getCal().getTime());
+	}
+
+	public String getTime() {
+
+		return getCal().get(Calendar.HOUR_OF_DAY) + ":" + getCal().get(Calendar.MINUTE) + ":"
+				+ getCal().get(Calendar.SECOND);
+	}
+
+	public String getDateTime() {
+
+		return getDate() + "-" +
+				getCal().get(Calendar.HOUR_OF_DAY) + ":" + getCal().get(Calendar.MINUTE) + ":"
+				+ getCal().get(Calendar.SECOND);
+	}
+
+    /**
+     *
+     * @return
+     */
+    private Calendar getCal() {
+
+        if (cal == null) {
+            cal = Calendar.getInstance(Locale.getDefault());
+            cal.setTimeInMillis(lastGigDate);
+        }
+
+        return cal;
+    }
 }

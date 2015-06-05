@@ -63,7 +63,7 @@ public class GigCustomAdapter extends ArrayAdapter<Gig> {
         }
 
         viewHolder.gigName.setText(getItem(position).getName());
-        viewHolder.gigDate.setText(getItem(position).getDate());
+        viewHolder.gigDate.setText(getItem(position).getDateTime());
 
         return view;
     }
