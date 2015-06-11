@@ -876,18 +876,23 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 	 */
 	private void deleteSetlists() throws DataServiceException {
 
-        List<Model> remainingSetlists = dbService.deleteSetlists(itemList);
+		try {
+			List<Model> remainingSetlists = dbService.deleteSetlists(itemList);
 
-        reorderUnselectedItems();
+			reorderUnselectedItems();
 
-        listAdapter.clear();
-        listAdapter.addAll(remainingSetlists);
-        listAdapter.notifyDataSetChanged();
+			listAdapter.clear();
+			listAdapter.addAll(remainingSetlists);
+			listAdapter.notifyDataSetChanged();
 
-        if (remainingSetlists.size() == 0) {
-            editMode = false;
-            setActionItemVisibility();
-        }
+			if (remainingSetlists.size() == 0) {
+				editMode = false;
+				setActionItemVisibility();
+			}
+		}
+		catch (DataServiceException ex) {
+			Toast.makeText(getActivity(), ex.getReason(), Toast.LENGTH_LONG).show();
+		}
 	}
 	
 	

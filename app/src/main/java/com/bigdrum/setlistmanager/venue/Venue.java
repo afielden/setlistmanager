@@ -92,6 +92,7 @@ public class Venue implements Parcelable {
 		dest.writeString(phone);
 		dest.writeString(email);
 		dest.writeLong(lastGigDate);
+        dest.writeString(dateFormat);
 	}
 	
 	/**
@@ -109,6 +110,7 @@ public class Venue implements Parcelable {
 		phone = parcel.readString();
 		email = parcel.readString();
 		lastGigDate = parcel.readLong();
+        dateFormat = parcel.readString();
 	}
 
 	
@@ -219,6 +221,10 @@ public class Venue implements Parcelable {
 
 
 	public String getDate() {
+
+        if (lastGigDate == 0) {
+            return "";
+        }
 
 		SimpleDateFormat sdf = new SimpleDateFormat(dateFormat, Locale.getDefault());
 

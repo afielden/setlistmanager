@@ -14,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -129,9 +130,14 @@ public class VenueManagementFragment extends Fragment implements OnItemClickList
 	 * 
 	 */
 	private void populateVenues() {
-		arrayAdapter = new ArrayAdapter<Venue>(getActivity(), R.layout.venue_row_layout, R.id.artist_label);
-		arrayAdapter.addAll(dbService.readAllVenues());
-		venueListview.setAdapter(arrayAdapter);
+
+
+        arrayAdapter = new ArrayAdapter<Venue>(getActivity(), R.layout.venue_row_layout, R.id.artist_label);
+        venueListview.setAdapter(arrayAdapter);
+
+        arrayAdapter.addAll(dbService.readAllVenues());
+        arrayAdapter.notifyDataSetChanged();
+
 		venueListview.setOnItemClickListener(this);
 	}
 
@@ -210,12 +216,9 @@ public class VenueManagementFragment extends Fragment implements OnItemClickList
                 if (selectedView != null) {
                     selectedView.setBackgroundColor(Color.TRANSPARENT);
                 }
-				((InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE)).
-					hideSoftInputFromWindow(rootView.getWindowToken(),0);
-                if (arrayAdapter != null) {
-                    arrayAdapter.add(venue);
-                    arrayAdapter.notifyDataSetChanged();
-                }
+
+                getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+                populateVenues();
 			}
 			else if (resultCode == Activity.RESULT_CANCELED) {
 				Toast.makeText(this.getActivity(), R.string.cancelled, Toast.LENGTH_LONG).show();
@@ -224,15 +227,14 @@ public class VenueManagementFragment extends Fragment implements OnItemClickList
 			
 		case Constants.EDIT_VENUE:
 			if (resultCode == Activity.RESULT_OK) {
-				Venue venue = (Venue)data.getExtras().get(Constants.VENUE);
+                Venue venue = (Venue)data.getExtras().get(Constants.VENUE);
 				setVenueDetails(venue);
 				dbService.updateVenue(venue);
                 venueDetails.setText("");
                 if (selectedView != null) {
                     selectedView.setBackgroundColor(Color.TRANSPARENT);
                 }
-				arrayAdapter.add(venue);
-				arrayAdapter.notifyDataSetChanged();
+				populateVenues();
 			}
 			else if (resultCode == Activity.RESULT_CANCELED) {
 				Toast.makeText(this.getActivity(), R.string.cancelled, Toast.LENGTH_LONG).show();

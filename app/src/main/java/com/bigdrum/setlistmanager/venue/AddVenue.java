@@ -1,10 +1,12 @@
 package com.bigdrum.setlistmanager.venue;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -73,6 +75,8 @@ public class AddVenue extends Activity {
 			if (valid(venue)) {
 				intent.putExtra(Constants.VENUE, venue);
 				setResult(Activity.RESULT_OK, intent);
+				((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE)).
+					hideSoftInputFromWindow(findViewById(R.id.add_venue_name).getWindowToken(),0);
 				finish();
 			}
 			break;

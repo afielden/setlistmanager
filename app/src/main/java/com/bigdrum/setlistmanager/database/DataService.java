@@ -647,11 +647,18 @@ public class DataService extends SQLiteOpenHelper {
 			setlist.setId(getSetlistId(setlist));
 
 			deleteSongsInSetlist(setlist);
-			
-			db.delete(SETLIST_TABLE, SETLISTPRIMARYKEY + "=" + setlist.getId() 
-					+ " AND " + SETLISTPOS + "=" + setlist.getPosition(), null);
-			
-			numberOfSetlists--;
+
+            String gigs = findGigWithSetlist(setlist.getId());
+
+            if (gigs == null) {
+                db.delete(SETLIST_TABLE, SETLISTPRIMARYKEY + "=" + setlist.getId()
+                        + " AND " + SETLISTPOS + "=" + setlist.getPosition(), null);
+
+                numberOfSetlists--;
+            }
+            else {
+                throw new DataServiceException(context.getString(R.string.setlist_in_use, setlist.getName()) + gigs);
+            }
 		}
 		
 		reorderSetlists(remainingSetlists);
@@ -1135,6 +1142,33 @@ public class DataService extends SQLiteOpenHelper {
 		cur.close();
 		return contacts;
 	}
+
+
+    /**
+     *
+     * @param setlistId
+     * @return
+     */
+    public String findGigWithSetlist(long setlistId) {
+
+        String[] cols = {GIG_NAME};
+        String gigs = "";
+        Cursor cursor = db.query(GIG_TABLE, cols, GIG_SETLIST_ID + "=" + String.valueOf(setlistId), null, null, null, null, null);
+
+        if (cursor.getCount() == 0) {
+            return null;
+        }
+
+        cursor.moveToFirst();
+
+        do {
+            gigs += " " + cursor.getString(0);
+        }
+        while (cursor.moveToNext());
+
+        return gigs;
+    }
+
 
 
 //    public void changeGigDateFormat(String dateFormat) throws ParseException {

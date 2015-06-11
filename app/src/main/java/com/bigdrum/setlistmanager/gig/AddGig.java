@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.TimePickerDialog;
 import android.app.TimePickerDialog.OnTimeSetListener;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -158,6 +160,10 @@ public class AddGig extends Activity implements OnClickListener, OnDateSetListen
 						dateEditText.getText().toString(), timeEditText.getText().toString(), this);
 				intent.putExtra(Constants.GIG, gig);
 				setResult(Activity.RESULT_OK, intent);
+
+				((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE)).
+						hideSoftInputFromWindow(findViewById(R.id.gig_name_edit_text).getWindowToken(), 0);
+
 				finish();
 			}
 			return true;
