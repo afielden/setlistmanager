@@ -478,7 +478,7 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 		emailAction.setVisible(false);
 
         editModeAction.setTitle(editMode ? R.string.action_done : R.string.action_edit);
-        editModeAction.setIcon(editMode?android.R.drawable.ic_menu_close_clear_cancel:android.R.drawable.ic_menu_manage);
+        editModeAction.setIcon(editMode?android.R.drawable.checkbox_on_background:android.R.drawable.ic_menu_manage);
 		editModeAction.setVisible(listAdapter.getCount() != 0);
 
         helpDialogFragment.setNumberOfListItems(listAdapter.getCount());

@@ -58,7 +58,7 @@ public class VenueManagementFragment extends Fragment implements OnItemClickList
 		dbService.init();
 		
 		help = new HelpDialogFragment();
-//		populateVenues();
+		populateVenues();
 		
 		return rootView;
 	}

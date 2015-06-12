@@ -1160,11 +1160,11 @@ public class DataService extends SQLiteOpenHelper {
         }
 
         cursor.moveToFirst();
+        gigs += ": " + cursor.getString(0);
 
-        do {
-            gigs += " " + cursor.getString(0);
+        while (cursor.moveToNext()) {
+            gigs += ", " + cursor.getString(0);
         }
-        while (cursor.moveToNext());
 
         return gigs;
     }
