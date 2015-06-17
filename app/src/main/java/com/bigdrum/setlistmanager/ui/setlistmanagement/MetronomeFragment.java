@@ -3,6 +3,7 @@ package com.bigdrum.setlistmanager.ui.setlistmanagement;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import android.app.Activity;
 import android.content.Context;
@@ -37,6 +38,7 @@ import com.bigdrum.setlistmanager.database.Constants;
 import com.bigdrum.setlistmanager.database.DataService;
 import com.bigdrum.setlistmanager.database.DataServiceException;
 import com.bigdrum.setlistmanager.network.MySong;
+import com.bigdrum.setlistmanager.slidingtabview.SlidingTabLayout;
 import com.bigdrum.setlistmanager.ui.setlistmanagement.ConfirmationDialogFragment.ConfirmationDialogCallback;
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.ActionItemTarget;
@@ -79,6 +81,8 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
     private Activity thisActivity;
     private final HelpDialogFragment helpDialogFragment = new HelpDialogFragment();
     private DatabaseBackup dbBackupService;
+
+
 
     @Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -434,6 +438,21 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 		this.setlistMode = setlistMode;
 
         helpDialogFragment.setSetlistMode(setlistMode);
+
+		SlidingTabLayout slidingTabLayout = (SlidingTabLayout) getActivity().findViewById(R.id.sliding_tabs);
+
+        Locale l = Locale.getDefault();
+		slidingTabLayout.setTabTitle(0, setlistMode?getResources().getString(R.string.title_setlists).toUpperCase(l):
+                getResources().getString(R.string.title_songs).toUpperCase(l));
+	}
+
+
+	/**
+	 *
+	 * @return
+	 */
+	public boolean isSetlistMode() {
+		return setlistMode;
 	}
 	
 	

@@ -124,7 +124,7 @@ public class SlidingTabsBasicFragment extends Fragment {
 
             switch (position) {
                 case 0:
-                    return getString(R.string.title_section1).toUpperCase(l);
+                    return getString(R.string.title_setlists).toUpperCase(l);
                 case 1:
                     return getString(R.string.title_section2).toUpperCase(l);
                 case 2:

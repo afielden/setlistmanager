@@ -3,7 +3,8 @@
 
     <string name="app_name">SetlistManager</string>
     <string name="action_settings">Settings</string>
-    <string name="title_section1">Setlists</string>
+    <string name="title_setlists">Setlists</string>
+    <string name="title_songs">Songs</string>
     <string name="title_section2">Gigs</string>
     <string name="title_section3">Venues</string>
     <string name="title_section4">About</string>

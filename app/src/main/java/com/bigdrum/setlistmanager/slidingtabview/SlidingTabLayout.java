@@ -78,6 +78,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
     private ViewPager.OnPageChangeListener mViewPagerPageChangeListener;
 
     private final SlidingTabStrip mTabStrip;
+    private TextView[] tabTextviews;
 
     public SlidingTabLayout(Context context) {
         this(context, null);
@@ -99,6 +100,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
         mTabStrip = new SlidingTabStrip(context);
         addView(mTabStrip, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+
     }
 
     /**
@@ -188,6 +190,8 @@ public class SlidingTabLayout extends HorizontalScrollView {
         final PagerAdapter adapter = mViewPager.getAdapter();
         final View.OnClickListener tabClickListener = new TabClickListener();
 
+        tabTextviews = new TextView[adapter.getCount()];
+
         for (int i = 0; i < adapter.getCount(); i++) {
             View tabView = null;
             TextView tabTitleView = null;
@@ -206,6 +210,8 @@ public class SlidingTabLayout extends HorizontalScrollView {
             if (tabTitleView == null && TextView.class.isInstance(tabView)) {
                 tabTitleView = (TextView) tabView;
             }
+
+            tabTextviews[i] = tabTitleView;
 
             if (mDistributeEvenly) {
                 LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) tabView.getLayoutParams();
@@ -226,6 +232,13 @@ public class SlidingTabLayout extends HorizontalScrollView {
             }
         }
     }
+
+
+    public void setTabTitle(int tabNumber, String title) {
+
+        tabTextviews[tabNumber].setText(title);
+    }
+
 
     public void setContentDescription(int i, String desc) {
         mContentDescriptions.put(i, desc);

@@ -68,8 +68,8 @@ public class EnterSongDetails extends Activity implements OnItemSelectedListener
 			timeSig.setText(String.valueOf(originalSong.getTimeSignature()));
 			key = originalSong.getKey();
             initialiseDuration(originalSong.getDuration());
-			
-			if (originalSong.getArtist().equals("<subset>")) {
+
+			if (originalSong.getArtist() != null && originalSong.getArtist().equals("<subset>")) {
 				subset = true;
 				artist.setVisibility(View.INVISIBLE);
 				tempo.setVisibility(View.INVISIBLE);

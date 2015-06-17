@@ -24,6 +24,7 @@ import java.util.Locale;
 public class MainActivity2 extends FragmentActivity {
 
     private MyPagerAdapter adapterViewPager;
+    private SlidingTabLayout slidingTabLayout;
 
     /**
      *
@@ -39,7 +40,7 @@ public class MainActivity2 extends FragmentActivity {
         vpPager.setAdapter(adapterViewPager);
 
         // Give the SlidingTabLayout the ViewPager
-        SlidingTabLayout slidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
+        slidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
         // Center the tabs in the layout
         slidingTabLayout.setDistributeEvenly(true);
         slidingTabLayout.setViewPager(vpPager);
@@ -119,7 +120,15 @@ public class MainActivity2 extends FragmentActivity {
 
             switch (position) {
                 case 0:
-                    return getString(R.string.title_section1).toUpperCase(l);
+                    if (metronomeFragment != null && !metronomeFragment.isSetlistMode()) {
+                        return getString(R.string.title_songs).toUpperCase(l);
+                    }
+                    else if (metronomeFragment != null && metronomeFragment.isSetlistMode()){
+                        return getString(R.string.title_setlists).toUpperCase(l);
+                    }
+                    else {
+                        return getString(R.string.title_setlists).toUpperCase(l);
+                    }
                 case 1:
                     return getString(R.string.title_section2).toUpperCase(l);
                 case 2:
@@ -145,7 +154,6 @@ public class MainActivity2 extends FragmentActivity {
             switch(position) {
                 case 0:
                     metronomeFragment = new MetronomeFragment();
-
                     metronomeFragment.setArguments(args);
                     return metronomeFragment;
                 case 1:
