@@ -677,7 +677,9 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 				}
 				else if (resultCode == Activity.RESULT_CANCELED) {
 
-					displaySetlists();
+                    if (isSetlistMode()) {
+                        displaySetlists();
+                    }
 
 					Toast.makeText(getActivity(), R.string.cancelled, Toast.LENGTH_LONG).show();
 				}
