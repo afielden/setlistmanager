@@ -956,12 +956,14 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 	 */
 	private void showConfirmationDialog(String message) {
 
-		ConfirmationDialogFragment confirmDialog = new ConfirmationDialogFragment();
+		ConfirmationDialogFragment.showConfirmationDialog(message, getResources().getString(R.string.confirm), this);
 
-		confirmDialog.setMessageAndTitle(message, getResources().getString(R.string.confirm));
-        confirmDialog.setFragmentCallbackClass(this);
-
-		confirmDialog.show(getActivity().getFragmentManager(), "");
+//		ConfirmationDialogFragment confirmDialog = new ConfirmationDialogFragment();
+//
+//		confirmDialog.setMessageAndTitle(message, getResources().getString(R.string.confirm));
+//        confirmDialog.setFragmentCallbackClass(this);
+//
+//		confirmDialog.show(getActivity().getFragmentManager(), "");
 	}
 
 

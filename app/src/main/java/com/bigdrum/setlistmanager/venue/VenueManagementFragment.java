@@ -21,6 +21,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bigdrum.setlistmanager.MainActivity2;
@@ -28,11 +29,12 @@ import com.bigdrum.setlistmanager.R;
 import com.bigdrum.setlistmanager.database.Constants;
 import com.bigdrum.setlistmanager.database.DataService;
 import com.bigdrum.setlistmanager.database.DataServiceException;
+import com.bigdrum.setlistmanager.ui.setlistmanagement.ConfirmationDialogFragment;
 import com.bigdrum.setlistmanager.ui.setlistmanagement.HelpDialogFragment;
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.ActionItemTarget;
 
-public class VenueManagementFragment extends Fragment implements OnItemClickListener{
+public class VenueManagementFragment extends Fragment implements OnItemClickListener, ConfirmationDialogFragment.ConfirmationDialogCallback{
 	
 	private DataService dbService;
 	private List<Venue> venueList;
@@ -45,6 +47,7 @@ public class VenueManagementFragment extends Fragment implements OnItemClickList
 	private Venue selectedVenue;
 	private HelpDialogFragment help;
 	private View selectedView;
+    private TextView venueDetailsTitle;
 
 	/**
 	 * 
@@ -55,6 +58,7 @@ public class VenueManagementFragment extends Fragment implements OnItemClickList
 		
 		venueListview = (ListView)rootView.findViewById(R.id.venue_listview);
 		venueDetails = (EditText)rootView.findViewById(R.id.venue_details_textbox);
+        venueDetailsTitle = (TextView)rootView.findViewById(R.id.venue_details_title);
 		dbService = DataService.getDataService(this.getActivity());
 		dbService.init();
 		
@@ -184,9 +188,8 @@ public class VenueManagementFragment extends Fragment implements OnItemClickList
 	    	return true;
 	    	
 	    case R.id.action_delete:
-	    	if (deleteVenue()) {
-                setActionItemVisibility();
-            }
+			ConfirmationDialogFragment.showConfirmationDialog(getResources().getString(R.string.confirm_delete_venue),
+					getResources().getString(R.string.confirm), this);
 	    	return true;
 	    	
 	    case R.id.action_help:
@@ -335,9 +338,12 @@ public class VenueManagementFragment extends Fragment implements OnItemClickList
 	private void setVenueDetails(Venue venue) {
 		if (venue == null) {
 			venueDetails.setText("");
+            venueDetailsTitle.setVisibility(View.INVISIBLE);
 			return;
 		}
-		
+
+        venueDetailsTitle.setVisibility(View.VISIBLE);
+
 		details = new StringBuilder();
 		details.append("Venue: ").append(venue.getName()).append("\n");
 		details.append("Street: ").append(venue.getStreet()).append("\n");
@@ -357,6 +363,28 @@ public class VenueManagementFragment extends Fragment implements OnItemClickList
 	 */
 	public void unselectVenue() {
 
+        venueDetailsTitle.setVisibility(View.INVISIBLE);
 		selectedVenue = null;
 	}
+
+
+    /**
+     *
+     */
+    @Override
+    public void positiveButtonClicked() {
+
+        if (deleteVenue()) {
+            setActionItemVisibility();
+        }
+    }
+
+
+    /**
+     *
+     */
+    @Override
+    public void negativeButtonClicked() {
+
+    }
 }

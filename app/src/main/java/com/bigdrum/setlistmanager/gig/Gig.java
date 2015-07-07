@@ -204,15 +204,13 @@ public class Gig implements Parcelable {
 	
 	public String getTime() {
 
-        return getCal().get(Calendar.HOUR_OF_DAY) + ":" + getCal().get(Calendar.MINUTE) + ":"
-                + getCal().get(Calendar.SECOND);
+        return getCal().get(Calendar.HOUR_OF_DAY) + ":" + getCal().get(Calendar.MINUTE);
 	}
 	
 	public String getDateTime() {
 
         return getDate() + "-" +
-                getCal().get(Calendar.HOUR_OF_DAY) + ":" + getCal().get(Calendar.MINUTE) + ":"
-                + getCal().get(Calendar.SECOND);
+                getCal().get(Calendar.HOUR_OF_DAY) + ":" + getCal().get(Calendar.MINUTE);
 	}
 
 

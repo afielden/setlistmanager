@@ -4,10 +4,15 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.app.FragmentManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.webkit.WebView;
+
+import com.bigdrum.setlistmanager.R;
 
 public class ConfirmationDialogFragment extends DialogFragment {
 
@@ -89,5 +94,21 @@ public class ConfirmationDialogFragment extends DialogFragment {
      */
     public void setFragmentCallbackClass(ConfirmationDialogCallback callback) {
         this.callback = callback;
+    }
+
+
+
+    /**
+     *
+     *
+     */
+    public static void showConfirmationDialog(String message, String title, ConfirmationDialogCallback fragment) {
+
+        ConfirmationDialogFragment confirmDialog = new ConfirmationDialogFragment();
+
+        confirmDialog.setMessageAndTitle(message, title);
+        confirmDialog.setFragmentCallbackClass(fragment);
+
+        confirmDialog.show(((Fragment)fragment).getActivity().getFragmentManager(), "");
     }
 }

@@ -86,7 +86,7 @@
     <string name="no_time">A time must be entered</string>
     <string name="title_activity_select_recipients">SelectRecipients</string>
     <string name="email_success">Successfully emailed gig details</string>
-    <string name="email_failure">email gig details: FAILED!</string>
+    <string name="email_failure">email gig details failed. Check your email login settings</string>
     <string name="title_activity_prefs">Preferences</string>
     <string name="pref_email_user_title">Email user name</string>
     <string name="pref_email_user_summary">User name for your email account</string>
@@ -133,6 +133,8 @@
     <string name="tooltip_ok">Save and finish</string>
     <string name="confirm_delete_setlists">"Delete the selected setlists?</string>
     <string name="confirm_delete_songs">"Delete the selected songs?</string>
+    <string name="confirm_delete_gig">Delete this gig?</string>
+    <string name="confirm_delete_venue">Delete this venue?</string>
     <string name="confirm">Confirm</string>
     <string name="warning">Warning</string>
     <string name="crash_toast_text">Sorry, SetlistManager crashed. Please allow diagnostic information to be sent to the developer</string>

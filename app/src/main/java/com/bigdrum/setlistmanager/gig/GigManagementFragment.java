@@ -22,6 +22,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bigdrum.setlistmanager.MainActivity2;
@@ -31,6 +32,7 @@ import com.bigdrum.setlistmanager.database.DataService;
 import com.bigdrum.setlistmanager.database.DataServiceException;
 import com.bigdrum.setlistmanager.export.Mail;
 import com.bigdrum.setlistmanager.export.SelectRecipients;
+import com.bigdrum.setlistmanager.ui.setlistmanagement.ConfirmationDialogFragment;
 import com.bigdrum.setlistmanager.ui.setlistmanagement.HelpDialogFragment;
 import com.bigdrum.setlistmanager.ui.setlistmanagement.Model;
 import com.bigdrum.setlistmanager.utils.Utils;
@@ -55,7 +57,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class GigManagementFragment extends Fragment implements OnItemClickListener, OnClickListener {
+public class GigManagementFragment extends Fragment implements OnItemClickListener, OnClickListener, ConfirmationDialogFragment.ConfirmationDialogCallback {
 
 	private DataService dbService;
 	private ArrayAdapter<Gig> arrayAdapter;
@@ -74,7 +76,9 @@ public class GigManagementFragment extends Fragment implements OnItemClickListen
 	private PendingAction pendingAction = PendingAction.NONE;
 	private HelpDialogFragment help;
 	private View selectedView;
-	
+    private TextView gigDetailsTitle;
+
+
 //	private Session.StatusCallback callback = new Session.StatusCallback() {
 //        @Override
 //        public void call(Session session, SessionState state, Exception exception) {
@@ -97,6 +101,8 @@ public class GigManagementFragment extends Fragment implements OnItemClickListen
 //		createSession();
 		listview = (ListView)rootView.findViewById(R.id.gig_listview);
 		gigDetails = (EditText)rootView.findViewById(R.id.gig_details_textbox);
+        gigDetailsTitle = (TextView)rootView.findViewById(R.id.gig_details_title);
+        gigDetailsTitle.setVisibility(View.INVISIBLE);
 		/*facebookButton = (ImageButton)rootView.findViewById(R.id.facebook_button);
 		facebookButton.setOnClickListener(this);*/
 		dbService = DataService.getDataService(this.getActivity());
@@ -312,8 +318,8 @@ public class GigManagementFragment extends Fragment implements OnItemClickListen
 	    	return true;
 	    	
 	    case R.id.action_delete:
-	    	deleteGig();
-            setActionItemVisibility();
+			ConfirmationDialogFragment.showConfirmationDialog(getResources().getString(R.string.confirm_delete_gig),
+					getResources().getString(R.string.confirm), this);
 	    	return true;
 	    	
 	    case R.id.action_email:
@@ -356,6 +362,7 @@ public class GigManagementFragment extends Fragment implements OnItemClickListen
      */
     public void unSelectGig() {
 
+        gigDetailsTitle.setVisibility(View.INVISIBLE);
         selectedGig = null;
     }
 	
@@ -427,8 +434,30 @@ public class GigManagementFragment extends Fragment implements OnItemClickListen
 			setActionItemVisibility();
 		}
 	}
-	
-	
+
+
+	/**
+	 *
+	 */
+	@Override
+	public void positiveButtonClicked() {
+
+		deleteGig();
+		setActionItemVisibility();
+
+	}
+
+
+	/**
+	 *
+	 */
+	@Override
+	public void negativeButtonClicked() {
+
+	}
+
+
+
 	/**
 	 * 
 	 * @return
@@ -611,11 +640,9 @@ public class GigManagementFragment extends Fragment implements OnItemClickListen
       try { 
         m.addAttachment(buildEmailContent().getAbsolutePath());
  
-        if(m.send()) { 
-          Toast.makeText(getActivity(), "Email was sent successfully.", Toast.LENGTH_LONG).show(); 
+        if(m.send()) {
           return Boolean.TRUE;
-        } else { 
-          Toast.makeText(getActivity(), "Email was not sent.", Toast.LENGTH_LONG).show();
+        } else {
           return Boolean.FALSE;
         } 
       } 
@@ -661,9 +688,11 @@ public class GigManagementFragment extends Fragment implements OnItemClickListen
 	private void setGigDetails(Gig gig) {
 		if (gig == null) {
 			gigDetails.setText("");
+            gigDetailsTitle.setVisibility(View.INVISIBLE);
 			return;
 		}
-		
+
+        gigDetailsTitle.setVisibility(View.VISIBLE);
 		details = new StringBuilder();
 		String venueName = dbService.getVenueNameById(gig.getVenueId());
 		String setlistName = dbService.getSetlistNameById(gig.getSetlistId());
