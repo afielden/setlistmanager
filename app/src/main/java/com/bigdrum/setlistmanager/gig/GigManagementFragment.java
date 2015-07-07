@@ -24,6 +24,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.bigdrum.setlistmanager.MainActivity2;
 import com.bigdrum.setlistmanager.R;
 import com.bigdrum.setlistmanager.database.Constants;
 import com.bigdrum.setlistmanager.database.DataService;
@@ -336,15 +337,27 @@ public class GigManagementFragment extends Fragment implements OnItemClickListen
 	 * 
 	 */
 	private void displayHelpDialog() {
-		HelpDialogFragment help = new HelpDialogFragment();
+		MainActivity2 activity = (MainActivity2)getActivity();
+		HelpDialogFragment help = activity.getHelpDialogFragment();
 
 		help.setMessageAndTitle(getString(R.string.help_gig_mgmt), 
 				getString(R.string.help_gig_mgmt_title));
 
-		help.setDisplayShowcaseView(false);
-		
+		help.setDisplayShowcaseView(true);
+        help.setGigSelected(selectedGig != null);
+//        help.setCurrentlyDisplayedTab(Constants.GIG_TAB_INDEX);
 		help.show(getActivity().getSupportFragmentManager(), "");
 	}
+
+
+    /**
+     *
+     *
+     */
+    public void unSelectGig() {
+
+        selectedGig = null;
+    }
 	
 	
 	/**
@@ -607,7 +620,7 @@ public class GigManagementFragment extends Fragment implements OnItemClickListen
         } 
       } 
       catch(Exception e) {
-		  Log.d("SetlistManager", "failed to send email:" + e.toString());
+          Log.d("SetlistManager", "failed to send email:" + e.toString());
         return Boolean.FALSE;
       } 
    }
@@ -675,6 +688,18 @@ public class GigManagementFragment extends Fragment implements OnItemClickListen
 		protected Boolean doInBackground(String... emails) {
 			return emailGigDetails(emails);
 		}
+
+
+        @Override
+        protected void onPostExecute(Boolean ok) {
+
+            if (ok) {
+                Toast.makeText(getActivity(), R.string.email_success, Toast.LENGTH_LONG).show();
+            }
+            else {
+                Toast.makeText(getActivity(), R.string.email_failure, Toast.LENGTH_LONG).show();
+            }
+        }
 	}
 
 

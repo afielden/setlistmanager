@@ -11,6 +11,7 @@ import android.view.View;
 import android.webkit.WebView;
 
 import com.bigdrum.setlistmanager.R;
+import com.bigdrum.setlistmanager.database.Constants;
 import com.github.amlcurran.showcaseview.OnShowcaseEventListener;
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.ActionItemTarget;
@@ -34,7 +35,13 @@ public class HelpDialogFragment extends DialogFragment implements View.OnClickLi
     private int[] songlist = {R.id.action_setlists, R.id.action_search, R.id.action_add_section, R.id.action_add, R.id.action_editmode};
     private int[] songlistEditMultipleSelected = {R.id.action_setlists, R.id.action_copy, R.id.action_delete, R.id.action_editmode};
     private int[] songlistEditSingleSelected = {R.id.action_setlists, R.id.action_copy, R.id.action_edit, R.id.action_delete, R.id.action_editmode};
-    private int[] songlistEditNoneSelected = {R.id.action_setlists, R.id.action_editmode};
+    private int[] songlistEditNoneSelected = {R.id.action_editmode};
+
+    private int[] gigsView = {R.id.action_add};
+    private int[] gigsViewSelected = {R.id.action_email, R.id.action_add, R.id.action_edit, R.id.action_delete};
+
+    private int[] venuesView = {R.id.action_add};
+    private int[] venuesViewSelected = {R.id.action_add, R.id.action_edit, R.id.action_delete};
 
     private int[] currentItemList = setlist;
     private int currentItem = 0;
@@ -46,6 +53,7 @@ public class HelpDialogFragment extends DialogFragment implements View.OnClickLi
     private boolean showcaseHelpAvailable = false;
     private int numberOfListItems = 0;
     private boolean displayShowcaseView;
+    private int currentlyDisplayedTab;
 	
 	/**
 	 * 
@@ -108,14 +116,24 @@ public class HelpDialogFragment extends DialogFragment implements View.OnClickLi
 
         showcaseHelpAvailable = true;
 
-        if (activityName.contains("MainActivity")) {
-            msgId = getMainActivityHelpItemId();
-        }
-        else {
-            showcaseHelpAvailable = false;
+        switch (currentlyDisplayedTab) {
+            case Constants.SONG_SETLIST_TAB_INDEX:
+                msgId = getSongSetlistTabHelpItemId();
+                break;
+
+            case Constants.GIG_TAB_INDEX:
+                msgId = getGigTabHelpItemId();
+                break;
+
+            case Constants.VENUE_TAB_INDEX:
+                msgId = getVenueTabHelpItemId();
+                break;
+
+            default:
+                showcaseHelpAvailable = false;
         }
 
-        if (displayShowcaseView) {
+        if (displayShowcaseView && msgId != 0) {
             ActionItemTarget target = new ActionItemTarget(activity, currentItemList[currentItem]);
             helpMessage = activity.getString(msgId) + "\n" + activity.getString(R.string.help_next_item);
 
@@ -141,7 +159,7 @@ public class HelpDialogFragment extends DialogFragment implements View.OnClickLi
      *
      * @return
      */
-    private int getMainActivityHelpItemId() {
+    private int getSongSetlistTabHelpItemId() {
 
         int msgId = 0;
 
@@ -228,6 +246,57 @@ public class HelpDialogFragment extends DialogFragment implements View.OnClickLi
 
 
     /**
+     *
+     * @return
+     */
+    private int getGigTabHelpItemId() {
+
+        int msgId = 0;
+
+        switch (currentItemList[currentItem]) {
+            case R.id.action_add:
+                msgId = R.string.help_action_gig_add;
+                break;
+            case R.id.action_email:
+                msgId = R.string.help_action_gig_email;
+                break;
+            case R.id.action_edit:
+                msgId = R.string.help_action_gig_edit;
+                break;
+            case R.id.action_delete:
+                msgId = R.string.help_action_gig_delete;
+                break;
+        }
+
+        return msgId;
+    }
+
+
+    /**
+     *
+     * @return
+     */
+    private int getVenueTabHelpItemId() {
+
+        int msgId = 0;
+
+        switch (currentItemList[currentItem]) {
+            case R.id.action_add:
+                msgId = R.string.help_action_venue_add;
+                break;
+            case R.id.action_edit:
+                msgId = R.string.help_action_venue_edit;
+                break;
+            case R.id.action_delete:
+                msgId = R.string.help_action_venue_delete;
+                break;
+        }
+
+        return msgId;
+    }
+
+
+    /**
 	 * 
 	 * @param msg
 	 */
@@ -279,6 +348,27 @@ public class HelpDialogFragment extends DialogFragment implements View.OnClickLi
         else {
             currentItemList = editMode?songlistEditNoneSelected:songlist;
         }
+    }
+
+
+    /**
+     *
+     * @param gigSelected
+     */
+    public void setGigSelected(boolean gigSelected) {
+
+        currentItemList = gigSelected?gigsViewSelected:gigsView;
+
+    }
+
+
+    /**
+     *
+     * @param venueSelected
+     */
+    public void setVenueSelected(boolean venueSelected) {
+
+        currentItemList = venueSelected?venuesViewSelected:venuesView;
     }
 
 
@@ -375,5 +465,35 @@ public class HelpDialogFragment extends DialogFragment implements View.OnClickLi
 
     @Override
     public void onShowcaseViewShow(ShowcaseView showcaseView) {
+    }
+
+
+    /**
+     *
+     * @param tabIndex
+     */
+    public void setCurrentlyDisplayedTab(int tabIndex) {
+
+        currentlyDisplayedTab = tabIndex;
+        currentItem = 0;
+
+        switch(tabIndex) {
+
+            case Constants.SONG_SETLIST_TAB_INDEX:
+                currentItemList = setlist;
+                break;
+
+            case Constants.GIG_TAB_INDEX:
+                currentItemList = gigsView;
+                break;
+
+            case Constants.VENUE_TAB_INDEX:
+                currentItemList = venuesView;
+                break;
+
+            case Constants.ABOUT_TAB_INDEX:
+                break;
+
+        }
     }
 }

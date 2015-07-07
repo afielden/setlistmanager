@@ -86,7 +86,7 @@
     <string name="no_time">A time must be entered</string>
     <string name="title_activity_select_recipients">SelectRecipients</string>
     <string name="email_success">Successfully emailed gig details</string>
-    <string name="email_failure">Problem emailing gig details</string>
+    <string name="email_failure">email gig details: FAILED!</string>
     <string name="title_activity_prefs">Preferences</string>
     <string name="pref_email_user_title">Email user name</string>
     <string name="pref_email_user_summary">User name for your email account</string>
@@ -224,6 +224,13 @@ or enter selectedSong details manually by tapping the \'+\' icon. Subset markers
     <string name="help_action_song_copy">Copy the selected song(s) to another setlist</string>
     <string name="help_action_song_edit">Edit the details of the selected song</string>
     <string name="help_action_song_delete">Delete the selected song(s)</string>
+    <string name="help_action_gig_add">Add a new gig</string>
+    <string name="help_action_gig_email">Email gig details (including setlist) to other people</string>
+    <string name="help_action_gig_edit">Edit the details of a selected gig</string>
+    <string name="help_action_gig_delete">Delete a selected gig</string>
+    <string name="help_action_venue_add">Add a new venue</string>
+    <string name="help_action_venue_edit">Edit the details of a selected venue</string>
+    <string name="help_action_venue_delete">Delete a selected venue</string>
     <string name="title_activity_about_fragment">About SetlistManager</string>
     <string name="gig_name_label">Name</string>
     <string name="select_target_setlist">Select the target setlist</string>

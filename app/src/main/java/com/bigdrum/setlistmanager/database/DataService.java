@@ -752,11 +752,42 @@ public class DataService extends SQLiteOpenHelper {
 	public void copySongs(List<Model> songs, long toSetlistId) throws DataServiceException {
 		for (Model song : songs) {
 			if (song.isSelected()) {
-//				addSongToSetlist(song, new Model(0, setlist, -1));
-				addSongToSetlist(song, toSetlistId);
+                if (song.isSubsetItem()) {
+                    addSongToSetlist(song, toSetlistId);
+                    copySongs(getSongsInSubset(songs, song), toSetlistId);
+                }
+                else {
+                    addSongToSetlist(song, toSetlistId);
+                }
 			}
 		}
 	}
+
+
+    /**
+     *
+     * @return
+     */
+    private List<Model> getSongsInSubset(List<Model> songs, Model subset) {
+
+        int subsetPosition = subset.getPosition();
+        List<Model> songsInSubset = new ArrayList<Model>();
+
+        for (Model song : songs) {
+            if (song.getPosition() < subsetPosition) {
+                continue;
+            }
+            if (song.getPosition() > subsetPosition && !song.isSubsetItem()) {
+                song.setSelected(true);
+                songsInSubset.add(song);
+            }
+            if (song.getPosition() > subsetPosition && song.isSubsetItem()) {
+                break;
+            }
+        }
+
+        return songsInSubset;
+    }
 	
 	
 	/**

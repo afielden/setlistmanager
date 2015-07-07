@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -85,8 +86,7 @@ public class SearchActivity extends Activity implements OnClickListener {
             setlistSearchCheckbox.setEnabled(false);
         }
 	}
-	
-	
+
 	
 	
 	/**
@@ -244,6 +244,15 @@ public class SearchActivity extends Activity implements OnClickListener {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
+
+            case R.id.action_cancel:
+                songInfoPane.setText(R.string.cancelled);
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra(Constants.SONG_SELECTED, (String)null);
+                setResult(Activity.RESULT_CANCELED, resultIntent);
+                finish();
+                return true;
+
             case R.id.action_help:
                 displayHelpDialog();
                 return true;

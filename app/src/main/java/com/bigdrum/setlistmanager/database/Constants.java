@@ -87,6 +87,11 @@ public interface Constants extends BaseColumns {
 	public static final String prefs_band_name="pref_band_name";
 	public static final String prefs_date_format="pref_date_format";
 
+	public static final int SONG_SETLIST_TAB_INDEX = 0;
+	public static final int GIG_TAB_INDEX = 1;
+	public static final int VENUE_TAB_INDEX = 2;
+	public static final int ABOUT_TAB_INDEX = 3;
+
     public static final String DB_BACKUP_FILE="setlistmgr_db_backup.xml";
 	
 	public static final String SONGLIST_QUERY = "SELECT s.*, l." + SONG_SET_SONG_POS + " FROM " + SONG_TABLE + " s " 

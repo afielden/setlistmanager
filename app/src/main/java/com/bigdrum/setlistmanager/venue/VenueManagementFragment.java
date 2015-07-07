@@ -23,6 +23,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.bigdrum.setlistmanager.MainActivity2;
 import com.bigdrum.setlistmanager.R;
 import com.bigdrum.setlistmanager.database.Constants;
 import com.bigdrum.setlistmanager.database.DataService;
@@ -248,12 +249,15 @@ public class VenueManagementFragment extends Fragment implements OnItemClickList
 	 * 
 	 */
 	private void displayHelpDialog() {
-		HelpDialogFragment help = new HelpDialogFragment();
+		MainActivity2 activity = (MainActivity2)getActivity();
+		HelpDialogFragment help = activity.getHelpDialogFragment();
 		
 		help.setMessageAndTitle(getString(R.string.help_venue_mgmt),
                 getString(R.string.help_venue_mgmt_title));
-		
-//		help.show(getActivity().getFragmentManager(), "");
+
+		help.setDisplayShowcaseView(true);
+		help.setVenueSelected(selectedVenue != null);
+		help.show(getActivity().getSupportFragmentManager(), "");
 	}
 	
 	
@@ -345,5 +349,14 @@ public class VenueManagementFragment extends Fragment implements OnItemClickList
 		details.append("Email: ").append(venue.getEmail()).append("\n");
 		details.append("Last gig date: ").append(venue.getDate());
 		venueDetails.setText(details.toString());
+	}
+
+
+	/**
+	 *
+	 */
+	public void unselectVenue() {
+
+		selectedVenue = null;
 	}
 }

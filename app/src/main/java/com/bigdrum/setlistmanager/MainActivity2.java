@@ -10,12 +10,14 @@ import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.bigdrum.setlistmanager.database.Constants;
 import com.bigdrum.setlistmanager.gig.GigManagementFragment;
 import com.bigdrum.setlistmanager.info.AboutFragment;
 import com.bigdrum.setlistmanager.prefs.Prefs;
 
 import com.bigdrum.setlistmanager.prefs.PrefsFragment;
 import com.bigdrum.setlistmanager.slidingtabview.SlidingTabLayout;
+import com.bigdrum.setlistmanager.ui.setlistmanagement.HelpDialogFragment;
 import com.bigdrum.setlistmanager.ui.setlistmanagement.MetronomeFragment;
 import com.bigdrum.setlistmanager.venue.VenueManagementFragment;
 
@@ -25,6 +27,7 @@ public class MainActivity2 extends FragmentActivity {
 
     private MyPagerAdapter adapterViewPager;
     private SlidingTabLayout slidingTabLayout;
+    private final HelpDialogFragment helpDialogFragment = new HelpDialogFragment();
 
     /**
      *
@@ -82,10 +85,23 @@ public class MainActivity2 extends FragmentActivity {
     }
 
 
+    /**
+     *
+     * @return
+     */
+    public HelpDialogFragment getHelpDialogFragment() {
+        return helpDialogFragment;
+    }
 
+
+    /**
+     *
+     */
     class MyPagerAdapter extends FragmentPagerAdapter implements ViewPager.OnPageChangeListener {
 
         private MetronomeFragment metronomeFragment;
+        private GigManagementFragment gigFragment;
+        private VenueManagementFragment venueFragment;
 
         /**
          *
@@ -157,13 +173,13 @@ public class MainActivity2 extends FragmentActivity {
                     metronomeFragment.setArguments(args);
                     return metronomeFragment;
                 case 1:
-                    fragment = new GigManagementFragment();
-                    fragment.setArguments(args);
-                    return fragment;
+                    gigFragment = new GigManagementFragment();
+                    gigFragment.setArguments(args);
+                    return gigFragment;
                 case 2:
-                    fragment = new VenueManagementFragment();
-                    fragment.setArguments(args);
-                    return fragment;
+                    venueFragment = new VenueManagementFragment();
+                    venueFragment.setArguments(args);
+                    return venueFragment;
                 case 3:
                     fragment = new AboutFragment();
                     fragment.setArguments(args);
@@ -180,10 +196,36 @@ public class MainActivity2 extends FragmentActivity {
 
         @Override
         public void onPageSelected(int position) {
-            if (position == 0) {
-                if (metronomeFragment != null) {
-                    metronomeFragment.setEditMode(false);
-                }
+            switch (position) {
+                case Constants.SONG_SETLIST_TAB_INDEX:
+                    if (metronomeFragment != null) {
+                        metronomeFragment.setEditMode(false);
+                        metronomeFragment.setlistMode(true);
+                    }
+
+                    helpDialogFragment.setCurrentlyDisplayedTab(Constants.SONG_SETLIST_TAB_INDEX);
+                    slidingTabLayout.setTabTitle(0, getResources().getString(R.string.title_setlists).toUpperCase());
+                    break;
+
+                case Constants.GIG_TAB_INDEX:
+                    if (gigFragment != null) {
+                        gigFragment.unSelectGig();
+                    }
+
+                    helpDialogFragment.setCurrentlyDisplayedTab(Constants.GIG_TAB_INDEX);
+                    break;
+
+                case Constants.VENUE_TAB_INDEX:
+                    if (venueFragment != null) {
+                        venueFragment.unselectVenue();
+                    }
+
+                    helpDialogFragment.setCurrentlyDisplayedTab(Constants.VENUE_TAB_INDEX);
+                    break;
+
+                case Constants.ABOUT_TAB_INDEX:
+                    helpDialogFragment.setCurrentlyDisplayedTab(Constants.ABOUT_TAB_INDEX);
+                    break;
             }
         }
 

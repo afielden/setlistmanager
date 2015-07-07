@@ -7,7 +7,7 @@
     <dimen name="subsection_height">50dp</dimen>
     <dimen name="section_div_height">20dp</dimen>
 
-    <dimen name="showcase_radius">54dp</dimen>
-    <dimen name="showcase_radius_inner">46dp</dimen>
-    <dimen name="showcase_radius_outer">98dp</dimen>
+    <dimen name="showcase_radius">0dp</dimen>
+    <dimen name="showcase_radius_inner">0dp</dimen>
+    <dimen name="showcase_radius_outer">8dp</dimen>
 </resources>

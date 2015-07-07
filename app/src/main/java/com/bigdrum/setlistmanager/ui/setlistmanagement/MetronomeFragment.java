@@ -32,6 +32,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bigdrum.setlistmanager.MainActivity2;
 import com.bigdrum.setlistmanager.R;
 import com.bigdrum.setlistmanager.backup.DatabaseBackup;
 import com.bigdrum.setlistmanager.database.Constants;
@@ -77,9 +78,8 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 	private MenuItem searchAction;
 	private MenuItem playAction;
 	private MenuItem emailAction;
-	private HelpDialogFragment help;
     private Activity thisActivity;
-    private final HelpDialogFragment helpDialogFragment = new HelpDialogFragment();
+    private HelpDialogFragment helpDialogFragment;
     private DatabaseBackup dbBackupService;
 
 
@@ -94,8 +94,9 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 		/*if(!(Thread.getDefaultUncaughtExceptionHandler() instanceof CustomExceptionHandler)) {
 		    Thread.setDefaultUncaughtExceptionHandler(new CustomExceptionHandler(getActivity()));
 		}*/
-		
-		help = new HelpDialogFragment();
+
+        MainActivity2 activity = (MainActivity2)getActivity();
+        helpDialogFragment = activity.getHelpDialogFragment();
 		
 //		playImage = (ImageView)rootView.findViewById(R.id.beat_play);
 //		playImage.setVisibility(View.INVISIBLE);
@@ -132,7 +133,14 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
 	}
-	
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        helpDialogFragment.setCurrentlyDisplayedTab(Constants.SONG_SETLIST_TAB_INDEX);
+    }
 	
 	/**
 	 * 
@@ -266,9 +274,9 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 	 * 
 	 */
 	private void displayWelcomeMessage() {
-		help.setMessageAndTitleHtml(getString(R.string.help_welcome),
+		helpDialogFragment.setMessageAndTitleHtml(getString(R.string.help_welcome),
                 getString(R.string.help_welcome_title), getActivity());
-		help.show(getActivity().getSupportFragmentManager(), "");
+		helpDialogFragment.show(getActivity().getSupportFragmentManager(), "");
 	}
 	
 	
@@ -423,7 +431,7 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 	/**
 	 * 
 	 */
-	private void setlistMode(boolean setlistMode) {
+	public void setlistMode(boolean setlistMode) {
 		if (actionMenu != null) {
 			backToSetlistsAction.setVisible(!setlistMode);
 			
@@ -466,7 +474,7 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 			copyAction.setVisible(false);	
 			addAction.setVisible(true);			
 			addSectionAction.setVisible(false);		
-			backToSetlistsAction.setVisible(!setlistMode);		
+			backToSetlistsAction.setVisible(!setlistMode);
 			editAction.setVisible(false);		
 			deleteAction.setVisible(false);
 			
@@ -478,6 +486,9 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 				searchAction.setVisible(false);
 			}
 		}
+        else {
+            backToSetlistsAction.setVisible(false);
+        }
 		
     	if (setlistMode) {
 	    	addAction.setVisible(!editMode).setTitle(R.string.tooltip_add_setlist);
@@ -497,7 +508,7 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 		emailAction.setVisible(false);
 
         editModeAction.setTitle(editMode ? R.string.action_done : R.string.action_edit);
-        editModeAction.setIcon(editMode?android.R.drawable.checkbox_on_background:android.R.drawable.ic_menu_manage);
+        editModeAction.setIcon(editMode?android.R.drawable.checkbox_on_background:android.R.drawable.ic_menu_edit);
 		editModeAction.setVisible(listAdapter.getCount() != 0);
 
         helpDialogFragment.setNumberOfListItems(listAdapter.getCount());
@@ -657,6 +668,7 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
 
                     editMode = false;
 					displaySetlists();
+                    setlistMode(true);
                     setActionItemVisibility();
 //                    editModeAction.setTitle(R.string.action_edit);
 
@@ -798,7 +810,6 @@ public class MetronomeFragment extends Fragment implements OnClickListener, OnLo
     	}
 
         helpDialogFragment.setDisplayShowcaseView(true);
-
 		helpDialogFragment.show(getActivity().getSupportFragmentManager(), "");
 	}
 	
