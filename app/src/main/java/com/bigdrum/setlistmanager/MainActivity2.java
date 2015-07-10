@@ -49,6 +49,7 @@ public class MainActivity2 extends FragmentActivity {
         slidingTabLayout.setViewPager(vpPager);
         slidingTabLayout.setOnPageChangeListener(adapterViewPager);
 //        slidingTabLayout.setSelectedIndicatorColors(android.R.color.holo_blue_light);
+
     }
 
 

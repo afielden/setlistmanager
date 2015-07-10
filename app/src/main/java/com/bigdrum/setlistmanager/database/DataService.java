@@ -173,6 +173,15 @@ public class DataService extends SQLiteOpenHelper {
 
     /**
      *
+     * @return
+     */
+    public boolean isFirstTimeUser() {
+        return firstTimeUser;
+    }
+
+
+    /**
+     *
      */
     public void deleteEntireDatabase() {
         db.delete(SONG_SET_TABLE_NAME, null, null);
