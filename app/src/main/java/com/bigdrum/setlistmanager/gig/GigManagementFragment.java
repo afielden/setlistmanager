@@ -102,7 +102,10 @@ public class GigManagementFragment extends Fragment implements OnItemClickListen
 		listview = (ListView)rootView.findViewById(R.id.gig_listview);
 		gigDetails = (EditText)rootView.findViewById(R.id.gig_details_textbox);
         gigDetailsTitle = (TextView)rootView.findViewById(R.id.gig_details_title);
-        gigDetailsTitle.setVisibility(View.INVISIBLE);
+
+		if (gigDetailsTitle != null) {
+			gigDetailsTitle.setVisibility(View.INVISIBLE);
+		}
 		/*facebookButton = (ImageButton)rootView.findViewById(R.id.facebook_button);
 		facebookButton.setOnClickListener(this);*/
 		dbService = DataService.getDataService(this.getActivity());
@@ -167,14 +170,15 @@ public class GigManagementFragment extends Fragment implements OnItemClickListen
     private void showHelp() {
         ActionItemTarget target = new ActionItemTarget(getActivity(), R.id.action_add);
 
-        new ShowcaseView.Builder(getActivity())
-                .setTarget(target)
-                .setContentTitle("")
-                .hideOnTouchOutside()
-                .setStyle(R.style.CustomShowcaseTheme3)
-                .setTarget(target)
-                .setContentText(R.string.help_no_gigs)
-                .build();
+        return;
+//        new ShowcaseView.Builder(getActivity())
+//                .setTarget(target)
+//                .setContentTitle("")
+//                .hideOnTouchOutside()
+//                .setStyle(R.style.CustomShowcaseTheme3)
+//                .setTarget(target)
+//                .setContentText(R.string.help_no_gigs)
+//                .build();
 
 
     }

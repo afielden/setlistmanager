@@ -1,0 +1,79 @@
+{
+    "logs": [
+        {
+            "outputFile": "/home/andrew/AndroidstudioProjects/MetronomeMate/dragSortListviewDemo/build/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
+            "map": [
+                {
+                    "source": "/home/andrew/AndroidstudioProjects/MetronomeMate/dragSortListviewDemo/src/main/res/values/colors.xml",
+                    "from": {
+                        "startLines": "8,7,2,3,6,5,4",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "301,261,55,94,219,175,137",
+                        "endColumns": "51,39,38,42,41,43,37",
+                        "endOffsets": "348,296,89,132,256,214,170"
+                    },
+                    "to": {
+                        "startLines": "294,295,296,297,298,299,300",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "9416,9468,9508,9547,9590,9632,9676",
+                        "endColumns": "51,39,38,42,41,43,37",
+                        "endOffsets": "9463,9503,9542,9585,9627,9671,9709"
+                    }
+                },
+                {
+                    "source": "/home/andrew/AndroidstudioProjects/MetronomeMate/dragSortListviewDemo/src/main/res/values/ids.xml",
+                    "from": {
+                        "startLines": "3,2",
+                        "startColumns": "4,4",
+                        "startOffsets": "97,55",
+                        "endColumns": "42,41",
+                        "endOffsets": "135,92"
+                    },
+                    "to": {
+                        "startLines": "311,312",
+                        "startColumns": "4,4",
+                        "startOffsets": "10935,10977",
+                        "endColumns": "41,40",
+                        "endOffsets": "10972,11013"
+                    }
+                },
+                {
+                    "source": "/home/andrew/AndroidstudioProjects/MetronomeMate/dragSortListviewDemo/src/main/res/values/dimens.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,98",
+                        "endColumns": "42,49",
+                        "endOffsets": "93,143"
+                    },
+                    "to": {
+                        "startLines": "309,310",
+                        "startColumns": "4,4",
+                        "startOffsets": "10842,10885",
+                        "endColumns": "42,49",
+                        "endOffsets": "10880,10930"
+                    }
+                },
+                {
+                    "source": "/home/andrew/AndroidstudioProjects/MetronomeMate/dragSortListviewDemo/src/main/res/values/strings.xml",
+                    "from": {
+                        "startLines": "13,3,96,61,66,89,71,57,56,55,2,51,50,53,54,52",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "460,108,3685,2371,2526,3269,2682,2242,2192,2142,55,1915,1881,2017,2084,1957",
+                        "endLines": "49,12,302,65,70,94,88,60,56,55,2,51,50,53,54,52",
+                        "endColumns": "19,19,19,19,19,19,19,19,49,49,52,41,33,66,57,59",
+                        "endOffsets": "1876,455,9826,2521,2677,3679,3264,2366,2237,2187,103,1952,1910,2079,2137,2012"
+                    },
+                    "to": {
+                        "startLines": "2,39,49,256,261,266,272,290,313,314,315,316,317,318,319,320",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,1476,1828,7974,8129,8285,8700,9287,11018,11068,11118,11171,11213,11247,11314,11372",
+                        "endLines": "38,48,255,260,265,271,289,293,313,314,315,316,317,318,319,320",
+                        "endColumns": "19,19,19,19,19,19,19,19,49,49,52,41,33,66,57,59",
+                        "endOffsets": "1471,1823,7969,8124,8280,8695,9282,9411,11063,11113,11166,11208,11242,11309,11367,11427"
+                    }
+                }
+            ]
+        }
+    ]
+}

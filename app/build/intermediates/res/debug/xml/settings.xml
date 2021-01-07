@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:windowBackground="@drawable/gradient"
+    android:title="Preferences" >
+
+    <PreferenceCategory android:title="Band Details" >
+        <EditTextPreference
+            android:dialogTitle="@string/pref_band_name"
+            android:key="pref_band_name"
+            android:summary="@string/pref_band_name_summary"
+            android:defaultValue="My Band"
+            android:persistent="true" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Email Options" >
+
+        <EditTextPreference
+            android:dialogTitle="@string/pref_email_user_title"
+            android:key="pref_email_user"
+            android:summary="@string/pref_email_user_summary"
+            android:inputType="textEmailAddress"
+            android:textColor="#000000"
+            android:persistent="true" />
+
+        <EditTextPreference
+            android:dialogTitle="@string/pref_email_password_title"
+            android:key="pref_email_password"
+            android:summary="@string/pref_email_password_summary"
+            android:persistent="true"
+            android:inputType="textPassword"
+            android:textColor="#000000"
+            android:title="****" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_date_time_title">
+
+        <ListPreference
+            android:dialogTitle="@string/pref_date_format"
+            android:key="pref_date_format"
+            android:entries="@array/date_formats"
+            android:entryValues="@array/date_formats"
+            android:persistent="true" />
+    </PreferenceCategory>
+
+</PreferenceScreen><!-- From: file:/home/andrew/AndroidstudioProjects/MetronomeMate/app/src/main/res/xml/settings.xml -->

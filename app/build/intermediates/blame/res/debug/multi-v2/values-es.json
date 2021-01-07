@@ -1,0 +1,43 @@
+{
+    "logs": [
+        {
+            "outputFile": "/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-es/values-es.xml",
+            "map": [
+                {
+                    "source": "/home/andrew/.gradle/caches/transforms-1/files-1.1/appcompat-v7-22.2.0.aar/7b2efad40d8305d299d2863df3b25a12/res/values-es/values-es.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "291,408,521,629,714,815,943,1050,1150,1249,1357,1464,1571",
+                        "endColumns": "116,112,107,84,100,127,106,99,98,107,106,106,121",
+                        "endOffsets": "403,516,624,709,810,938,1045,1145,1244,1352,1459,1566,1688"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,172,285,393,478,579,707,814,914,1013,1121,1228,1335",
+                        "endColumns": "116,112,107,84,100,127,106,99,98,107,106,106,121",
+                        "endOffsets": "167,280,388,473,574,702,809,909,1008,1116,1223,1330,1452"
+                    }
+                },
+                {
+                    "source": "/home/andrew/.gradle/caches/transforms-1/files-1.1/facebook-android-sdk-4.1.2.aar/064c6de3178402b201b825cc37f7e03f/res/values-es/values.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8,9,10,11,12,13,16",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "161,261,387,485,543,617,710,790,870,961,1189",
+                        "endColumns": "99,125,97,57,73,92,79,79,90,104,61",
+                        "endOffsets": "256,382,480,538,612,705,785,865,956,1061,1246"
+                    },
+                    "to": {
+                        "startLines": "15,16,17,18,19,20,21,22,23,24,25",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "1457,1557,1683,1781,1839,1913,2006,2086,2166,2257,2362",
+                        "endColumns": "99,125,97,57,73,92,79,79,90,104,61",
+                        "endOffsets": "1552,1678,1776,1834,1908,2001,2081,2161,2252,2357,2419"
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="mail">
-    <CLASSES>
-      <root url="jar://$USER_HOME$/android_developer_toolkit/mail.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

@@ -43,7 +43,7 @@ public class HelpDialogFragment extends DialogFragment implements View.OnClickLi
     private int[] venuesView = {R.id.action_add};
     private int[] venuesViewSelected = {R.id.action_add, R.id.action_edit, R.id.action_delete};
 
-    private int[] currentItemList = setlist;
+    private int[] currentItemList = setlistNoListItems;
     private int currentItem = 0;
     private Activity activity;
     private boolean dismiss = false;
@@ -331,7 +331,12 @@ public class HelpDialogFragment extends DialogFragment implements View.OnClickLi
         this.setlistMode = setlistEdit;
         this.currentItem = 0;
 
-        currentItemList = setlistEdit?setlist:songlist;
+        if (numberOfListItems == 0) {
+            currentItemList = setlistEdit ? setlistNoListItems : songlistNoListItems;
+        }
+        else {
+            currentItemList = setlistEdit ? setlist : songlist;
+        }
     }
 
     /**
@@ -480,7 +485,7 @@ public class HelpDialogFragment extends DialogFragment implements View.OnClickLi
         switch(tabIndex) {
 
             case Constants.SONG_SETLIST_TAB_INDEX:
-                currentItemList = setlist;
+                currentItemList = numberOfListItems == 0?setlistNoListItems:setlist;
                 break;
 
             case Constants.GIG_TAB_INDEX:

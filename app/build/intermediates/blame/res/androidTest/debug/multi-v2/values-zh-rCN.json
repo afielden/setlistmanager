@@ -1,0 +1,43 @@
+{
+    "logs": [
+        {
+            "outputFile": "/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-zh-rCN/values-zh-rCN.xml",
+            "map": [
+                {
+                    "source": "/home/andrew/.gradle/caches/transforms-1/files-1.1/facebook-android-sdk-4.1.2.aar/a9df96e6da4589acfa7d535afa3904e2/res/values-zh-rCN/values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "4",
+                        "startOffsets": "182",
+                        "endColumns": "57",
+                        "endOffsets": "235"
+                    },
+                    "to": {
+                        "startLines": "15",
+                        "startColumns": "4",
+                        "startOffsets": "1320",
+                        "endColumns": "57",
+                        "endOffsets": "1373"
+                    }
+                },
+                {
+                    "source": "/home/andrew/.gradle/caches/transforms-1/files-1.1/appcompat-v7-22.2.0.aar/afe7482c9cb00910dde03bd4f99d85a4/res/values-zh-rCN/values-zh-rCN.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "295,391,486,586,668,765,871,967,1063,1158,1255,1350,1448",
+                        "endColumns": "95,94,99,81,96,105,95,95,94,96,94,97,111",
+                        "endOffsets": "386,481,581,663,760,866,962,1058,1153,1250,1345,1443,1555"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,151,246,346,428,525,631,727,823,918,1015,1110,1208",
+                        "endColumns": "95,94,99,81,96,105,95,95,94,96,94,97,111",
+                        "endOffsets": "146,241,341,423,520,626,722,818,913,1010,1105,1203,1315"
+                    }
+                }
+            ]
+        }
+    ]
+}

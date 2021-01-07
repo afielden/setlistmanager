@@ -1,0 +1,26 @@
+{
+    "logs": [
+        {
+            "outputFile": "/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-pa/values-pa.xml",
+            "map": [
+                {
+                    "source": "/home/andrew/.gradle/caches/transforms-1/files-1.1/facebook-android-sdk-4.1.2.aar/064c6de3178402b201b825cc37f7e03f/res/values-pa/values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "4",
+                        "startOffsets": "178",
+                        "endColumns": "59",
+                        "endOffsets": "233"
+                    },
+                    "to": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "59",
+                        "endOffsets": "110"
+                    }
+                }
+            ]
+        }
+    ]
+}

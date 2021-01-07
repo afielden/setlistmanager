@@ -1,0 +1,16 @@
+/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/classes/test/debug
+/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/test/debug/classes-4da0cba238c809188f0c2cc1f78e0dd85683c9a8.jar
+/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/test/debug/javax.inject-1-7aa7cc6e97ca42a845b626cde71b2ce1811fe711.jar
+/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/test/debug/classes-521349c9b1c41749babf29a96e025746a1de7d4f.jar
+/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/test/debug/support-annotations-22.2.0-b841bc36ac89fa510d9e41a4824a78af1e4e5742.jar
+/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/test/debug/hamcrest-integration-1.3-73b401e2b7b9fc5a1656904eaa5c7411c4f3a52c.jar
+/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/test/debug/classes-d8eb4874cfded73c322ff26c7dfd80df9453141f.jar
+/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/test/debug/javawriter-2.1.1-1991afaa24d29220bc7ed5bb7baec6916780667d.jar
+/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/test/debug/hamcrest-core-1.3-b767e1ae35f07b4353396533a676c5e6c1843366.jar
+/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/test/debug/jsr305-2.0.1-7a793c03e7aad423ac62a8e8ee04f84343da4863.jar
+/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/test/debug/javax.annotation-api-1.2-ff4224e6873336326ba1a42d8acb45314700d28e.jar
+/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/test/debug/hamcrest-library-1.3-b9afade3eae5cd69a72326c8d698272a08b8191b.jar
+/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/test/debug/classes-537529ff4bb86cd6d46e843fd8f26a6ae8fd4e5e.jar
+/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/test/debug/classes-b678ef2779453ce121718e8af7931d1a0b34852e.jar
+/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/test/debug/junit-4.12-308abfb80ba602210decd86eac940445c66492d8.jar
+/home/andrew/AndroidstudioProjects/MetronomeMate/app/build/intermediates/pre-dexed/test/debug/classes-01b9aba1e636725d38f917d1860ef00b176186ff.jar

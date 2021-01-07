@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.amlcurran.showcaseview:library:5.0.0@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/library-5.0.0.aar/75088464a2c012f49f0ff9356bdb68d2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/library-5.0.0.aar/75088464a2c012f49f0ff9356bdb68d2/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.amlcurran.showcaseview/library/5.0.0/b45e3ca00d580293f08286fc772ecbb6f90d576d/library-5.0.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:facebook="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient"
+    android:orientation="vertical" >
+
+    <!--TextView
+        android:id="@+id/no_gigs_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/help_no_gigs" /-->
+
+    <ListView
+        android:id="@+id/gig_listview"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:paddingTop="10dp">
+    </ListView>
+
+    <TextView
+        android:id="@+id/gig_details_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/gig_details"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textStyle="bold"
+        android:textSize="@dimen/abc_text_size_large_material"/>
+
+    <EditText
+        android:id="@+id/gig_details_textbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.95"
+        android:ems="10"
+        android:enabled="false"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:inputType="textMultiLine" >
+
+        <requestFocus />
+    </EditText>
+
+    <!--
+         com.facebook.widget.LoginButton
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        facebook:confirm_logout="false"
+        facebook:fetch_user_info="true" /
+    -->
+
+</LinearLayout><!-- From: file:/home/andrew/AndroidstudioProjects/MetronomeMate/app/src/main/res/layout/gig_management_fragment_layout.xml -->

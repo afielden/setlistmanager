@@ -154,14 +154,14 @@ public class VenueManagementFragment extends Fragment implements OnItemClickList
     private void showHelp() {
         ActionItemTarget target = new ActionItemTarget(getActivity(), R.id.action_add);
 
-        new ShowcaseView.Builder(getActivity())
-                .setTarget(target)
-                .setContentTitle("")
-                .hideOnTouchOutside()
-                .setStyle(R.style.CustomShowcaseTheme3)
-                .setTarget(target)
-                .setContentText(R.string.help_no_venues)
-                .build();
+//        new ShowcaseView.Builder(getActivity())
+//                .setTarget(target)
+//                .setContentTitle("")
+//                .hideOnTouchOutside()
+//                .setStyle(R.style.CustomShowcaseTheme3)
+//                .setTarget(target)
+//                .setContentText(R.string.help_no_venues)
+//                .build();
 
 
     }

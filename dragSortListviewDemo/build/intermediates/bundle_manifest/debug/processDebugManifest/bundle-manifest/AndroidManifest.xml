@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.mobeta.android.demodslv"
+    android:versionCode="4"
+    android:versionName="0.6.1" >
+
+    <uses-sdk
+        android:minSdkVersion="11"
+        android:targetSdkVersion="22" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:debuggable="true"
+        android:icon="@drawable/dslv_launcher"
+        android:label="@string/app_name" >
+        <activity
+            android:name="com.mobeta.android.demodslv.Launcher"
+            android:icon="@drawable/dslv_launcher"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.mobeta.android.demodslv.TestBedDSLV"
+            android:label="Basic usage" />
+        <activity
+            android:name="com.mobeta.android.demodslv.ArbItemSizeDSLV"
+            android:label="Arbitrary item heights" />
+        <activity
+            android:name="com.mobeta.android.demodslv.WarpDSLV"
+            android:label="Warp" />
+        <activity
+            android:name="com.mobeta.android.demodslv.BGHandle"
+            android:label="Background handle" />
+        <activity
+            android:name="com.mobeta.android.demodslv.Sections"
+            android:label="Sections" />
+        <activity
+            android:name="com.mobeta.android.demodslv.CursorDSLV"
+            android:label="Cursor-backed" />
+        <activity
+            android:name="com.mobeta.android.demodslv.MultipleChoiceListView"
+            android:label="Multi-select list" />
+        <activity
+            android:name="com.mobeta.android.demodslv.SingleChoiceListView"
+            android:label="Single-choice list" />
+    </application>
+
+</manifest>

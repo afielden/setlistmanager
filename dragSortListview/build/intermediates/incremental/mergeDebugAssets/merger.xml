@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="/home/andrew/AndroidstudioProjects/MetronomeMate/dragSortListview/src/main/assets"/><source path="/home/andrew/AndroidstudioProjects/MetronomeMate/dragSortListview/build/generated/assets/shaders/debug"/></dataSet><dataSet config="debug"><source path="/home/andrew/AndroidstudioProjects/MetronomeMate/dragSortListview/src/debug/assets"/></dataSet></merger>
