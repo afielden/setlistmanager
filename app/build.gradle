@@ -2,7 +2,8 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 22
-    buildToolsVersion "19.1.0"
+    buildToolsVersion "34.0.0"
+    namespace = "com.bigdrum"
 
     defaultConfig {
         applicationId "com.bigdrum.metronomemate"
@@ -24,26 +25,26 @@ android {
 }
 
 dependencies {
-    compile project(':dragSortListview')
-    compile files('/home/andrew/AndroidstudioProjects/MetronomeMate/jEN.jar')
-    compile files('/home/andrew/AndroidstudioProjects/MetronomeMate/json_simple-1.1.jar')
-    compile files('/home/andrew/android_developer_toolkit/mail.jar')
-    compile files('/home/andrew/android_developer_toolkit/activation.jar')
-    compile files('/home/andrew/android_developer_toolkit/additionnal.jar')
-    compile files('/home/andrew/AndroidstudioProjects/XOM/XOM/xom-1.2.10.jar')
-    compile 'com.android.support:support-v4:22.2.0'
-    compile 'com.android.support:appcompat-v7:22.2.0'
-    compile 'com.facebook.android:facebook-android-sdk:4.1.2'
-    compile 'com.github.amlcurran.showcaseview:library:5.0.0'
+    implementation project(':dragSortListview')
+    implementation files('/home/andrew/AndroidstudioProjects/MetronomeMate/jEN.jar')
+    implementation files('/home/andrew/AndroidstudioProjects/MetronomeMate/json_simple-1.1.jar')
+    implementation files('/home/andrew/android_developer_toolkit/mail.jar')
+    implementation files('/home/andrew/android_developer_toolkit/activation.jar')
+    implementation files('/home/andrew/android_developer_toolkit/additionnal.jar')
+    implementation files('/home/andrew/AndroidstudioProjects/XOM/XOM/xom-1.2.10.jar')
+    implementation 'com.android.support:support-v4:22.2.0'
+    implementation 'com.android.support:appcompat-v7:22.2.0'
+    implementation 'com.facebook.android:facebook-android-sdk:4.1.2'
+    implementation 'com.github.amlcurran.showcaseview:library:5.0.0'
 
-    
-    androidTestCompile 'junit:junit:4.12'
-    androidTestCompile 'com.android.support.test:runner:0.3'
+
+    androidTestImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:0.3'
     // Set this dependency to use JUnit 4 rules
-    androidTestCompile 'com.android.support.test:rules:0.3'
+    androidTestImplementation 'com.android.support.test:rules:0.3'
     // Set this dependency to build and run Espresso tests
-    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2'
     // Set this dependency to build and run UI Automator tests
-    androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.1'
+    androidTestImplementation 'com.android.support.test.uiautomator:uiautomator-v18:2.1.1'
 
 }

@@ -2,7 +2,8 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 22
-    buildToolsVersion "19.1.0"
+    buildToolsVersion "34.0.0"
+    namespace = "com.bigdrum"
 
     defaultConfig {
         minSdkVersion 7
@@ -18,5 +19,5 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:22.1.1'
+    implementation 'com.android.support:support-v4:22.1.1'
 }

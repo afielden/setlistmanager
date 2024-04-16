@@ -1,10 +1,13 @@
 <component name="libraryTable">
-  <library name="Gradle: com.github.amlcurran.showcaseview:library:5.0.0@aar">
+  <library name="Gradle: com.github.amlcurran.showcaseview:library:5.0.0@aar" external-system-id="GRADLE">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/library-5.0.0.aar/75088464a2c012f49f0ff9356bdb68d2/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/library-5.0.0.aar/75088464a2c012f49f0ff9356bdb68d2/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/d823a5c1db8531bd3eacd250e60efd01/transformed/library-5.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/d823a5c1db8531bd3eacd250e60efd01/transformed/library-5.0.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/d823a5c1db8531bd3eacd250e60efd01/transformed/library-5.0.0/jars/classes.jar!/" />
     </CLASSES>
-    <JAVADOC />
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.amlcurran.showcaseview/library/5.0.0/5d41f2e017f52ba01d32bbaa9136db66db9c03c6/library-5.0.0-javadoc.jar!/" />
+    </JAVADOC>
     <SOURCES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.amlcurran.showcaseview/library/5.0.0/b45e3ca00d580293f08286fc772ecbb6f90d576d/library-5.0.0-sources.jar!/" />
     </SOURCES>

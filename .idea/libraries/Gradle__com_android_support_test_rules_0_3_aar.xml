@@ -1,14 +1,15 @@
 <component name="libraryTable">
-  <library name="Gradle: com.android.support.test:rules:0.3@aar">
+  <library name="Gradle: com.android.support.test:rules:0.3@aar" external-system-id="GRADLE">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/rules-0.3.aar/2fa7ced4e318c751d667b2c842b4b113/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/rules-0.3.aar/2fa7ced4e318c751d667b2c842b4b113/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/9d553e603f6d39ea1c718e15f126f151/transformed/rules-0.3/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/9d553e603f6d39ea1c718e15f126f151/transformed/rules-0.3/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/9d553e603f6d39ea1c718e15f126f151/transformed/rules-0.3/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$USER_HOME$/Android/Sdk/extras/android/m2repository/com/android/support/test/rules/0.3/rules-0.3-javadoc.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.support.test/rules/0.3/a6b951c837a2b4f092fef8ce0af49d89d8e19f84/rules-0.3-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$USER_HOME$/Android/Sdk/extras/android/m2repository/com/android/support/test/rules/0.3/rules-0.3-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.support.test/rules/0.3/4ae0309752e5a464894369ca10a77ea28819baea/rules-0.3-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

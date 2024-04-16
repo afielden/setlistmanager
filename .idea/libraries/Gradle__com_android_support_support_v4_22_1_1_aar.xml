@@ -1,15 +1,15 @@
 <component name="libraryTable">
-  <library name="Gradle: com.android.support:support-v4:22.1.1@aar">
+  <library name="Gradle: com.android.support:support-v4:22.1.1@aar" external-system-id="GRADLE">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/support-v4-22.1.1.aar/8c2bf8db7c586f4c89eb2018be0d5bfc/jars/libs/internal_impl-22.1.1.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/support-v4-22.1.1.aar/8c2bf8db7c586f4c89eb2018be0d5bfc/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/support-v4-22.1.1.aar/8c2bf8db7c586f4c89eb2018be0d5bfc/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/ce1f152ce311b5d41dd05577caed12fc/transformed/support-v4-22.1.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/ce1f152ce311b5d41dd05577caed12fc/transformed/support-v4-22.1.1/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/ce1f152ce311b5d41dd05577caed12fc/transformed/support-v4-22.1.1/jars/libs/internal_impl-22.1.1.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$USER_HOME$/Android/Sdk/extras/android/m2repository/com/android/support/support-v4/22.1.1/support-v4-22.1.1-javadoc.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.support/support-v4/22.1.1/1335e606312a487e399dfbf507dede45cb6a73bd/support-v4-22.1.1-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$USER_HOME$/Android/Sdk/extras/android/m2repository/com/android/support/support-v4/22.1.1/support-v4-22.1.1-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.support/support-v4/22.1.1/ef601e669a0506b3f9636825118b3f2103d7d3d/support-v4-22.1.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
